@@ -3,17 +3,20 @@ package model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "tag2post")
-public class Tag2post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private int id;
+public class Tag2post implements Serializable {
+    @EmbeddedId
+    private Key1 id;
 
-    private int post_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id",insertable = false,updatable = false)
+    private Posts post;
 
-    private int tag_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tag_id",insertable = false,updatable = false)
+    private Tags tag;
 }

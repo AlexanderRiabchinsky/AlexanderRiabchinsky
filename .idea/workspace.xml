@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 21.01.2022">
-      <change afterPath="$PROJECT_DIR$/sh.exe.stackdump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Key1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Global_settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Global_settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_comments.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Post_comments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_votes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Post_votes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts$moderation_status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Posts$moderation_status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Posts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Tag2post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tag2post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Tags.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tags.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Users.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -117,7 +129,21 @@
       <option name="project" value="LOCAL" />
       <updated>1643003584165</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="version 21.01.2022">
+      <created>1643006411413</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1643006411414</updated>
+    </task>
+    <task id="LOCAL-00003" summary="version 21.01.2022">
+      <created>1643006441596</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1643006441596</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
