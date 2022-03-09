@@ -15,8 +15,8 @@ public class Tags {
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private List<Tag2post> tag2post;
+    @JoinColumn(name = "tag_id")
+    private List<Tag2Post> tag2post;
 
     @Column(name = "name")
     private String name;

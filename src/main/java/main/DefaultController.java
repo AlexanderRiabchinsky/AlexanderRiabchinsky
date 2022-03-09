@@ -9,6 +9,6 @@ import java.util.Date;
 public class DefaultController {
     @RequestMapping("/")
     public String index()
-    {return (new Date()).toString();
+    { return "index";//(new Date()).toString();
     }
 }

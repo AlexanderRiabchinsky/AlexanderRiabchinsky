@@ -7,18 +7,22 @@ import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "post_votes")
-public class Post_votes {
+@Table(name = "post_comments")
+public class PostComments {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private int id;
 
-    private int user_id;
+    private int parent_id;
 
-    private int post_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Posts post_id;
+
+    private int user_id;
 
     private Date time;
 
-    private int value;
+    private String text;
 }

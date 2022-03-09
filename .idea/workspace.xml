@@ -4,20 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 21.01.2022">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Key1.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 29.01.2022">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ApiPostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Captcha_codes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CaptchaCodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Global_settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GlobalSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Post_comments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PostComments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Post_votes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PostVotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tag2Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Global_settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Global_settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_comments.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Post_comments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_votes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Post_votes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts$moderation_status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Posts$moderation_status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Posts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ApiPostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/ApiPostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DefaultController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DefaultController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Global_settings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_comments.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_votes.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/model/Tag2post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tag2post.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/model/Tags.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tags.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Users.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +73,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -83,13 +90,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../12_SQLAndHibernate" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Others\BlogDriver\src\main\resources" />
       <recent name="D:\Others\BlogDriver" />
     </key>
   </component>
@@ -143,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643006441596</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="version 29.01.2022">
+      <created>1643435128413</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1643435128413</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,6 +176,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="version 21.01.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 21.01.2022" />
+    <MESSAGE value="version 29.01.2022" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 29.01.2022" />
   </component>
 </project>

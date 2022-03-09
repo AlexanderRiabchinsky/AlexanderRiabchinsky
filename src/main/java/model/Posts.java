@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,7 +21,9 @@ public class Posts {
 
     private int moderator_id;
 
-    private int user_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Users user_id;
 
     private Date time;
 
@@ -29,4 +32,21 @@ public class Posts {
     private String text;
 
     private int view_count;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<Tag2Post> tag2post;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<PostComments> postComments;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<PostVotes> postVotes;
+
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL})
+    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    private List<Tags> tag;
 }

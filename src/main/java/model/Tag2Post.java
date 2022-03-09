@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "tag2post")
-public class Tag2post implements Serializable {
+public class Tag2Post implements Serializable {
     @EmbeddedId
     private Key1 id;
 
