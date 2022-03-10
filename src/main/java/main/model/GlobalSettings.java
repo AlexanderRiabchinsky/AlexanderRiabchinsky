@@ -1,22 +1,21 @@
-package model;
+package main.model;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "captcha_codes")
-public class CaptchaCodes {
+@Table(name = "global_settings")
+public class GlobalSettings {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private int id;
 
-    private Date time;
-
     private String code;
 
-    private String secret_code;
+    private String name;
+
+    private String value;
 }

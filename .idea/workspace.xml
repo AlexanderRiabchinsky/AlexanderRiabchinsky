@@ -4,27 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 29.01.2022">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 09.03.2022">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/InitResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/SettingsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/SettingsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Captcha_codes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CaptchaCodes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Global_settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/GlobalSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Post_comments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PostComments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Post_votes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PostVotes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tag2post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tag2Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Tags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/ApiPostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/ApiPostController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/DefaultController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DefaultController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Captcha_codes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Global_settings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_comments.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Post_votes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Tag2post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tag2post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Tags.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Tags.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/DefaultController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/GlobalSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Key1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Key1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PostVotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tag2Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tag2Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/addComment.8407ff71.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/addComment.8407ff71.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/app.cd27e4f1.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.cd27e4f1.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/baseButton.3a7bae3c.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/baseButton.3a7bae3c.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/captcha.66dda667.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/captcha.66dda667.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8772246c.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8772246c.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/editPost.ce72759f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/editPost.ce72759f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/inputEmail.25efc46a.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/inputEmail.25efc46a.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/inputPassword.638924f7.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/inputPassword.638924f7.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/loginRegistration.b8dc9138.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/loginRegistration.b8dc9138.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/profile.1445a260.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/profile.1445a260.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/settings.7c2af028.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/settings.7c2af028.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ApiAuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ApiGeneralController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ApiPostController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DefaultController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts$moderation_status.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Posts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Tag2post.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Tags.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Users.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/addComment.8407ff71.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/addComment.8407ff71.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/app.cd27e4f1.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/app.cd27e4f1.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseButton.3a7bae3c.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/baseButton.3a7bae3c.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/captcha.66dda667.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/captcha.66dda667.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/chunk-vendors.8772246c.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/chunk-vendors.8772246c.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/editPost.ce72759f.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/editPost.ce72759f.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputEmail.25efc46a.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/inputEmail.25efc46a.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputPassword.638924f7.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/inputPassword.638924f7.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRegistration.b8dc9138.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/loginRegistration.b8dc9138.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/profile.1445a260.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/profile.1445a260.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/settings.7c2af028.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/settings.7c2af028.js.map" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +137,7 @@
       <module name="blogDriver" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="main.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -158,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643435128413</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="version 09.03.2022">
+      <created>1646830219342</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1646830219342</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +214,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="version 21.01.2022" />
     <MESSAGE value="version 29.01.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 29.01.2022" />
+    <MESSAGE value="version 09.03.2022" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 09.03.2022" />
   </component>
 </project>

@@ -3,3 +3,10 @@ spring.datasource.username: root
 spring.datasource.password: testtest
 spring.jpa.hibernate.ddl-auto: none
 someParameter: 4337
+
+blog.title: DevPub
+blog.subtitle: Рассказы разработчиков
+blog.phone: +79850080211
+blog.email: rialex@rambler.ru
+blog.copyright: Alexander Riabchinsky
+blog.copyrightFrom: 2022
