@@ -13,9 +13,9 @@ public class DefaultController {
         this.initResponse = initResponse;
     }
 
-    @RequestMapping("/")
-    public String index(Model model) {
-        System.out.println(initResponse.getTitle());
-        return "index";//(new Date()).toString();
-    }
+//    @RequestMapping("/")
+//    public String index(Model model) {
+//        System.out.println(initResponse.getTitle());
+//        return "index";//(new Date()).toString();
+//    }
 }
