@@ -13,9 +13,15 @@ public class DefaultController {
         this.initResponse = initResponse;
     }
 
-//    @RequestMapping("/")
-//    public String index(Model model) {
-//        System.out.println(initResponse.getTitle());
-//        return "index";//(new Date()).toString();
-//    }
+    @RequestMapping("/")
+    public String index(Model model) {
+        model.addAttribute("title", initResponse.getTitle())
+                .addAttribute("subtitle", initResponse.getSubtitle())
+                .addAttribute("phone", initResponse.getPhone())
+                .addAttribute("email", initResponse.getEmail())
+                .addAttribute("copyright", initResponse.getCopyright())
+                .addAttribute("copyright from:", initResponse.getCopyrightFrom());
+        System.out.println(initResponse.getTitle());
+        return "index.html";//(new Date()).toString();
+    }
 }

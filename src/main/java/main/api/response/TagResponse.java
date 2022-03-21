@@ -16,6 +16,8 @@ public class TagResponse {
     @JsonProperty("tags")
     private List<Tags> tags;
     public class Tags{
+        String name;
+        double weight;
 
     }
 

@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version stage 2 preliminary">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/DBConnection.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version 20.03.22">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/DefaultController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/SettingsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/SettingsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiGeneralController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controller/ApiGeneralController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/controller/DefaultController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controller/DefaultController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/service/SettingsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/service/SettingsService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647088722601</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="version 20.03.22">
+      <created>1647775572874</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1647775572874</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +205,7 @@
     <MESSAGE value="version 09.03.2022" />
     <MESSAGE value="version 10.03.2022" />
     <MESSAGE value="version stage 2 preliminary" />
-    <option name="LAST_COMMIT_MESSAGE" value="version stage 2 preliminary" />
+    <MESSAGE value="version 20.03.22" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 20.03.22" />
   </component>
 </project>
