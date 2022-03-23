@@ -1,12 +1,7 @@
 package main.controller;
 
-import main.api.response.InitResponse;
-import main.api.response.PostResponse;
-import main.api.response.SettingsResponse;
-import main.api.response.TagResponse;
+import main.api.response.*;
 import main.service.SettingsService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +11,14 @@ public class ApiGeneralController {
     private final SettingsService settingsService;
     private final InitResponse initResponse;
     private final TagResponse tagResponse;
+    private final CalendarResponse calendarResponse;
 
-    public ApiGeneralController(SettingsService settingsService, InitResponse initResponse, TagResponse tagResponse) {
+    public ApiGeneralController(SettingsService settingsService, InitResponse initResponse, TagResponse tagResponse, CalendarResponse calendarResponse) {
 
         this.settingsService = settingsService;
         this.initResponse = initResponse;
         this.tagResponse = tagResponse;
+        this.calendarResponse = calendarResponse;
     }
 
     @GetMapping("/api/settings")
@@ -40,4 +37,6 @@ public class ApiGeneralController {
     private TagResponse tags(){
         return tagResponse;
     }
+    @GetMapping("/api/calendar")
+    private CalendarResponse calendar(){return calendarResponse;}
 }

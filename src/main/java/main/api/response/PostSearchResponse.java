@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Component
-public class PostResponse {
+public class PostSearchResponse {
     @JsonProperty("count")
     public int count;
     @JsonProperty("posts")

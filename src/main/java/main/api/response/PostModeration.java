@@ -2,19 +2,17 @@ package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import main.model.Posts;
-import main.model.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Data
 @Component
-public class PostResponse {
+public class PostModeration {
     @JsonProperty("count")
     public int count;
     @JsonProperty("posts")
-    private List<Posts>postsList;
+    private List<Posts> postsList;
 
     public class Posts{
         @JsonProperty("id")

@@ -6,6 +6,7 @@ import com.mysql.cj.xdevapi.JsonArray;
 import lombok.Data;
 import main.model.Tags;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Array;
 import java.util.List;
@@ -16,9 +17,10 @@ public class TagResponse {
     @JsonProperty("tags")
     private List<Tags> tags;
     public class Tags{
-        String name;
-        double weight;
-
+        @JsonProperty("name")
+        public String name;
+        @JsonProperty("weight")
+        public double weight;
     }
 
 }
