@@ -25,7 +25,7 @@ public class ApiGeneralController {
 //    private ResponseEntity<SettingsResponse>settings(){
 //        return new  ResponseEntity<>(settingsService.getGlobalSettings(), HttpStatus.BAD_REQUEST);
 //    }
-    private SettingsResponse settings(){
+    private SettingsResponse settings() {
         return settingsService.getGlobalSettings();
     }
 
@@ -33,10 +33,14 @@ public class ApiGeneralController {
     private InitResponse init() {
         return initResponse;
     }
+
     @GetMapping("/api/tag")
-    private TagResponse tags(){
+    private TagResponse tags() {
         return tagResponse;
     }
+
     @GetMapping("/api/calendar")
-    private CalendarResponse calendar(){return calendarResponse;}
+    private CalendarResponse calendar() {
+        return calendarResponse;
+    }
 }

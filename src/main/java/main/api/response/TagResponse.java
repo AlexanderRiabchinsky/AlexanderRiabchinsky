@@ -12,11 +12,12 @@ import java.sql.Array;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class TagResponse {
     @JsonProperty("tags")
     private List<Tags> tags;
-    public class Tags{
+
+    public class Tags {
         @JsonProperty("name")
         public String name;
         @JsonProperty("weight")

@@ -11,44 +11,48 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class PostIDResponse {
     @JsonProperty("id")
-    public  int id;
+    public int id;
     @JsonProperty("timestamp")
     public Date timestamp;
     @JsonProperty("active")
     public boolean active;
     @JsonProperty("user")
-    public  Users user;
-    public class Users{
+    public Users user;
+
+    public class Users {
         @JsonProperty("id")
         public int id;
         @JsonProperty("name")
         public String name;
     }
+
     @JsonProperty("title")
-    public  String title;
+    public String title;
     @JsonProperty("text")
-    public  String text;
+    public String text;
     @JsonProperty("likeCount")
-    public  int likeCount;
+    public int likeCount;
     @JsonProperty("dislikeCount")
-    public  int dislikeCount;
+    public int dislikeCount;
     @JsonProperty("viewCount")
-    public  int viewCount;
+    public int viewCount;
     @JsonProperty("comments")
     private List<PostComments> comments;
-    public class PostComments{
+
+    public class PostComments {
         @JsonProperty("id")
-        public  int id;
+        public int id;
         @JsonProperty("timestamp")
-        public  String timestamp;
+        public String timestamp;
         @JsonProperty("text")
-        public  String text;
+        public String text;
         @JsonProperty("user")
         public Users user;
-        public class Users{
+
+        public class Users {
             @JsonProperty("id")
             public int id;
             @JsonProperty("name")
@@ -57,7 +61,8 @@ public class PostIDResponse {
             public String photo;
         }
     }
+
     @JsonProperty("tags")
-    private List<Tags>tags;
+    private List<Tags> tags;
 
 }

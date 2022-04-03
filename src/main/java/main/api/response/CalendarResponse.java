@@ -9,14 +9,15 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class CalendarResponse {
     @JsonProperty("years")
     public int years;
     @JsonProperty("posts")
     private List<Posts> posts;
+
     @Component
-    public class Posts{
+    public class Posts {
         @JsonProperty("time")
         private Date time;
         @JsonProperty("view_count")

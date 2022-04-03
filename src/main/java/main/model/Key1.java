@@ -15,8 +15,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Key1 implements Serializable {
-    @Column(name = "post_id",insertable = false, updatable = false)
+    @Column(name = "post_id", insertable = false, updatable = false)
     private int postId;
-    @Column(name = "tag_id",insertable = false, updatable = false)
+    @Column(name = "tag_id", insertable = false, updatable = false)
     private int tagId;
 }

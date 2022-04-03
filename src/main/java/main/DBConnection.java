@@ -10,7 +10,7 @@ public class DBConnection {
     private static String dbUser = "root";
     private static String dbPass = "testtest";
 
- //   private static StringBuilder insertQuery = new StringBuilder();
+    //   private static StringBuilder insertQuery = new StringBuilder();
 
     public static Connection getConnection() {
         if (connection == null) {
@@ -90,23 +90,27 @@ public class DBConnection {
         }
         return connection;
     }
-    public static Connection insertUser(int id, int is_moderator, Date reg_time,String name,String email,String password,String code,String photo){
+
+    public static Connection insertUser(int id, int is_moderator, Date reg_time, String name, String email, String password, String code, String photo) {
         if (connection == null) {
-            try {  connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/" + dbName +
-                            "?user=" + dbUser + "&password=" + dbPass);
-                connection.createStatement().execute("INSERT IN users.id=?",id);
-                connection.createStatement().execute("INSERT IN users.is_moderator=?",is_moderator);
+            try {
+                connection = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/" + dbName +
+                                "?user=" + dbUser + "&password=" + dbPass);
+                connection.createStatement().execute("INSERT IN users.id=?", id);
+                connection.createStatement().execute("INSERT IN users.is_moderator=?", is_moderator);
                 connection.createStatement().execute("INSERT IN users.reg_time= reg_time");
                 connection.createStatement().execute("INSERT IN users.name= name");
                 connection.createStatement().execute("INSERT IN users.email=email");
                 connection.createStatement().execute("INSERT IN users.password=password");
                 connection.createStatement().execute("INSERT IN users.code=code");
                 connection.createStatement().execute("INSERT IN users.photo=photo");
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return connection;
     }
-         catch (SQLException e1) {
-            e1.printStackTrace();
-        }}return connection;}
 
 //    public static void executeMultiInsert() throws SQLException {
 //        String sql = "INSERT INTO voter_count(name, birthDate, `count`) VALUES " + insertQuery.toString();

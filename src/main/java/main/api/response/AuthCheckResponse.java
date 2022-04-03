@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-@Component
+//@Component
 public class AuthCheckResponse {
     @JsonProperty("result")
     private boolean result;
     @JsonProperty("user")
     private List<User> user;
 
-    public class User{
+    public class User {
         @JsonProperty("id")
-        public  int id;
+        public int id;
         @JsonProperty("name")
         public String name;
         @JsonProperty("photo")

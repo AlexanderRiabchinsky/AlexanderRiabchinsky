@@ -17,12 +17,14 @@ public class Posts {
 
     private int is_active;
 
-    private enum moderation_status {NEW,ACCEPTED,DECLINED};
+    private enum moderation_status {NEW, ACCEPTED, DECLINED}
+
+    ;
 
     private int moderator_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Users user_id;
 
     private Date time;

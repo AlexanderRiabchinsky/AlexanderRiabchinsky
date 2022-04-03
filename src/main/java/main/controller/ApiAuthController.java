@@ -20,16 +20,21 @@ public class ApiAuthController {
         this.authCheckResponse = authCheckResponse;
         this.authCaptchaResponse = authCaptchaResponse;
     }
+
     @GetMapping("/api/auth/check")
-    public AuthCheckResponse authCheck(){
+    public AuthCheckResponse authCheck() {
         return authCheckResponse;
     }
+
     @GetMapping("/api/auth/captcha")
-    public AuthCaptchaResponse captchaCheck(){return authCaptchaResponse;}
+    public AuthCaptchaResponse captchaCheck() {
+        return authCaptchaResponse;
+    }
+
     @PostMapping("/api/auth/register")
     public int add(Users user) throws SQLException {
-DBConnection.insertUser(user.getId(), user.getIs_moderator(), user.getReg_time(),user.getName(), user.getEmail(), user.getPassword(), user.getCode(), user.getPhoto());
-return user.getId();
+        DBConnection.insertUser(user.getId(), user.getIs_moderator(), user.getReg_time(), user.getName(), user.getEmail(), user.getPassword(), user.getCode(), user.getPhoto());
+        return user.getId();
     }
 
 }
