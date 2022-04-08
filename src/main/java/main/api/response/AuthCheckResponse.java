@@ -3,6 +3,7 @@ package main.api.response;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import main.model.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,23 +14,24 @@ public class AuthCheckResponse {
     @JsonProperty("result")
     private boolean result;
     @JsonProperty("user")
-    private List<User> user;
+    private List<Users> user;
 
-    public class User {
+    @Data
+    public static class Users {
         @JsonProperty("id")
-        public int id;
+        private int id;
         @JsonProperty("name")
-        public String name;
+        private String name;
         @JsonProperty("photo")
-        public String photo;
+        private String photo;
         @JsonProperty("email")
-        public String email;
+        private String email;
         @JsonProperty("moderation")
-        public boolean moderation;
+        private boolean moderation;
         @JsonProperty("moderationCount")
-        public int moderationCount;
+        private int moderationCount;
         @JsonProperty("settings")
-        public boolean settings;
+        private boolean settings;
     }
 }
 

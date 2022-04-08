@@ -12,36 +12,38 @@ import java.util.List;
 //@Component
 public class PostSearchResponse {
     @JsonProperty("count")
-    public int count;
+    private int count;
     @JsonProperty("posts")
     private List<Posts> postsList;
 
-    public class Posts {
+    @Data
+    private class Posts {
         @JsonProperty("id")
-        public int id;
+        private int id;
         @JsonProperty("timestamp")
-        public String timestamp;
+        private String timestamp;
         @JsonProperty("user")
         private Users user;
 
+        @Data
         public class Users {
             @JsonProperty("id")
-            public int id;
+            private int id;
             @JsonProperty("name")
-            public String name;
+            private String name;
         }
 
         @JsonProperty("title")
-        public String title = "Заголовок Поста";
+        private String title = "Заголовок Поста";
         @JsonProperty("announce")
-        public String announce = "Текст анонса поста без HTML-тэгов";
+        private String announce = "Текст анонса поста без HTML-тэгов";
         @JsonProperty("likeCount")
-        public int likeCount;
+        private int likeCount;
         @JsonProperty("dislikeCount")
-        public int dislikeCount;
+        private int dislikeCount;
         @JsonProperty("commentCount")
-        public int commentCount;
+        private int commentCount;
         @JsonProperty("viewCount")
-        public int viewCount;
+        private int viewCount;
     }
 }

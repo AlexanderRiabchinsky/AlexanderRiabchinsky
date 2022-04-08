@@ -12,12 +12,12 @@ import java.util.List;
 //@Component
 public class CalendarResponse {
     @JsonProperty("years")
-    public int years;
+    private int years;
     @JsonProperty("posts")
     private List<Posts> posts;
 
-    @Component
-    public class Posts {
+    @Data
+    private static class Posts {
         @JsonProperty("time")
         private Date time;
         @JsonProperty("view_count")

@@ -14,51 +14,54 @@ import java.util.List;
 //@Component
 public class PostIDResponse {
     @JsonProperty("id")
-    public int id;
+    private int id;
     @JsonProperty("timestamp")
-    public Date timestamp;
+    private Date timestamp;
     @JsonProperty("active")
-    public boolean active;
+    private boolean active;
     @JsonProperty("user")
-    public Users user;
+    private Users user;
 
-    public class Users {
+    @Data
+    private class Users {
         @JsonProperty("id")
-        public int id;
+        private int id;
         @JsonProperty("name")
-        public String name;
+        private String name;
     }
 
     @JsonProperty("title")
-    public String title;
+    private String title;
     @JsonProperty("text")
-    public String text;
+    private String text;
     @JsonProperty("likeCount")
-    public int likeCount;
+    private int likeCount;
     @JsonProperty("dislikeCount")
-    public int dislikeCount;
+    private int dislikeCount;
     @JsonProperty("viewCount")
-    public int viewCount;
+    private int viewCount;
     @JsonProperty("comments")
     private List<PostComments> comments;
 
-    public class PostComments {
+    @Data
+    private static class PostComments {
         @JsonProperty("id")
-        public int id;
+        private int id;
         @JsonProperty("timestamp")
-        public String timestamp;
+        private String timestamp;
         @JsonProperty("text")
-        public String text;
+        private String text;
         @JsonProperty("user")
-        public Users user;
+        private Users user;
 
-        public class Users {
+        @Data
+        private static class Users {
             @JsonProperty("id")
-            public int id;
+            private int id;
             @JsonProperty("name")
-            public String name;
+            private String name;
             @JsonProperty("photo")
-            public String photo;
+            private String photo;
         }
     }
 

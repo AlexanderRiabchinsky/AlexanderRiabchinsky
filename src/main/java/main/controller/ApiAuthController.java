@@ -9,25 +9,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 @RestController
 public class ApiAuthController {
-    private final AuthCheckResponse authCheckResponse;
-    private final AuthCaptchaResponse authCaptchaResponse;
-
-    public ApiAuthController(AuthCheckResponse authCheckResponse, AuthCaptchaResponse authCaptchaResponse) {
-        this.authCheckResponse = authCheckResponse;
-        this.authCaptchaResponse = authCaptchaResponse;
-    }
+//    private final AuthCheckResponse authCheckResponse;
+//    private final AuthCaptchaResponse authCaptchaResponse;
+//
+//    public ApiAuthController(AuthCheckResponse authCheckResponse, AuthCaptchaResponse authCaptchaResponse) {
+//        this.authCheckResponse = authCheckResponse;
+//        this.authCaptchaResponse = authCaptchaResponse;
+//    }
 
     @GetMapping("/api/auth/check")
     public AuthCheckResponse authCheck() {
+        AuthCheckResponse authCheckResponse = new AuthCheckResponse();
+        authCheckResponse.setResult(true);
+        AuthCheckResponse.Users user = new AuthCheckResponse.Users();
+        user.setId(1);
+        user.setName("Vasya");
+        user.setPhoto("not yet");
+        user.setEmail("a@a.ru");
+        user.setModeration(false);
+        user.setModerationCount(0);
+        user.setSettings(true);
+        ArrayList<AuthCheckResponse.Users> users = new ArrayList<>();
+        users.add(user);
+        authCheckResponse.setUser(users);
         return authCheckResponse;
     }
 
     @GetMapping("/api/auth/captcha")
     public AuthCaptchaResponse captchaCheck() {
+        AuthCaptchaResponse authCaptchaResponse = new AuthCaptchaResponse();
         return authCaptchaResponse;
     }
 

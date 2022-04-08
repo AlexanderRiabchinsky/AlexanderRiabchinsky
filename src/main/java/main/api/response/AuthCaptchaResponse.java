@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 //@Component
 public class AuthCaptchaResponse {
     @JsonProperty("secret")
-    public String secret;
+    private String secret;
     @JsonProperty("image")
-    public String image;
+    private String image;
 }

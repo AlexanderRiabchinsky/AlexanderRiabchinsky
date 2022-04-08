@@ -17,11 +17,12 @@ public class TagResponse {
     @JsonProperty("tags")
     private List<Tags> tags;
 
-    public class Tags {
+    @Data
+    public static class Tags {
         @JsonProperty("name")
-        public String name;
+        private String name;
         @JsonProperty("weight")
-        public double weight;
+        private double weight;
     }
 
 }
