@@ -1,15 +1,11 @@
 package main.api.response;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import main.model.Users;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Data
-//@Component
 public class AuthCheckResponse {
     @JsonProperty("result")
     private boolean result;

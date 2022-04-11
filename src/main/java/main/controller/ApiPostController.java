@@ -8,21 +8,6 @@ import java.util.ArrayList;
 
 @RestController
 public class ApiPostController {
-//    private final PostResponse postResponse;
-//    private final PostSearchResponse postSearchResponse;
-//    private final PostByDateResponse postByDateResponse;
-//    private final PostByTagResponse postByTagResponse;
-//    private final PostIDResponse postIDResponse;
-//    private final PostModeration postModeration;
-//
-//    public ApiPostController(PostResponse postResponse, PostSearchResponse postSearchResponse, PostByDateResponse postByDateResponse, PostByTagResponse postByTagResponse, PostIDResponse postIDResponse, PostModeration postModeration) {
-//        this.postResponse = postResponse;
-//        this.postSearchResponse = postSearchResponse;
-//        this.postByDateResponse = postByDateResponse;
-//        this.postByTagResponse = postByTagResponse;
-//        this.postIDResponse = postIDResponse;
-//        this.postModeration = postModeration;
-//    }
 
     @GetMapping("/api/post")
     public PostResponse postCheck() {

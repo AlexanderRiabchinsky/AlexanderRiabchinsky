@@ -4,26 +4,23 @@ import main.DBConnection;
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
 import main.model.Users;
+import main.model.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 @RestController
 public class ApiAuthController {
-//    private final AuthCheckResponse authCheckResponse;
-//    private final AuthCaptchaResponse authCaptchaResponse;
-//
-//    public ApiAuthController(AuthCheckResponse authCheckResponse, AuthCaptchaResponse authCaptchaResponse) {
-//        this.authCheckResponse = authCheckResponse;
-//        this.authCaptchaResponse = authCaptchaResponse;
-//    }
+    @Autowired
+    private UsersRepository usersRepository;
 
     @GetMapping("/api/auth/check")
     public AuthCheckResponse authCheck() {
+        Iterable<Users> usersIterable = usersRepository.findAll();
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
         authCheckResponse.setResult(true);
         AuthCheckResponse.Users user = new AuthCheckResponse.Users();

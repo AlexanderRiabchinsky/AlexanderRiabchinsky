@@ -1,6 +1,5 @@
 package main;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

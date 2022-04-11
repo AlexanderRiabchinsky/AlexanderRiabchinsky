@@ -2,14 +2,11 @@ package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import main.model.Posts;
-import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.List;
 
 @Data
-//@Component
 public class CalendarResponse {
     @JsonProperty("years")
     private int years;
@@ -23,5 +20,4 @@ public class CalendarResponse {
         @JsonProperty("view_count")
         private int view_count;
     }
-
 }

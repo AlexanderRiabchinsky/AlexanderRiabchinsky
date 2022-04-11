@@ -2,16 +2,12 @@ package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import main.model.PostComments;
 import main.model.Tags;
-import main.model.Users;
-import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.List;
 
 @Data
-//@Component
 public class PostIDResponse {
     @JsonProperty("id")
     private int id;
