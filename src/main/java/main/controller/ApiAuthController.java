@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ApiAuthController {
@@ -20,7 +21,7 @@ public class ApiAuthController {
 
     @GetMapping("/api/auth/check")
     public AuthCheckResponse authCheck() {
-        Iterable<Users> usersIterable = usersRepository.findAll();
+        List<Users> usersIterable = usersRepository.findAll();
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
         authCheckResponse.setResult(true);
         AuthCheckResponse.Users user = new AuthCheckResponse.Users();
@@ -45,8 +46,9 @@ public class ApiAuthController {
 
     @PostMapping("/api/auth/register")
     public int add(Users user) throws SQLException {
-        DBConnection.insertUser(user.getId(), user.getIs_moderator(), user.getReg_time(), user.getName(), user.getEmail(), user.getPassword(), user.getCode(), user.getPhoto());
-        return user.getId();
+            Users newUser = usersRepository.save(user);
+  //          DBConnection.insertUser(user.getId(), user.getIs_moderator(), user.getReg_time(), user.getName(), user.getEmail(), user.getPassword(), user.getCode(), user.getPhoto());
+            return newUser.getId();
     }
 
 }

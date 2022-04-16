@@ -1,6 +1,8 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.Tags;
+import main.model.TagsRepository;
 import main.service.SettingsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ApiGeneralController {
+    private TagsRepository tagsRepository;
 
     private final SettingsService settingsService;
     private final InitResponse initResponse;
@@ -35,6 +39,8 @@ public class ApiGeneralController {
     private TagResponse tags() {
         TagResponse tagResponse = new TagResponse();
         TagResponse.Tags tags = new TagResponse.Tags();
+        List<Tags> tagsList = tagsRepository.findAll();
+
         tags.setName("Lena");
         tags.setWeight(0.9);
         ArrayList<TagResponse.Tags> tags1 = new ArrayList<>();

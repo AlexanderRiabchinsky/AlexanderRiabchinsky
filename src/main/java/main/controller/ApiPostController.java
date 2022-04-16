@@ -1,6 +1,9 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.PostsRepository;
+import main.model.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,12 +12,16 @@ import java.util.ArrayList;
 @RestController
 public class ApiPostController {
 
+    @Autowired
+    private PostsRepository postsRepository;
+    private UsersRepository usersRepository;
+
     @GetMapping("/api/post")
     public PostResponse postCheck() {
         PostResponse postResponse = new PostResponse();
-        postResponse.setCount(2);
+        postResponse.setCount((int) postsRepository.count());
         PostResponse.Posts post = new PostResponse.Posts();
-        post.setId(1);
+        post.setId(post.getId());
         post.setTimestamp("2022-04-08");
         PostResponse.Posts.Users user = new PostResponse.Posts.Users();
         user.setId(1);
