@@ -1,13 +1,17 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.Posts;
 import main.model.PostsRepository;
+import main.model.Users;
 import main.model.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ApiPostController {
@@ -20,23 +24,27 @@ public class ApiPostController {
     public PostResponse postCheck() {
         PostResponse postResponse = new PostResponse();
         postResponse.setCount((int) postsRepository.count());
-        PostResponse.Posts post = new PostResponse.Posts();
-        post.setId(post.getId());
-        post.setTimestamp("2022-04-08");
-        PostResponse.Posts.Users user = new PostResponse.Posts.Users();
-        user.setId(1);
-        user.setName("Petya");
-        ArrayList<PostResponse.Posts.Users> users = new ArrayList<>();
-        post.setUser(users);
-        post.setTitle("Проект в разработке - апрель");
-        post.setAnnounce("Анонс поста");
-        post.setLikeCount(2);
-        post.setDislikeCount(1);
-        post.setCommentCount(3);
-        post.setViewCount(5);
-        ArrayList<PostResponse.Posts> posts = new ArrayList<>();
-        posts.add(post);
-        postResponse.setPostsList(posts);
+        List<Posts> posts = postsRepository.findAll();
+        ArrayList<PostResponse.Posts> postss = new ArrayList<>();
+        for (Posts post:posts) {
+        PostResponse.Posts postt = new PostResponse.Posts();
+        postt.setId(post.getId());
+        postt.setTimestamp("2022-04-08");
+ //           Optional<Users> user = usersRepository.findById(postsRepository.getUser(post.getId()));
+        PostResponse.Posts.Users userr = new PostResponse.Posts.Users();
+        userr.setId(postsRepository.getUser(post.getId()));
+        userr.setName(usersRepository.getUserNameById(postsRepository.getUser(post.getId())));
+ //       ArrayList<PostResponse.Posts.Users> users = new ArrayList<>();
+        postt.setUser((List<PostResponse.Posts.Users>) userr);
+        postt.setTitle(postsRepository.getTitle(post.getId()));
+        postt.setAnnounce("Анонс поста");
+        postt.setLikeCount(2);
+        postt.setDislikeCount(1);
+        postt.setCommentCount(3);
+        postt.setViewCount(5);
+
+        postss.add(postt);}
+        postResponse.setPostsList(postss);
         return postResponse;
     }
 

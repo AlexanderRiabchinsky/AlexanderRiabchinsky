@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 11.04.22">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 16.04.22">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettingsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettingsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostCommentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostCommentsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Key1Repository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tag2PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tag2PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/TagsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/TagsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiAuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controller/ApiAuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiGeneralController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controller/ApiGeneralController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiPostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controller/ApiPostController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649669256949</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="version as of 16.04.22">
+      <created>1650094146162</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1650094146162</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,6 +261,7 @@
     <MESSAGE value="transaction version as of 03.04.22" />
     <MESSAGE value="version as of 08.04.22" />
     <MESSAGE value="version as of 11.04.22" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 11.04.22" />
+    <MESSAGE value="version as of 16.04.22" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 16.04.22" />
   </component>
 </project>
