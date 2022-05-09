@@ -6,6 +6,7 @@ import main.model.PostsRepository;
 import main.model.Users;
 import main.model.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,11 +33,14 @@ public class ApiPostController {
         postt.setTimestamp("2022-04-08");
  //           Optional<Users> user = usersRepository.findById(postsRepository.getUser(post.getId()));
         PostResponse.Posts.Users userr = new PostResponse.Posts.Users();
+       // userr.setId(postsRepository.getUser(post.getId()));
         userr.setId(postsRepository.getUser(post.getId()));
+      //  userr.setId(postsRepository.findById(post.getUser_id()));
         userr.setName(usersRepository.getUserNameById(postsRepository.getUser(post.getId())));
+    //    userr.setName(usersRepository.getUserNameById(post.getUser_id()));
  //       ArrayList<PostResponse.Posts.Users> users = new ArrayList<>();
         postt.setUser((List<PostResponse.Posts.Users>) userr);
-        postt.setTitle(postsRepository.getTitle(post.getId()));
+        postt.setTitle(post.getTitle());
         postt.setAnnounce("Анонс поста");
         postt.setLikeCount(2);
         postt.setDislikeCount(1);

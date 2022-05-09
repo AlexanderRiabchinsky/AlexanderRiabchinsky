@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -19,7 +20,6 @@ public class Posts {
 
     private enum moderation_status {NEW, ACCEPTED, DECLINED}
 
-    ;
 
     private int moderator_id;
 
