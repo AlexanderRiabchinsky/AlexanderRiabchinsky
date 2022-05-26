@@ -18,7 +18,7 @@ public class PostComments {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Posts post_id;
+    private Posts post_comment;
 
     private int user_id;
 

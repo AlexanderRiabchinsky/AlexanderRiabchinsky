@@ -18,7 +18,7 @@ public class Posts {
 
     private int is_active;
 
-    private enum moderation_status {NEW, ACCEPTED, DECLINED}
+    private enum status {NEW, ACCEPTED, DECLINED}
 
 
     private int moderator_id;
@@ -35,20 +35,20 @@ public class Posts {
 
     private int view_count;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<Tag2Post> tag2post;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "post_id")
+//    private List<Tag2Post> tag2post;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<PostComments> postComments;
+    @OneToMany(mappedBy = "post_comment",fetch = FetchType.LAZY)
+    //@JoinColumn(name = "post_id")
+    private List<PostComments> postComment;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<PostVotes> postVotes;
+    @OneToMany(mappedBy = "post_vote",fetch = FetchType.LAZY)
+   // @JoinColumn(name = "post_id")
+    private List<PostVotes> postVote;
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL})
     @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private List<Tags> tag;
+    private List<Tags> tags;
 }

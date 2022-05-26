@@ -17,9 +17,9 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
         @Query("SELECT p FROM Posts p " +
                 "LEFT JOIN Users u ON u.id = p.user_id " +
-                "LEFT JOIN PostComments pc ON pc.post_id = p.id " +
-                "LEFT JOIN PostVotes pvl on pvl.post_id = p.id and pvl.value = 1 " +
-                "WHERE p.isActive = 1 AND p.status = 'ACCEPTED' AND p.time <= CURRENT_DATE() " +
+                "LEFT JOIN PostComments pc ON pc.post_comment = p.id " +
+                "LEFT JOIN PostVotes pvl on pvl.post_vote = p.id and pvl.value = 1 " +
+                "WHERE p.is_active = 1 AND p.enum.valueOf(status) = 'ACCEPTED' AND p.time <= CURRENT_DATE() " +
                 "GROUP BY p.id ORDER BY COUNT(pvl) DESC"
         )
         Page<Posts> findPostsOrderByLikes(Pageable pageable);

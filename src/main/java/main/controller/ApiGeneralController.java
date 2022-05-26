@@ -1,9 +1,11 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.PostsRepository;
 import main.model.Tags;
 import main.model.TagsRepository;
 import main.service.SettingsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,10 @@ import java.util.List;
 
 @RestController
 public class ApiGeneralController {
+    @Autowired
     private TagsRepository tagsRepository;
+    @Autowired
+    private PostsRepository postsRepository;
 
     private final SettingsService settingsService;
     private final InitResponse initResponse;
@@ -24,6 +29,7 @@ public class ApiGeneralController {
         this.settingsService = settingsService;
         this.initResponse = initResponse;
     }
+
 
     @GetMapping("/api/settings")
     private SettingsResponse settings() {

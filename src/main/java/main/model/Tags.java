@@ -14,9 +14,9 @@ public class Tags {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tag_id")
-    private List<Tag2Post> tag2post;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tag_id")
+//    private List<Tag2Post> tag2post;
 
     @Column(name = "name")
     private String name;
@@ -24,5 +24,5 @@ public class Tags {
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL})
     @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "tag_id")},
             inverseJoinColumns = {@JoinColumn(name = "post_id")})
-    private List<Posts> post;
+    private List<Posts> posts;
 }

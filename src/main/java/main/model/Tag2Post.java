@@ -12,11 +12,11 @@ public class Tag2Post implements Serializable {
     @EmbeddedId
     private Key1 id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id",insertable = false,updatable = false)
-    private Posts post;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tag_id",insertable = false,updatable = false)
-    private Tags tag;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "post_id",insertable = false,updatable = false)
+//    private Posts post;
+//
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tag_id",insertable = false,updatable = false)
+//    private Tags tag;
 }

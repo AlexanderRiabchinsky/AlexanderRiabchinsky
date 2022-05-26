@@ -29,7 +29,7 @@ public class Users {
 
     private String photo;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private List<Posts> user_id;
+    @OneToMany(mappedBy = "user_id",fetch = FetchType.EAGER)
+  //  @JoinColumn(name = "user_id")
+    private List<Posts> posts;
 }

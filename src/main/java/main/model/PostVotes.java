@@ -18,7 +18,7 @@ public class PostVotes {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Posts post_id;
+    private Posts post_vote;
 
     private Date time;
 
