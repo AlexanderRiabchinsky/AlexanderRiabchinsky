@@ -15,9 +15,9 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private int is_moderator;
+    private int isModerator;
 
-    private Date reg_time;
+    private Date regTime;
 
     private String name;
 
@@ -29,7 +29,13 @@ public class Users {
 
     private String photo;
 
-    @OneToMany(mappedBy = "user_id",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
   //  @JoinColumn(name = "user_id")
     private List<Posts> posts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostVotes> postVotes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostComments> postComments;
 }

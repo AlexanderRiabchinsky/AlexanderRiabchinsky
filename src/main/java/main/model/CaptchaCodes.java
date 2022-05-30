@@ -18,5 +18,5 @@ public class CaptchaCodes {
 
     private String code;
 
-    private String secret_code;
+    private String secretCode;
 }

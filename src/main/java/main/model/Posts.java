@@ -16,16 +16,20 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private int is_active;
+    @Column(name = "is_active")
+    private int isActive;
 
-    private enum status {NEW, ACCEPTED, DECLINED}
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "status_ID", nullable = false, columnDefinition = "enum('NEW', 'ACCEPTED', 'DECLINED') default 'NEW'")
+    private ModerationStatus status;
 
 
-    private int moderator_id;
+    @Column(name = "moderator_id")
+    private int moderatorId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Users user_id;
+    private Users user;
 
     private Date time;
 
@@ -33,22 +37,23 @@ public class Posts {
 
     private String text;
 
-    private int view_count;
+    @Column(name = "view_count")
+    private int viewCount;
 
 //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "post_id")
 //    private List<Tag2Post> tag2post;
 
-    @OneToMany(mappedBy = "post_comment",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     //@JoinColumn(name = "post_id")
-    private List<PostComments> postComment;
+    private List<PostComments> postComments;
 
-    @OneToMany(mappedBy = "post_vote",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
    // @JoinColumn(name = "post_id")
-    private List<PostVotes> postVote;
+    private List<PostVotes> postVotes;
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL})
-    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
+//    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "postId")},
+//            inverseJoinColumns = {@JoinColumn(name = "tagId")})
     private List<Tags> tags;
 }

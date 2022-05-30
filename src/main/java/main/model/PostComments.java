@@ -14,13 +14,21 @@ public class PostComments {
     @Column(name = "id", nullable = false)
     private int id;
 
-    private int parent_id;
+    private int parentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Posts post_comment;
+    private Posts postComment;
 
-    private int user_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id", nullable = false)
+    private Posts post;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
+
+    //private int userId;
 
     private Date time;
 

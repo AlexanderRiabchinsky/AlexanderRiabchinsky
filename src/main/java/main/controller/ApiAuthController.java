@@ -1,10 +1,9 @@
 package main.controller;
 
-import main.DBConnection;
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
 import main.model.Users;
-import main.model.UsersRepository;
+import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

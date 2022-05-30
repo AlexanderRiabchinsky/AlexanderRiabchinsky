@@ -4,23 +4,160 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 09.05.22">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 26.05.22">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/model/ModerationStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sh.exe.stackdump" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/CaptchaCodesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettingsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/GlobalSettingsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Key1.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostCommentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tag2Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tag2Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tag2Post.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tag2PostRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/TagsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/TagsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/PostComments.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/PostComments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/PostVotes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/PostVotes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Posts$moderation_status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Posts.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/Posts.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Tag2Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/Tag2Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Tags.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/Tags.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/model/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/api/response/InitResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/api/response/SettingsResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiAuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiGeneralController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/ApiPostController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/controller/DefaultController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/CaptchaCodes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/GlobalSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Key1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/PostComments.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/PostVotes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Posts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Tag2Post.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Tags.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/model/Users.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/service/SettingsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/404.0307462e.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/addComment.3bd0147c.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/addText.3e32e758.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/app.a8078023.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/article.d31131f7.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/articles.ab6c5fed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/baseArticle.4b2c7168.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/baseButton.f7cd099c.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/baseNavbar.0c5366b4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/calendar.7ef4a90f.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/calendarMonth.c4c06180.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/calendarTable.dc9a89bb.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/chunk-vendors.29736c43.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/comment.2e97f697.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/editPost.c8f88f38.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/errorModal.fbaa6531.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/login.6bc2a293.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/loginHeader.5b0e4dcc.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/loginRegistrationSuccess.a879d2f2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/mainPage.4f8b7404.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/moderationBlock.0feff8c7.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/profile.9d56705d.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/settings.fa684121.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/socialBlock.b00d958f.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/stat.02b1e9f5.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/tags.95166178.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/userSection.c1ee68c4.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/default-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-500.3d291974.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-500.af3eb2e5.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-500italic.4661310e.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-500italic.59dbca61.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-700.1b4bd659.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-700.9880f0c6.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-700italic.01e822b3.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-700italic.f2842125.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-italic.23699154.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-italic.44803401.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-regular.f5e9a4ea.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/fonts/roboto-v20-cyrillic_latin_cyrillic-ext-regular.fa18727a.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/img/icons-sprite.3d76bac4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/404.47dd94cc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/404.47dd94cc.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/addComment.8407ff71.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/addComment.8407ff71.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/addText.3b2c4c96.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/addText.3b2c4c96.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/app.cd27e4f1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/app.cd27e4f1.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/article.f9c6f0f2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/article.f9c6f0f2.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/articles.db25faa6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/articles.db25faa6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseArticle.d8032b02.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseArticle.d8032b02.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseButton.3a7bae3c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseButton.3a7bae3c.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseNavbar.bbaecea2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/baseNavbar.bbaecea2.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendar.2db04d5a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendar.2db04d5a.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendarMonth.dd972471.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendarMonth.dd972471.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendarTable.25bd32c3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/calendarTable.25bd32c3.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/captcha.66dda667.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/captcha.66dda667.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/chunk-vendors.8772246c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/chunk-vendors.8772246c.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/comment.7fb4fec6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/comment.7fb4fec6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/editPost.ce72759f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/editPost.ce72759f.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/errorModal.af33cefc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/errorModal.af33cefc.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputEmail.25efc46a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputEmail.25efc46a.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputPassword.638924f7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/inputPassword.638924f7.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/login.61bd44e3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/login.61bd44e3.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginChange.f7468ba7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginChange.f7468ba7.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginHeader.c7e33100.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginHeader.c7e33100.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRegistration.b8dc9138.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRegistration.b8dc9138.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRegistrationSuccess.fbc6dbab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRegistrationSuccess.fbc6dbab.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRestore.11f05e9d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginRestore.11f05e9d.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginSignIn.5945ff7f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/loginSignIn.5945ff7f.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/mainPage.c9d5ccfd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/mainPage.c9d5ccfd.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/moderationBlock.b68add48.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/moderationBlock.b68add48.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/profile.1445a260.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/profile.1445a260.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/settings.7c2af028.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/settings.7c2af028.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/socialBlock.b5601ec6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/socialBlock.b5601ec6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/stat.ac1bf1f4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/stat.ac1bf1f4.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/tags.cc637194.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/tags.cc637194.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/userSection.847a5f80.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/userSection.847a5f80.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +170,7 @@
         <option value="AnnotationType" />
         <option value="Class" />
         <option value="Interface" />
+        <option value="com.haulmont.jpb.JpaEntity" />
       </list>
     </option>
   </component>
@@ -95,6 +233,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Others\BlogDriver\src\main\resources" />
       <recent name="D:\Others\BlogDriver" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Others\BlogDriver\src\main\resources" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="main" />
@@ -255,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652110872926</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="version as of 26.05.22">
+      <created>1653585996425</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1653585996425</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -287,6 +435,7 @@
     <MESSAGE value="version as of 16.04.22" />
     <MESSAGE value="version as of 28.04.22" />
     <MESSAGE value="version as of 09.05.22" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 09.05.22" />
+    <MESSAGE value="version as of 26.05.22" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 26.05.22" />
   </component>
 </project>

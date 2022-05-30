@@ -21,8 +21,8 @@ public class Tags {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL})
-    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "tag_id")},
-            inverseJoinColumns = {@JoinColumn(name = "post_id")})
+    @ManyToMany(mappedBy = "tags",cascade = {CascadeType.ALL, CascadeType.ALL}, fetch = FetchType.LAZY)
+//    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "tag_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "post_id")})
     private List<Posts> posts;
 }

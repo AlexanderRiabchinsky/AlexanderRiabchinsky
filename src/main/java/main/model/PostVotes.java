@@ -14,11 +14,19 @@ public class PostVotes {
     @Column(name = "id", nullable = false)
     private int id;
 
-    private int user_id;
+    //private int userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Posts post_vote;
+    private Posts postVote;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id", nullable = false)
+    private Posts post;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
     private Date time;
 

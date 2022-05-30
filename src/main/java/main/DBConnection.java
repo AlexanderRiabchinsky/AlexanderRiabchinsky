@@ -91,15 +91,15 @@ public class DBConnection {
         return connection;
     }
 
-    public static Connection insertUser(int id, int is_moderator, Date reg_time, String name, String email, String password, String code, String photo) {
+    public static Connection insertUser(int id, int isModerator, Date regTime, String name, String email, String password, String code, String photo) {
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(
                         "jdbc:mysql://localhost:3306/" + dbName +
                                 "?user=" + dbUser + "&password=" + dbPass);
                 connection.createStatement().execute("INSERT IN users.id=?", id);
-                connection.createStatement().execute("INSERT IN users.is_moderator=?", is_moderator);
-                connection.createStatement().execute("INSERT IN users.reg_time= reg_time");
+                connection.createStatement().execute("INSERT IN users.isModerator=?", isModerator);
+                connection.createStatement().execute("INSERT IN users.regTime= regTime");
                 connection.createStatement().execute("INSERT IN users.name= name");
                 connection.createStatement().execute("INSERT IN users.email=email");
                 connection.createStatement().execute("INSERT IN users.password=password");

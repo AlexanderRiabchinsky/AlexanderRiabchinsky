@@ -1,13 +1,11 @@
 package main.controller;
 
 import main.api.response.*;
-import main.model.PostsRepository;
+import main.repositories.PostsRepository;
 import main.model.Tags;
-import main.model.TagsRepository;
+import main.repositories.TagsRepository;
 import main.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
