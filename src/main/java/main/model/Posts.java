@@ -19,8 +19,10 @@ public class Posts {
     @Column(name = "is_active")
     private int isActive;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "status_ID", nullable = false, columnDefinition = "enum('NEW', 'ACCEPTED', 'DECLINED') default 'NEW'")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "moderation_status",
+            columnDefinition = "enum('NEW', 'ACCEPTED', 'DECLINED') default 'NEW'",
+            nullable = false)
     private ModerationStatus status;
 
 
@@ -28,7 +30,7 @@ public class Posts {
     private int moderatorId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Users user;
 
     private Date time;
@@ -40,9 +42,6 @@ public class Posts {
     @Column(name = "view_count")
     private int viewCount;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "post_id")
-//    private List<Tag2Post> tag2post;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     //@JoinColumn(name = "post_id")
@@ -53,7 +52,7 @@ public class Posts {
     private List<PostVotes> postVotes;
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
-//    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "postId")},
-//            inverseJoinColumns = {@JoinColumn(name = "tagId")})
+    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "postId")},
+            inverseJoinColumns = {@JoinColumn(name = "tagId")})
     private List<Tags> tags;
 }

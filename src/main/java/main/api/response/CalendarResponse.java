@@ -18,6 +18,6 @@ public class CalendarResponse {
         @JsonProperty("time")
         private Date time;
         @JsonProperty("view_count")
-        private int view_count;
+        private int viewCount;
     }
 }

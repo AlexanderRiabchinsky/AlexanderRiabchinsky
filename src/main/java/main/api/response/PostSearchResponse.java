@@ -13,7 +13,7 @@ public class PostSearchResponse {
     private List<Posts> postsList;
 
     @Data
-    private class Posts {
+    public static class Posts {
         @JsonProperty("id")
         private int id;
         @JsonProperty("timestamp")
@@ -22,7 +22,7 @@ public class PostSearchResponse {
         private Users user;
 
         @Data
-        public class Users {
+        public static class Users {
             @JsonProperty("id")
             private int id;
             @JsonProperty("name")

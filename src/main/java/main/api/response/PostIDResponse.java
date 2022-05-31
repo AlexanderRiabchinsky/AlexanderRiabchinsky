@@ -19,7 +19,7 @@ public class PostIDResponse {
     private Users user;
 
     @Data
-    private class Users {
+    private static class Users {
         @JsonProperty("id")
         private int id;
         @JsonProperty("name")

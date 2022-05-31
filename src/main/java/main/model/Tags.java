@@ -14,9 +14,6 @@ public class Tags {
     @Column(name = "id", nullable = false)
     private int id;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "tag_id")
-//    private List<Tag2Post> tag2post;
 
     @Column(name = "name")
     private String name;

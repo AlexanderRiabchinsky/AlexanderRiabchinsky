@@ -52,6 +52,30 @@ public class ApiPostController {
     @GetMapping("/api/post/search")
     public PostSearchResponse postSearchCheck() {
         PostSearchResponse postSearchResponse = new PostSearchResponse();
+        postSearchResponse.setCount((int) postsRepository.count());
+        List<Posts> posts = postsRepository.findAll();
+        ArrayList<PostSearchResponse.Posts> postss = new ArrayList<>();
+        for (Posts post:posts) {
+            PostSearchResponse.Posts postt = new PostSearchResponse.Posts();
+            postt.setId(post.getId());
+            postt.setTimestamp("2022-05-30");
+
+            PostResponse.Posts.Users userr = new PostResponse.Posts.Users();
+
+            userr.setId(postsRepository.getUser(post.getId()));
+
+            userr.setName(usersRepository.getUserNameById(postsRepository.getUser(post.getId())));
+
+       //        postt.setUser((List<PostSearchResponse.Posts.Users>) userr);
+            postt.setTitle(post.getTitle());
+            postt.setAnnounce("Анонс поста в отборе");
+            postt.setLikeCount(20);
+            postt.setDislikeCount(10);
+            postt.setCommentCount(30);
+            postt.setViewCount(50);
+
+            postss.add(postt);}
+        postSearchResponse.setPostsList(postss);
         return postSearchResponse;
     }
 
