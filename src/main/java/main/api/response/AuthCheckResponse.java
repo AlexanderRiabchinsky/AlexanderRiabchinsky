@@ -7,26 +7,26 @@ import java.util.List;
 
 @Data
 public class AuthCheckResponse {
-    @JsonProperty("result")
+ //   @JsonProperty("result")
     private boolean result;
-    @JsonProperty("user")
+//    @JsonProperty("user")
     private List<Users> user;
 
     @Data
     public static class Users {
-        @JsonProperty("id")
+ //       @JsonProperty("id")
         private int id;
-        @JsonProperty("name")
+ //       @JsonProperty("name")
         private String name;
-        @JsonProperty("photo")
+ //       @JsonProperty("photo")
         private String photo;
-        @JsonProperty("email")
+ //       @JsonProperty("email")
         private String email;
-        @JsonProperty("moderation")
+//        @JsonProperty("moderation")
         private boolean moderation;
-        @JsonProperty("moderationCount")
+//        @JsonProperty("moderationCount")
         private int moderationCount;
-        @JsonProperty("settings")
+//        @JsonProperty("settings")
         private boolean settings;
     }
 }

@@ -6,14 +6,14 @@ import java.util.List;
 
 @Data
 public class TagResponse {
-    @JsonProperty("tags")
+ //   @JsonProperty("tags")
     private List<Tags> tags;
 
     @Data
     public static class Tags {
-        @JsonProperty("name")
+ //       @JsonProperty("name")
         private String name;
-        @JsonProperty("weight")
+//        @JsonProperty("weight")
         private double weight;
     }
 

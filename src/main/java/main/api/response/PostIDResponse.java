@@ -9,59 +9,59 @@ import java.util.List;
 
 @Data
 public class PostIDResponse {
-    @JsonProperty("id")
+ //   @JsonProperty("id")
     private int id;
-    @JsonProperty("timestamp")
+ //   @JsonProperty("timestamp")
     private Date timestamp;
-    @JsonProperty("active")
+ //   @JsonProperty("active")
     private boolean active;
-    @JsonProperty("user")
+ //   @JsonProperty("user")
     private Users user;
 
     @Data
     private static class Users {
-        @JsonProperty("id")
+ //       @JsonProperty("id")
         private int id;
-        @JsonProperty("name")
+  //      @JsonProperty("name")
         private String name;
     }
 
-    @JsonProperty("title")
+  //  @JsonProperty("title")
     private String title;
-    @JsonProperty("text")
+ //   @JsonProperty("text")
     private String text;
-    @JsonProperty("likeCount")
+  //  @JsonProperty("likeCount")
     private int likeCount;
-    @JsonProperty("dislikeCount")
+ //   @JsonProperty("dislikeCount")
     private int dislikeCount;
-    @JsonProperty("viewCount")
+//    @JsonProperty("viewCount")
     private int viewCount;
-    @JsonProperty("comments")
+//    @JsonProperty("comments")
     private List<PostComments> comments;
 
     @Data
     private static class PostComments {
-        @JsonProperty("id")
+  //      @JsonProperty("id")
         private int id;
-        @JsonProperty("timestamp")
+ //       @JsonProperty("timestamp")
         private String timestamp;
-        @JsonProperty("text")
+ //       @JsonProperty("text")
         private String text;
-        @JsonProperty("user")
+ //       @JsonProperty("user")
         private Users user;
 
         @Data
         private static class Users {
-            @JsonProperty("id")
+  //          @JsonProperty("id")
             private int id;
-            @JsonProperty("name")
+  //          @JsonProperty("name")
             private String name;
-            @JsonProperty("photo")
+ //           @JsonProperty("photo")
             private String photo;
         }
     }
 
-    @JsonProperty("tags")
+//    @JsonProperty("tags")
     private List<Tags> tags;
 
 }

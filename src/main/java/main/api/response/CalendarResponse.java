@@ -8,16 +8,16 @@ import java.util.List;
 
 @Data
 public class CalendarResponse {
-    @JsonProperty("years")
+ //   @JsonProperty("years")
     private int years;
-    @JsonProperty("posts")
+//    @JsonProperty("posts")
     private List<Posts> posts;
 
     @Data
     private static class Posts {
-        @JsonProperty("time")
+  //      @JsonProperty("time")
         private Date time;
-        @JsonProperty("view_count")
+ //       @JsonProperty("view_count")
         private int viewCount;
     }
 }

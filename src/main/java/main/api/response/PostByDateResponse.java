@@ -7,39 +7,39 @@ import java.util.List;
 
 @Data
 public class PostByDateResponse {
-    @JsonProperty("count")
+//    @JsonProperty("count")
     private int count;
-    @JsonProperty("posts")
+ //   @JsonProperty("posts")
     private List<Posts> postsList;
 
     @Data
     private static class Posts {
-        @JsonProperty("id")
+  //      @JsonProperty("id")
         private int id;
-        @JsonProperty("timestamp")
+ //       @JsonProperty("timestamp")
         private String timestamp;
-        @JsonProperty("user")
+ //       @JsonProperty("user")
         private Users user;
 
         @Data
         private static class Users {
-            @JsonProperty("id")
+  //          @JsonProperty("id")
             private int id;
-            @JsonProperty("name")
+ //           @JsonProperty("name")
             private String name;
         }
 
-        @JsonProperty("title")
+ //       @JsonProperty("title")
         private String title = "Заголовок Поста";
-        @JsonProperty("announce")
+ //       @JsonProperty("announce")
         private String announce = "Текст анонса поста без HTML-тэгов";
-        @JsonProperty("likeCount")
+  //      @JsonProperty("likeCount")
         private int likeCount;
-        @JsonProperty("dislikeCount")
+ //       @JsonProperty("dislikeCount")
         private int dislikeCount;
-        @JsonProperty("commentCount")
+ //       @JsonProperty("commentCount")
         private int commentCount;
-        @JsonProperty("viewCount")
+ //       @JsonProperty("viewCount")
         private int viewCount;
     }
 }

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class AuthCaptchaResponse {
-    @JsonProperty("secret")
+ //   @JsonProperty("secret")
     private String secret;
-    @JsonProperty("image")
+ //   @JsonProperty("image")
     private String image;
 }
