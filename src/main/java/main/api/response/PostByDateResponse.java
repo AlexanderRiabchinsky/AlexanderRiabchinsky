@@ -9,7 +9,7 @@ import java.util.List;
 public class PostByDateResponse {
 //    @JsonProperty("count")
     private int count;
- //   @JsonProperty("posts")
+    @JsonProperty("posts")
     private List<Posts> postsList;
 
     @Data

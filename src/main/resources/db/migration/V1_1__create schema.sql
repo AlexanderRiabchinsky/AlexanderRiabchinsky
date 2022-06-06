@@ -1,0 +1,1 @@
+INSERT INTO users(id, isModerator, regTime, name, email, password, code, photo) VALUES(1, 0, '2022-06-03-12-00-01','Вася Петров','vasya@mail.ru', 'vasya01',null,null);

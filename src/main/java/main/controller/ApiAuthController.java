@@ -2,7 +2,9 @@ package main.controller;
 
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
+import main.model.UserAuthCheck;
 import main.model.Users;
+import main.repositories.UserAuthCheckRepository;
 import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,27 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ApiAuthController {
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
+    private UserAuthCheckRepository userAuthCheckRepository;
 
     @GetMapping("/api/auth/check")
     public AuthCheckResponse authCheck() {
-        List<Users> usersIterable = usersRepository.findAll();
+   //     List<UserAuthCheck> usersIterable = userAuthCheckRepository.findAll();
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
+        Integer id = 1;
+
+        Optional<UserAuthCheck> userAuthCheck = userAuthCheckRepository.findById(id);
         authCheckResponse.setResult(true);
-        AuthCheckResponse.Users user = new AuthCheckResponse.Users();
-        user.setId(1);
-        user.setName("Vasya");
-        user.setPhoto("not yet");
-        user.setEmail("a@a.ru");
-        user.setModeration(false);
-        user.setModerationCount(0);
-        user.setSettings(true);
-        ArrayList<AuthCheckResponse.Users> users = new ArrayList<>();
-        users.add(user);
+        AuthCheckResponse user = new AuthCheckResponse();
+        UserAuthCheck users = new UserAuthCheck();
+        users.setId(id);
+        users.setName(userAuthCheckRepository.findNameById(id));
+        users.setPhoto(userAuthCheckRepository.findPhotoById(id));
+        users.setEmail(userAuthCheckRepository.findEmailById(id));
+        users.setModeration(true);
+        users.setModerationCount(101);
+        users.setSettings(true);
         authCheckResponse.setUser(users);
         return authCheckResponse;
     }
