@@ -1,13 +1,16 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.PostExternal;
 import main.model.Posts;
+import main.model.UserExternal;
 import main.repositories.PostsRepository;
 import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,7 @@ public class ApiPostController {
 
     @Autowired
     private PostsRepository postsRepository;
+    @Autowired
     private UsersRepository usersRepository;
 
     @GetMapping("/api/post")
@@ -23,29 +27,22 @@ public class ApiPostController {
         PostResponse postResponse = new PostResponse();
         postResponse.setCount((int) postsRepository.count());
         List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostResponse.Posts> postss = new ArrayList<>();
+        ArrayList<PostExternal> postss = new ArrayList<>();
         for (Posts post:posts) {
-        PostResponse.Posts postt = new PostResponse.Posts();
-        postt.setId(post.getId());
-        postt.setTimestamp("2022-04-08");
- //           Optional<Users> user = usersRepository.findById(postsRepository.getUser(post.getId()));
-        PostResponse.Posts.Users userr = new PostResponse.Posts.Users();
-       // userr.setId(postsRepository.getUser(post.getId()));
-        userr.setId(postsRepository.getUser(post.getId()));
-      //  userr.setId(postsRepository.findById(post.getUser_id()));
-        userr.setName(usersRepository.getUserNameById(postsRepository.getUser(post.getId())));
-    //    userr.setName(usersRepository.getUserNameById(post.getUser_id()));
- //       ArrayList<PostResponse.Posts.Users> users = new ArrayList<>();
-        postt.setUser((List<PostResponse.Posts.Users>) userr);
-        postt.setTitle(post.getTitle());
-        postt.setAnnounce("Анонс поста");
-        postt.setLikeCount(2);
-        postt.setDislikeCount(1);
-        postt.setCommentCount(3);
-        postt.setViewCount(5);
+        PostExternal postExt = new PostExternal();
+        postExt.setId(post.getId());
+        postExt.setTimestamp(post.getTimestamp());
+        postExt.setUser((UserExternal) post.getUser());
 
-        postss.add(postt);}
-        postResponse.setPostsList(postss);
+        postExt.setTitle(post.getTitle());
+        postExt.setAnnounce("Анонс поста");
+        postExt.setLikeCount(5);
+        postExt.setDislikeCount(5);
+        postExt.setCommentCount(5);
+        postExt.setViewCount(post.getViewCount());
+
+        postss.add(postExt);}
+        postResponse.setPosts(postss);
         return postResponse;
     }
 
@@ -60,11 +57,11 @@ public class ApiPostController {
             postt.setId(post.getId());
             postt.setTimestamp("2022-05-30");
 
-            PostResponse.Posts.Users userr = new PostResponse.Posts.Users();
+            UserExternal userr = new UserExternal();
 
-            userr.setId(postsRepository.getUser(post.getId()));
+            userr.setId(postsRepository.getUserIdByPostId(post.getId()));
 
-            userr.setName(usersRepository.getUserNameById(postsRepository.getUser(post.getId())));
+            userr.setName(usersRepository.getUserNameById(postsRepository.getUserIdByPostId(post.getId())));
 
        //        postt.setUser((List<PostSearchResponse.Posts.Users>) userr);
             postt.setTitle(post.getTitle());

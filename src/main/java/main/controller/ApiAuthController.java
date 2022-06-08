@@ -4,7 +4,6 @@ import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
 import main.model.UserAuthCheck;
 import main.model.Users;
-import main.repositories.UserAuthCheckRepository;
 import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class ApiAuthController {
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
-    private UserAuthCheckRepository userAuthCheckRepository;
+//    @Autowired
+//    private UserAuthCheckRepository userAuthCheckRepository;
 
     @GetMapping("/api/auth/check")
     public AuthCheckResponse authCheck() {
@@ -29,14 +26,14 @@ public class ApiAuthController {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
         Integer id = 1;
 
-        Optional<UserAuthCheck> userAuthCheck = userAuthCheckRepository.findById(id);
+        Optional<Users> userAuthCheck = usersRepository.findById(id);
         authCheckResponse.setResult(true);
         AuthCheckResponse user = new AuthCheckResponse();
         UserAuthCheck users = new UserAuthCheck();
         users.setId(id);
-        users.setName(userAuthCheckRepository.findNameById(id));
-        users.setPhoto(userAuthCheckRepository.findPhotoById(id));
-        users.setEmail(userAuthCheckRepository.findEmailById(id));
+        users.setName(usersRepository.findNameById(id));
+        users.setPhoto(usersRepository.findPhotoById(id));
+        users.setEmail(usersRepository.findEmailById(id));
         users.setModeration(true);
         users.setModerationCount(101);
         users.setSettings(true);

@@ -4,13 +4,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Entity
 @Data
 @Table(name = "posts")
-public class Posts {
+public class Posts{
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +34,7 @@ public class Posts {
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Users user;
 
-    private Date time;
+    private LocalDateTime timestamp;
 
     private String title;
 

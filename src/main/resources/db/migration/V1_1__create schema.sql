@@ -1,1 +1,3 @@
-INSERT INTO users(id, isModerator, regTime, name, email, password, code, photo) VALUES(1, 0, '2022-06-03-12-00-01','Вася Петров','vasya@mail.ru', 'vasya01',null,null);
+INSERT INTO users(id, is_moderator, reg_time, name, email, password, code, photo) VALUES(1, 0, '2022-06-03-12-00-01','Вася Петров','vasya@mail.ru', 'vasya01',null,null);
+INSERT INTO users(id, is_moderator, reg_time, name, email, password, code, photo) VALUES(2, 0, '2022-06-06-12-00-01','Петя Васечкин','petya@mail.ru', 'petya01',null,null);
+INSERT INTO posts(id, is_active, moderation_status, moderator_id, user_id, time, title, text, view_count) VALUES(1, 1, 'ACCEPTED',1,1, '2022-06-06-12-01-01','Васины мысли','Я хочу есть',2);
