@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.api.response.*;
+import main.model.Posts;
 import main.repositories.PostsRepository;
 import main.model.Tags;
 import main.repositories.TagsRepository;
@@ -42,13 +43,14 @@ public class ApiGeneralController {
     @GetMapping("/api/tag")
     private TagResponse tags() {
         TagResponse tagResponse = new TagResponse();
-        TagResponse.Tags tags = new TagResponse.Tags();
-        List<Tags> tagsList = tagsRepository.findAll();
+        List<Tags> tags = tagsRepository.findAll();
+        ArrayList<TagExternal> tags1 = new ArrayList<>();
+        for (Tags tag:tags) {
+        TagExternal tagExt = new TagExternal();
 
-        tags.setName("Lena");
-        tags.setWeight(0.9);
-        ArrayList<TagResponse.Tags> tags1 = new ArrayList<>();
-        tags1.add(tags);
+        tagExt.setName("Lena");
+        tagExt.setWeight(0.9);
+        tags1.add(tagExt);}
         tagResponse.setTags(tags1);
         return tagResponse;
     }

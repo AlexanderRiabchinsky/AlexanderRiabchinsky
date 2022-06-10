@@ -2,7 +2,7 @@ package main.controller;
 
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
-import main.model.UserAuthCheck;
+import main.api.response.UserAuthCheck;
 import main.model.Users;
 import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class ApiAuthController {
         users.setPhoto(usersRepository.findPhotoById(id));
         users.setEmail(usersRepository.findEmailById(id));
         users.setModeration(true);
-        users.setModerationCount(101);
+        users.setModerationCount(88);
         users.setSettings(true);
         authCheckResponse.setUser(users);
         return authCheckResponse;

@@ -1,12 +1,11 @@
-package main.model;
+package main.controller;
 
 import lombok.Data;
-import main.api.response.PostResponse;
+import main.model.Posts;
+import main.api.response.UserExternal;
 
 import javax.persistence.Id;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class PostExternal extends Posts {

@@ -1,16 +1,14 @@
 package main.controller;
 
 import main.api.response.*;
-import main.model.PostExternal;
 import main.model.Posts;
-import main.model.UserExternal;
+import main.api.response.UserExternal;
 import main.repositories.PostsRepository;
 import main.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 

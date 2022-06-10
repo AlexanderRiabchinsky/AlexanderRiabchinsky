@@ -1,4 +1,4 @@
-package main.model;
+package main.api.response;
 
 public enum ModerationStatus {
     NEW,

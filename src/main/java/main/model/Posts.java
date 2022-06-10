@@ -1,12 +1,11 @@
 package main.model;
 
 import lombok.Data;
+import main.api.response.ModerationStatus;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Data

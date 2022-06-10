@@ -4,19 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 06.06.22">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/model/PostExternal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/model/UserExternal.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 09.06.22">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/ModerationStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/ModerationStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostCalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostCalendarResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/PostExternal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UserAuthCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/UserAuthCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/UserAuthCheckRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1_1__create schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1_1__create schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UserAuthCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserAuthCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UserExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostCalendarResponseRepository.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +97,7 @@
       <recent name="D:\Others\BlogDriver" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Others\BlogDriver" />
       <recent name="D:\Others\BlogDriver\src\main\resources" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -290,7 +294,21 @@
       <option name="project" value="LOCAL" />
       <updated>1654498280563</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="version as of 08.06.22">
+      <created>1654659853483</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1654659853483</updated>
+    </task>
+    <task id="LOCAL-00025" summary="version as of 09.06.22">
+      <created>1654808477957</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1654808477957</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,6 +345,8 @@
     <MESSAGE value="version as of 31.05.22" />
     <MESSAGE value="version as of 02.06.22" />
     <MESSAGE value="version as of 06.06.22" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 06.06.22" />
+    <MESSAGE value="version as of 08.06.22" />
+    <MESSAGE value="version as of 09.06.22" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 09.06.22" />
   </component>
 </project>
