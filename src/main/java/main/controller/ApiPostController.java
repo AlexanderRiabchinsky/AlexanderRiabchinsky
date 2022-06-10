@@ -30,7 +30,7 @@ public class ApiPostController {
         PostExternal postExt = new PostExternal();
         postExt.setId(post.getId());
         postExt.setTimestamp(post.getTimestamp());
-        postExt.setUser((UserExternal) post.getUser());
+        postExt.setUser(post.getUser());
 
         postExt.setTitle(post.getTitle());
         postExt.setAnnounce("Анонс поста");
