@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 09.06.22">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 10.06.22">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/ModerationStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/ModerationStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostCalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostCalendarResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/PostExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UserAuthCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserAuthCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/UserExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostCalendarResponseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654808477957</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="version as of 10.06.22">
+      <created>1654845575342</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1654845575342</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,6 +343,7 @@
     <MESSAGE value="version as of 06.06.22" />
     <MESSAGE value="version as of 08.06.22" />
     <MESSAGE value="version as of 09.06.22" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 09.06.22" />
+    <MESSAGE value="version as of 10.06.22" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 10.06.22" />
   </component>
 </project>

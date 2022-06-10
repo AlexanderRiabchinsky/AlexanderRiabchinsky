@@ -18,5 +18,6 @@ public class CaptchaCodes {
 
     private String code;
 
+    @Column(name = "secret_code")
     private String secretCode;
 }

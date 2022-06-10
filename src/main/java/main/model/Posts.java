@@ -30,9 +30,10 @@ public class Posts{
     private int moderatorId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Users user;
 
+    @Column(name = "time")
     private LocalDateTime timestamp;
 
     private String title;
@@ -52,7 +53,7 @@ public class Posts{
     private List<PostVotes> postVotes;
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "postId")},
-            inverseJoinColumns = {@JoinColumn(name = "tagId")})
+    @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "id")})
     private List<Tags> tags;
 }

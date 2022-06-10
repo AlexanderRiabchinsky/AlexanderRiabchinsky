@@ -15,8 +15,10 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "is_moderator")
     private int isModerator;
 
+    @Column(name = "reg_time")
     private Date regTime;
 
     private String name;
