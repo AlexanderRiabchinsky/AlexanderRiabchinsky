@@ -5,6 +5,7 @@ import main.model.Posts;
 import main.api.response.UserExternal;
 import main.repositories.PostsRepository;
 import main.repositories.UsersRepository;
+import main.service.ApiPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,28 +21,17 @@ public class ApiPostController {
     @Autowired
     private UsersRepository usersRepository;
 
+    private final ApiPostService postResponse;
+
+    public ApiPostController(PostsRepository postsRepository, UsersRepository usersRepository, ApiPostService postResponse) {
+        this.postsRepository = postsRepository;
+        this.usersRepository = usersRepository;
+        this.postResponse = postResponse;
+    }
+
     @GetMapping("/api/post")
-    public PostResponse postCheck() {
-        PostResponse postResponse = new PostResponse();
-        postResponse.setCount((int) postsRepository.count());
-        List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostExternal> postss = new ArrayList<>();
-        for (Posts post:posts) {
-        PostExternal postExt = new PostExternal();
-        postExt.setId(post.getId());
-        postExt.setTimestamp(post.getTimestamp());
-        postExt.setUser(post.getUser());
-
-        postExt.setTitle(post.getTitle());
-        postExt.setAnnounce("Анонс поста");
-        postExt.setLikeCount(5);
-        postExt.setDislikeCount(5);
-        postExt.setCommentCount(5);
-        postExt.setViewCount(post.getViewCount());
-
-        postss.add(postExt);}
-        postResponse.setPosts(postss);
-        return postResponse;
+    private PostResponse apiPost() {
+        return postResponse.getPostResponse();
     }
 
     @GetMapping("/api/post/search")

@@ -5,6 +5,7 @@ import main.api.response.AuthCheckResponse;
 import main.api.response.UserAuthCheck;
 import main.model.Users;
 import main.repositories.UsersRepository;
+import main.service.ApiAuthCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,30 +16,17 @@ import java.util.Optional;
 
 @RestController
 public class ApiAuthController {
+    private final ApiAuthCheckService apiAuthCheckService;
     @Autowired
     private UsersRepository usersRepository;
-//    @Autowired
-//    private UserAuthCheckRepository userAuthCheckRepository;
+
+    public ApiAuthController(ApiAuthCheckService apiAuthCheckService) {
+        this.apiAuthCheckService = apiAuthCheckService;
+    }
 
     @GetMapping("/api/auth/check")
-    public AuthCheckResponse authCheck() {
-   //     List<UserAuthCheck> usersIterable = userAuthCheckRepository.findAll();
-        AuthCheckResponse authCheckResponse = new AuthCheckResponse();
-        Integer id = 1;
-
-        Optional<Users> userAuthCheck = usersRepository.findById(id);
-        authCheckResponse.setResult(true);
-        AuthCheckResponse user = new AuthCheckResponse();
-        UserAuthCheck users = new UserAuthCheck();
-        users.setId(id);
-        users.setName(usersRepository.findNameById(id));
-        users.setPhoto(usersRepository.findPhotoById(id));
-        users.setEmail(usersRepository.findEmailById(id));
-        users.setModeration(true);
-        users.setModerationCount(88);
-        users.setSettings(true);
-        authCheckResponse.setUser(users);
-        return authCheckResponse;
+    private AuthCheckResponse apiAuthCheck() {
+        return apiAuthCheckService.getAuthCheckResponse();
     }
 
     @GetMapping("/api/auth/captcha")
@@ -50,7 +38,6 @@ public class ApiAuthController {
     @PostMapping("/api/auth/register")
     public int add(Users user) throws SQLException {
             Users newUser = usersRepository.save(user);
-  //          DBConnection.insertUser(user.getId(), user.getIs_moderator(), user.getReg_time(), user.getName(), user.getEmail(), user.getPassword(), user.getCode(), user.getPhoto());
             return newUser.getId();
     }
 

@@ -5,6 +5,8 @@ import main.model.Posts;
 import main.repositories.PostsRepository;
 import main.model.Tags;
 import main.repositories.TagsRepository;
+import main.service.ApiAuthCheckService;
+import main.service.ApiTagService;
 import main.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +24,13 @@ public class ApiGeneralController {
 
     private final SettingsService settingsService;
     private final InitResponse initResponse;
+    private final ApiTagService tagResponse;
 
-    public ApiGeneralController(SettingsService settingsService, InitResponse initResponse/*, TagResponse tagResponse, CalendarResponse calendarResponse*/) {
+    public ApiGeneralController(SettingsService settingsService, InitResponse initResponse, ApiTagService tagResponse/*, CalendarResponse calendarResponse*/) {
 
         this.settingsService = settingsService;
         this.initResponse = initResponse;
+        this.tagResponse = tagResponse;
     }
 
 
@@ -41,18 +45,8 @@ public class ApiGeneralController {
     }
 
     @GetMapping("/api/tag")
-    private TagResponse tags() {
-        TagResponse tagResponse = new TagResponse();
-        List<Tags> tags = tagsRepository.findAll();
-        ArrayList<TagExternal> tags1 = new ArrayList<>();
-        for (Tags tag:tags) {
-        TagExternal tagExt = new TagExternal();
-
-        tagExt.setName("Lena");
-        tagExt.setWeight(0.9);
-        tags1.add(tagExt);}
-        tagResponse.setTags(tags1);
-        return tagResponse;
+    private TagResponse apiTag() {
+        return tagResponse.getTagResponse();
     }
 
     @GetMapping("/api/calendar")
