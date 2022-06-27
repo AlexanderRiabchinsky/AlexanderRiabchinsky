@@ -2,8 +2,11 @@ package main.api.response;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class CalendarResponse {
-    private int years;
-    private PostCalendarResponse posts;
+    private List<Integer> years;
+    private ArrayList<PostCalendarResponse> posts;
 }

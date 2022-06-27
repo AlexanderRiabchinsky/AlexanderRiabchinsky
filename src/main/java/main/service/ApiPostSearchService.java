@@ -1,7 +1,8 @@
 package main.service;
 
-import main.api.response.PostResponse;
 import main.api.response.PostExternal;
+import main.api.response.PostResponse;
+import main.api.response.PostSearchResponse;
 import main.model.Posts;
 import main.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ApiPostService {
+public class ApiPostSearchService {
     @Autowired
     private PostsRepository postsRepository;
-    public PostResponse getPostResponse() {
-        PostResponse postResponse = new PostResponse();
-        postResponse.setCount((int) postsRepository.count());
+    public PostSearchResponse getPostSearchResponse() {
+        PostSearchResponse postSearchResponse = new PostSearchResponse();
+        postSearchResponse.setCount((int) postsRepository.count());
         List<Posts> posts = postsRepository.findAll();
         ArrayList<PostExternal> postss = new ArrayList<>();
         for (Posts post:posts) {
@@ -33,7 +34,7 @@ public class ApiPostService {
             postExt.setViewCount(post.getViewCount());
 
             postss.add(postExt);}
-        postResponse.setPosts(postss);
-        return postResponse;
+        postSearchResponse.setPosts(postss);
+        return postSearchResponse;
     }
 }

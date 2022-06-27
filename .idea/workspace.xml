@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 10.06.22 corrected">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthCheckService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiTagService.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 12.06.22 corrected">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiCalendarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostSearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostSearchResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostSearchResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/myFlywayConfig.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +105,7 @@
       <module name="blogDriver" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.controller.*" />
+          <option name="PATTERN" value="main.api.response.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -323,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654852909462</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="version as of 12.06.22 corrected">
+      <created>1655061623137</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1655061623137</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,6 +372,7 @@
     <MESSAGE value="version as of 09.06.22" />
     <MESSAGE value="version as of 10.06.22" />
     <MESSAGE value="version as of 10.06.22 corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 10.06.22 corrected" />
+    <MESSAGE value="version as of 12.06.22 corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 12.06.22 corrected" />
   </component>
 </project>

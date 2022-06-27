@@ -1,4 +1,4 @@
-package main.controller;
+package main.api.response;
 
 import lombok.Data;
 import main.model.Posts;
