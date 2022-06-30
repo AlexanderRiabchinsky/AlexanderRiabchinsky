@@ -1,23 +1,28 @@
 package main.controller;
 
 import main.api.response.*;
-import main.repositories.PostsRepository;
-import main.repositories.UsersRepository;
-import main.service.ApiPostSearchService;
-import main.service.ApiPostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.service.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ApiPostController {
 
     private final ApiPostService postResponse;
-    private ApiPostSearchService postSearchResponse;
+    private final ApiPostSearchService postSearchResponse;
+    private final ApiPostByDateService postByDateResponse;
+    private final ApiPostByTagService postByTagResponse;
+    private final ApiPostByIdService postIDResponse;
+    private final PostModerationService postModeration;
 
-    public ApiPostController(PostsRepository postsRepository, UsersRepository usersRepository, ApiPostService postResponse,ApiPostSearchService postSearchResponse) {
+    public ApiPostController(ApiPostService postResponse, ApiPostSearchService postSearchResponse, ApiPostByDateService postByDateResponse, ApiPostByTagService postByTagResponse, ApiPostByIdService postIDResponse, PostModerationService postModeration) {
         this.postResponse = postResponse;
         this.postSearchResponse = postSearchResponse;
+        this.postByDateResponse = postByDateResponse;
+        this.postByTagResponse = postByTagResponse;
+        this.postIDResponse = postIDResponse;
+        this.postModeration = postModeration;
     }
 
     @GetMapping("/api/post")
@@ -30,27 +35,19 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post/byDate")
-    public PostByDateResponse postByDateCheck() {
-        PostByDateResponse postByDateResponse = new PostByDateResponse();
-        return postByDateResponse;
+    private PostByDateResponse apiPostByDateSearch() {return postByDateResponse.getPostByDateResponse();
     }
 
     @GetMapping("/api/post/byTag")
-    public PostByTagResponse postByTagCheck() {
-        PostByTagResponse postByTagResponse = new PostByTagResponse();
-        return postByTagResponse;
+    public PostByTagResponse apiPostByTagResponse() {return postByTagResponse.getPostByTagResponse();
     }
 
     @GetMapping("/api/post/{ID}")
-    public PostIDResponse postIDCheck() {
-        PostIDResponse postIDResponse = new PostIDResponse();
-        return postIDResponse;
+    public PostIDResponse postIdCheck(@PathVariable int id) {return postIDResponse.getPostByIdResponse(id);
     }
 
     @GetMapping("/api/post/moderation")
-    public PostModeration moderationCheck() {
-        PostModeration postModeration = new PostModeration();
-        return postModeration;
+    public PostModeration moderationCheck() {return postModeration.getModerationData();
     }
 
 }

@@ -5,63 +5,27 @@ import lombok.Data;
 import main.model.Tags;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 public class PostIDResponse {
- //   @JsonProperty("id")
+
     private int id;
- //   @JsonProperty("timestamp")
-    private Date timestamp;
- //   @JsonProperty("active")
+    private LocalDateTime timestamp;
     private boolean active;
- //   @JsonProperty("user")
-    private Users user;
 
-    @Data
-    private static class Users {
- //       @JsonProperty("id")
-        private int id;
-  //      @JsonProperty("name")
-        private String name;
-    }
+    private UserExternal user;
 
-  //  @JsonProperty("title")
     private String title;
- //   @JsonProperty("text")
     private String text;
-  //  @JsonProperty("likeCount")
     private int likeCount;
- //   @JsonProperty("dislikeCount")
     private int dislikeCount;
-//    @JsonProperty("viewCount")
     private int viewCount;
-//    @JsonProperty("comments")
-    private List<PostComments> comments;
 
-    @Data
-    private static class PostComments {
-  //      @JsonProperty("id")
-        private int id;
- //       @JsonProperty("timestamp")
-        private String timestamp;
- //       @JsonProperty("text")
-        private String text;
- //       @JsonProperty("user")
-        private Users user;
+    private PostCommentsExternal comments;
 
-        @Data
-        private static class Users {
-  //          @JsonProperty("id")
-            private int id;
-  //          @JsonProperty("name")
-            private String name;
- //           @JsonProperty("photo")
-            private String photo;
-        }
-    }
 
-//    @JsonProperty("tags")
     private List<Tags> tags;
 
 }

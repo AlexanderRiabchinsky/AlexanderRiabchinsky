@@ -2,26 +2,25 @@ package main.controller;
 
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
-import main.api.response.UserAuthCheck;
-import main.model.Users;
 import main.repositories.UsersRepository;
 import main.service.ApiAuthCheckService;
+import main.service.CaptchaService;
+import main.service.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
-import java.util.Optional;
-
 @RestController
 public class ApiAuthController {
     private final ApiAuthCheckService apiAuthCheckService;
-    @Autowired
-    private UsersRepository usersRepository;
+    private final CaptchaService captchaService;
+    private final UserRegistrationService userRegistrationService;
 
-    public ApiAuthController(ApiAuthCheckService apiAuthCheckService) {
+    public ApiAuthController(ApiAuthCheckService apiAuthCheckService, CaptchaService captchaService, UserRegistrationService userRegistrationService) {
         this.apiAuthCheckService = apiAuthCheckService;
+        this.captchaService = captchaService;
+        this.userRegistrationService = userRegistrationService;
     }
 
     @GetMapping("/api/auth/check")
@@ -30,15 +29,11 @@ public class ApiAuthController {
     }
 
     @GetMapping("/api/auth/captcha")
-    public AuthCaptchaResponse captchaCheck() {
-        AuthCaptchaResponse authCaptchaResponse = new AuthCaptchaResponse();
-        return authCaptchaResponse;
+    private AuthCaptchaResponse captchaCheck() {return captchaService.getCaptcha();
     }
 
     @PostMapping("/api/auth/register")
-    public int add(Users user) throws SQLException {
-            Users newUser = usersRepository.save(user);
-            return newUser.getId();
+    public int set(){return userRegistrationService.setNewUser();
     }
 
 }
