@@ -4,28 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 30.06.22 corrected">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 03.07.22 corrected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthCheckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiCalendarService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostByDateService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostByIdService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostByTagService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostSearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiTagService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/CaptchaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/PostModerationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/SettingsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/UserRegistrationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656577890742</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="version as of 03.07.22 corrected">
+      <created>1656829673897</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1656829673897</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,7 +372,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 09.03.2022" />
     <MESSAGE value="version 10.03.2022" />
     <MESSAGE value="version stage 2 preliminary" />
     <MESSAGE value="version 20.03.22" />
@@ -402,6 +396,7 @@
     <MESSAGE value="version as of 12.06.22 corrected" />
     <MESSAGE value="version as of 27.06.22 corrected" />
     <MESSAGE value="version as of 30.06.22 corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 30.06.22 corrected" />
+    <MESSAGE value="version as of 03.07.22 corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 03.07.22 corrected" />
   </component>
 </project>

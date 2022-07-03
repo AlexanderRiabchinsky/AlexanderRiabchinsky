@@ -2,6 +2,7 @@ package main.service;
 
 import main.api.response.*;
 import main.model.Posts;
+import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,8 +16,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ApiPostService {
+    MapperService mapperService = new MapperService();
     @Autowired
     private PostsRepository postsRepository;
+    private PostCommentsRepository postCommentsRepository;
     public PostResponse getPostResponse() {
         PostResponse postResponse = new PostResponse();
         postResponse.setCount((int) postsRepository.count());

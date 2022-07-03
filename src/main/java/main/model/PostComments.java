@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
