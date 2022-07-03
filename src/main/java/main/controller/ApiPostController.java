@@ -2,27 +2,19 @@ package main.controller;
 
 import main.api.response.*;
 import main.service.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ApiPostController {
 
     private final ApiPostService postResponse;
-    private final ApiPostSearchService postSearchResponse;
-    private final ApiPostByDateService postByDateResponse;
-    private final ApiPostByTagService postByTagResponse;
-    private final ApiPostByIdService postIDResponse;
-    private final PostModerationService postModeration;
 
-    public ApiPostController(ApiPostService postResponse, ApiPostSearchService postSearchResponse, ApiPostByDateService postByDateResponse, ApiPostByTagService postByTagResponse, ApiPostByIdService postIDResponse, PostModerationService postModeration) {
+    public ApiPostController(ApiPostService postResponse) {
         this.postResponse = postResponse;
-        this.postSearchResponse = postSearchResponse;
-        this.postByDateResponse = postByDateResponse;
-        this.postByTagResponse = postByTagResponse;
-        this.postIDResponse = postIDResponse;
-        this.postModeration = postModeration;
     }
 
     @GetMapping("/api/post")
@@ -31,23 +23,25 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post/search")
-   private PostSearchResponse apiPostSearch() { return postSearchResponse.getPostSearchResponse();
+   private PostResponse apiPostSearch() { return postResponse.getPostSearchResponse();
     }
 
     @GetMapping("/api/post/byDate")
-    private PostByDateResponse apiPostByDateSearch() {return postByDateResponse.getPostByDateResponse();
+    public ResponseEntity<PostResponse> byDate(@RequestParam(defaultValue = "0") int offset,
+                                               @RequestParam(defaultValue = "10") int limit,
+                                               @RequestParam String date) {return ResponseEntity.ok(postResponse.getPostByDate(offset, limit, date));
     }
 
     @GetMapping("/api/post/byTag")
-    public PostByTagResponse apiPostByTagResponse() {return postByTagResponse.getPostByTagResponse();
+    public PostResponse apiPostByTagResponse() {return postResponse.getPostByTagResponse();
     }
 
     @GetMapping("/api/post/{ID}")
-    public PostIDResponse postIdCheck(@PathVariable int id) {return postIDResponse.getPostByIdResponse(id);
+    public PostIDResponse postIdCheck(@PathVariable int id) {return postResponse.getPostByIdResponse(id);
     }
 
     @GetMapping("/api/post/moderation")
-    public PostModeration moderationCheck() {return postModeration.getModerationData();
+    public PostResponse moderationCheck() {return postResponse.getModerationData();
     }
 
 }

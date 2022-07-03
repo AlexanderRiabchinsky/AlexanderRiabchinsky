@@ -11,6 +11,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
+        @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+                "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+                "AND DATE_FORMAT(posts.time, '%Y-%m-%d') = :date " +
+                "ORDER BY posts.time DESC",
+                nativeQuery = true)
+        Page<Posts> findPostsByDate(Pageable pageable, @Param("date") String date);
+
+        @Query("SELECT COUNT(value) FROM post_votes WHERE post.id = postId and value = 1")
+        int findPostLikesCount(int postId);
+
+        @Query("SELECT COUNT(value) FROM post_votes WHERE post.id = postId and value = -1")
+        int findPostDislikesCount(int id);
+
+        @Query("SELECT COUNT(*) FROM post_comments WHERE post.id = postId")
+        int findPostCommentsCount(int id);
+
+
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
   //      @Query (value = "SELECT id FROM Users u LEFT OUTER JOIN Posts p on u.id=p.user_id  WHERE p.id=postId")
   //      @Query (value = "SELECT id FROM Users u LEFT OUTER JOIN Posts p on u=p.user  WHERE p.id=postId")

@@ -2,38 +2,30 @@ package main.controller;
 
 import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
-import main.repositories.UsersRepository;
-import main.service.ApiAuthCheckService;
-import main.service.CaptchaService;
-import main.service.UserRegistrationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.service.ApiAuthService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ApiAuthController {
-    private final ApiAuthCheckService apiAuthCheckService;
-    private final CaptchaService captchaService;
-    private final UserRegistrationService userRegistrationService;
+    private final ApiAuthService apiAuthService;
 
-    public ApiAuthController(ApiAuthCheckService apiAuthCheckService, CaptchaService captchaService, UserRegistrationService userRegistrationService) {
-        this.apiAuthCheckService = apiAuthCheckService;
-        this.captchaService = captchaService;
-        this.userRegistrationService = userRegistrationService;
+    public ApiAuthController(ApiAuthService apiAuthService) {
+        this.apiAuthService = apiAuthService;
     }
 
     @GetMapping("/api/auth/check")
     private AuthCheckResponse apiAuthCheck() {
-        return apiAuthCheckService.getAuthCheckResponse();
+        return apiAuthService.getAuthCheckResponse();
     }
 
     @GetMapping("/api/auth/captcha")
-    private AuthCaptchaResponse captchaCheck() {return captchaService.getCaptcha();
+    private AuthCaptchaResponse captchaCheck() {return apiAuthService.getCaptcha();
     }
 
     @PostMapping("/api/auth/register")
-    public int set(){return userRegistrationService.setNewUser();
+    public int set(){return apiAuthService.setNewUser();
     }
 
 }

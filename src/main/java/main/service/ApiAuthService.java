@@ -1,5 +1,6 @@
 package main.service;
 
+import main.api.response.AuthCaptchaResponse;
 import main.api.response.AuthCheckResponse;
 import main.api.response.UserAuthCheck;
 import main.model.Users;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ApiAuthCheckService {
+public class ApiAuthService {
     @Autowired
     private UsersRepository usersRepository;
 
@@ -31,5 +32,23 @@ public class ApiAuthCheckService {
         users.setSettings(true);
         authCheckResponse.setUser(users);
         return authCheckResponse;
+    }
+    public AuthCaptchaResponse getCaptcha(){
+        AuthCaptchaResponse captchaResponse = new AuthCaptchaResponse();
+        captchaResponse.setSecret(captchaResponse.getSecret());
+        captchaResponse.setImage(captchaResponse.getImage());
+        return captchaResponse;
+    }
+    public int setNewUser(){
+        Users newUser = new Users();
+        newUser.setIsModerator(newUser.getIsModerator());
+        newUser.setRegTime(newUser.getRegTime());
+        newUser.setName(newUser.getName());
+        newUser.setEmail(newUser.getEmail());
+        newUser.setPassword(newUser.getPassword());
+        newUser.setCode(newUser.getCode());
+        newUser.setPhoto(newUser.getPhoto());
+        usersRepository.save(newUser);
+        return newUser.getId();
     }
 }

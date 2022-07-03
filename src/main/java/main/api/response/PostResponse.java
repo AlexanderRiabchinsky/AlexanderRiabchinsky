@@ -5,6 +5,6 @@ import java.util.ArrayList;
 
 @Data
 public class PostResponse  {
-    private int count;
+    private long count;
     private ArrayList<PostExternal> posts;
 }

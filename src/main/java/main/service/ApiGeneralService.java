@@ -1,5 +1,7 @@
 package main.service;
 
+import main.api.response.CalendarResponse;
+import main.api.response.SettingsResponse;
 import main.api.response.TagExternal;
 import main.api.response.TagResponse;
 import main.model.Tags;
@@ -11,10 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ApiTagService {
+public class ApiGeneralService {
     @Autowired
     private TagsRepository tagsRepository;
-
+    public SettingsResponse getGlobalSettings(){
+        SettingsResponse settingsResponse=new SettingsResponse();
+        settingsResponse.setMultiuserMode(true);
+        settingsResponse.setStatisticsIsPublic(true);
+        settingsResponse.setPostPremoderation(false);
+        return settingsResponse;
+    }
     public TagResponse getTagResponse() {
         TagResponse tagResponse = new TagResponse();
         List<Tags> tags = tagsRepository.findAll();
@@ -27,5 +35,10 @@ public class ApiTagService {
             tags1.add(tagExt);}
         tagResponse.setTags(tags1);
         return tagResponse;
+    }
+    public CalendarResponse getCalendarResponse(){
+        CalendarResponse calendarResponse = new CalendarResponse();
+
+        return calendarResponse;
     }
 }
