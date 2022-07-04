@@ -18,14 +18,14 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
                 nativeQuery = true)
         Page<Posts> findPostsByDate(Pageable pageable, @Param("date") String date);
 
-        @Query("SELECT COUNT(value) FROM post_votes WHERE post.id = postId and value = 1")
-        int findPostLikesCount(int postId);
+        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = 1")
+        int findPostLikesCount(@Param("postId") int postId);
 
-        @Query("SELECT COUNT(value) FROM post_votes WHERE post.id = postId and value = -1")
-        int findPostDislikesCount(int id);
+        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = -1")
+        int findPostDislikesCount(@Param("postId") int postId);
 
-        @Query("SELECT COUNT(*) FROM post_comments WHERE post.id = postId")
-        int findPostCommentsCount(int id);
+        @Query("SELECT COUNT(post) FROM PostComments pc WHERE pc.post =:postId")
+        int findPostCommentsCount(@Param("postId") int postId);
 
 
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
