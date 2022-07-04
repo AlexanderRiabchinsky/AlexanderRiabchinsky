@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 03.07.22 (2) corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 04.07.22 corrected">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656876310202</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="version as of 04.07.22 corrected">
+      <created>1656919294418</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1656919294418</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,7 +382,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version stage 2 preliminary" />
     <MESSAGE value="version 20.03.22" />
     <MESSAGE value="version 21.03.22" />
     <MESSAGE value="version 23.03.22" />
@@ -397,6 +406,7 @@
     <MESSAGE value="version as of 30.06.22 corrected" />
     <MESSAGE value="version as of 03.07.22 corrected" />
     <MESSAGE value="version as of 03.07.22 (2) corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 03.07.22 (2) corrected" />
+    <MESSAGE value="version as of 04.07.22 corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 04.07.22 corrected" />
   </component>
 </project>
