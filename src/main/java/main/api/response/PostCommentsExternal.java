@@ -13,5 +13,5 @@ public class PostCommentsExternal extends PostComments {
     private String timestamp;
     private String text;
 
-    private UserExternal2 user;
+    private UserExternal user;
 }

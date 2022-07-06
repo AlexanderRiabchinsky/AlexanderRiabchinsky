@@ -2,7 +2,9 @@ package main.controller;
 
 import main.api.response.*;
 import main.service.ApiGeneralService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,9 +31,7 @@ public class ApiGeneralController {
     }
 
     @GetMapping("/api/tag")
-    private TagResponse apiTag() {
-        return generalService.getTagResponse();
-    }
+    public ResponseEntity<TagResponse> apiTag(@RequestParam String query) {return ResponseEntity.ok(generalService.getTagResponse(query));}
 
     @GetMapping("/api/calendar")
     private CalendarResponse calendar() {return generalService.getCalendarResponse();

@@ -18,9 +18,13 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post")
-    private PostResponse apiPost() {
-        return postResponse.getPostResponse();
+    public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
+                                               @RequestParam(defaultValue = "10") int limit,
+                                               @RequestParam String mode) {return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
     }
+//    private PostResponse apiPost() {
+//        return postResponse.getPostResponse();
+//    }
 
     @GetMapping("/api/post/search")
    private PostResponse apiPostSearch() { return postResponse.getPostSearchResponse();

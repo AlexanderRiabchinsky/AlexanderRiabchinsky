@@ -1,12 +1,15 @@
 package main.api.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class RegRequest {
-    String e_mail;
-    String password;
-    String name;
-    String captcha;
-    String captcha_secret;
+    @JsonProperty("e_mail")
+    private String email;
+    private String password;
+    private String name;
+    private String captcha;
+    @JsonProperty("captcha_secret")
+    private String captchaSecret;
 }

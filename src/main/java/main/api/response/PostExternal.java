@@ -19,9 +19,5 @@ public class PostExternal extends Posts {
     private int dislikeCount;
     private int commentCount;
     private int viewCount;
-
-    public int setActive(boolean b) {
-        if(b){return 1;}
-        return -1;
-    }
+    private boolean active;
 }

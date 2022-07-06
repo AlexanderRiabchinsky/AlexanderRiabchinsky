@@ -1,40 +1,41 @@
 package main.service;
 
+import lombok.AllArgsConstructor;
 import main.api.response.PostExternal;
-import main.api.response.PostExternal2;
-import main.api.response.PostResponse;
 import main.api.response.UserExternal;
 import main.model.Posts;
 import main.model.Users;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostVotesRepository;
 import main.repositories.PostsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.repositories.UsersRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class MapperService {
 
-    @Autowired
-    private  PostsRepository postsRepository;
+  //  @Autowired
+    private final PostsRepository postsRepository;
+    private final UsersRepository usersRepository;
     private PostCommentsRepository postCommentsRepository;
     private PostVotesRepository postVotesRepository;
 
     public PostExternal convertPostToDto(Posts post) {
         PostExternal postDto = new PostExternal();
         postDto.setId(post.getId());
-        postDto.setActive(post.getIsActive() == 1); //новый метод в PostExternal2
+        postDto.setActive(post.getIsActive() == 1);
         postDto.setTimestamp(post.getTimestamp()/*post.getTime().getTime() / 1000*/);// непонятная конструкция post.getTime().getTime() / 1000
-        postDto.setUser(convertUserToDto(post.getUser()));//?
+        postDto.setUser(convertUserToDto(post.getUser()));
         postDto.setTitle(post.getTitle());
         postDto.setText(post.getText());
         String postDtoText = postDto.getText()
                 .replaceAll("<(/)?([0-9A-Za-z\\-;:./=\"\\s]+)?>", "")
                 .replaceAll(" ", "");
         postDto.setAnnounce(postDtoText.length() < 150 ? postDtoText : postDtoText.substring(0, 150) + "...");
-        postDto.setLikeCount(postsRepository.findPostLikesCount(post.getId()));//?
-        postDto.setDislikeCount(postsRepository.findPostDislikesCount(post.getId()));//?
-        postDto.setCommentCount(postsRepository.findPostCommentsCount(post.getId()));//?
+        postDto.setLikeCount(postsRepository.findPostLikesCount(post.getId()));
+        postDto.setDislikeCount(postsRepository.findPostDislikesCount(post.getId()));
+        postDto.setCommentCount(postsRepository.findPostCommentsCount(post.getId()));
         postDto.setViewCount(post.getViewCount());
         return postDto;
     }
@@ -43,5 +44,16 @@ public class MapperService {
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         return userDto;
+    }
+    public UserExternal convertUserToCheck(Users user){
+        UserExternal userCheck = new UserExternal();
+        userCheck.setId(user.getId());
+        userCheck.setName(user.getName());
+        userCheck.setPhoto(user.getPhoto());
+        userCheck.setEmail(user.getEmail());
+        userCheck.setModeration(user.getIsModerator()==1);
+        userCheck.setModerationCount(usersRepository.findModerationCount(user.getId()));
+        userCheck.setSettings(true);//Непонятно назначение параметра
+        return userCheck;
     }
 }

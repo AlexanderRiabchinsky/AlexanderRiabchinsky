@@ -4,10 +4,7 @@ import main.api.response.*;
 import main.service.ApiAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ApiAuthController {
@@ -20,8 +17,10 @@ public class ApiAuthController {
     }
 
     @GetMapping("/api/auth/check")
-    private AuthCheckResponse apiAuthCheck() {
-        return apiAuthService.getAuthCheckResponse();
+ //   private AuthCheckResponse apiAuthCheck() {
+//        return apiAuthService.getAuthCheckResponse();
+//    }
+    public ResponseEntity<AuthCheckResponse> apiAuthCheck() {return ResponseEntity.ok(apiAuthService.getAuthCheckResponse());
     }
 
     @GetMapping("/api/auth/captcha")
@@ -34,8 +33,6 @@ public class ApiAuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(apiAuthService.getRegResponse(regRequest));
-
-//        public int set(){return apiAuthService.setNewUser();
     }
 
 }

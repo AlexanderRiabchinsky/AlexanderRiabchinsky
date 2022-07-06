@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AuthCheckResponse {
     private boolean result;
-    private UserAuthCheck user;
+    private UserExternal user;
 
 }
 

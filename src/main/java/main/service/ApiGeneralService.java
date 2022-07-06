@@ -23,16 +23,25 @@ public class ApiGeneralService {
         settingsResponse.setPostPremoderation(false);
         return settingsResponse;
     }
-    public TagResponse getTagResponse() {
+    public TagResponse getTagResponse(String query) {
         TagResponse tagResponse = new TagResponse();
         List<Tags> tags = tagsRepository.findAll();
         ArrayList<TagExternal> tags1 = new ArrayList<>();
-        for (Tags tag:tags) {
+        for (Tags tag:tags) {if (tag.getName().contains(query)){
             TagExternal tagExt = new TagExternal();
 
-            tagExt.setName("Lena");
-            tagExt.setWeight(0.9);
-            tags1.add(tagExt);}
+            tagExt.setName(tag.getName());
+            tagExt.setWeight(tag.getId());
+            tags1.add(tagExt);}}
+
+        if (tags1.size()==0){
+            for (Tags tag:tags) {
+                TagExternal tagExt = new TagExternal();
+
+                tagExt.setName(tag.getName());
+                tagExt.setWeight(1);
+                tags1.add(tagExt);}
+        }
         tagResponse.setTags(tags1);
         return tagResponse;
     }

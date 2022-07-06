@@ -6,6 +6,6 @@ import java.util.Map;
 
 @Data
 public class RegResponse {
-    boolean result;
-    Map<String,String>errors;
+    private boolean result;
+    private Map<String,String>errors;
 }

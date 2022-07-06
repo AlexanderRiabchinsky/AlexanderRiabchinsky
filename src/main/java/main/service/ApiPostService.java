@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ApiPostService {
-    MapperService mapperService = new MapperService();
+    MapperService mapperService;
     @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
@@ -63,6 +64,29 @@ public class ApiPostService {
             postss.add(postExt);}
         postSearchResponse.setPosts(postss);
         return postSearchResponse;
+    }
+
+    public PostResponse getPostByMode   (int offset, int limit, String mode) {
+        Sort sort;
+
+        switch (mode){
+
+            case "popular": sort = new Sort(Sort.Direction.DESC,"view_count");
+            break;
+            case "best": sort = new Sort(Sort.Direction.DESC,"likes_count");
+            break;
+            case "early": sort = new Sort(Sort.Direction.ASC,"date");
+            break;
+            default: sort = new Sort(Sort.Direction.DESC,"date");
+        }
+        PostResponse postByDateResponse = new PostResponse();
+        Pageable pageable = PageRequest.of(offset / limit, limit, sort);
+        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);
+        postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList()));
+        postByDateResponse.setCount(page.getTotalElements());
+
+        return postByDateResponse;
     }
     public PostResponse getPostByDate   (int offset, int limit, String date) {
         PostResponse postByDateResponse = new PostResponse();

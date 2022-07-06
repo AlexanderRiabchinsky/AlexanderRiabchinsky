@@ -19,6 +19,5 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("Started");
-        //      DBConnection.getConnection();
     }
 }
