@@ -1,16 +1,24 @@
 package main.service;
 
-import main.api.response.*;
+import com.github.cage.Cage;
+import com.github.cage.GCage;
+import com.github.cage.YCage;
+import main.api.response.AuthCaptchaResponse;
+import main.api.response.AuthCheckResponse;
+import main.api.response.RegRequest;
+import main.api.response.RegResponse;
 import main.model.CaptchaCodes;
 import main.model.Users;
 import main.repositories.CaptchaCodesRepository;
 import main.repositories.UsersRepository;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,10 +50,25 @@ public class ApiAuthService {
 //        authCheckResponse.setUser(users);
         return authCheckResponse;
     }
-    public AuthCaptchaResponse getCaptcha(){
+    public AuthCaptchaResponse getCaptcha()throws IOException {
+        String encodedString;
+        String text=null;
+
+        Cage cage = new GCage();
+        OutputStream os = new FileOutputStream("captcha.jpg", false);
+        try {
+            text=cage.getTokenGenerator().next();
+            cage.draw(text, os);
+        } finally {
+            byte[] fileContent = FileUtils.readFileToByteArray(new File("captcha.jpg"));
+             encodedString = Base64.getEncoder().encodeToString(fileContent);
+  //          os.close();
+        }
         AuthCaptchaResponse captchaResponse = new AuthCaptchaResponse();
-        captchaResponse.setSecret(captchaResponse.getSecret());
-        captchaResponse.setImage(captchaResponse.getImage());
+        captchaResponse.setSecret(text);
+        captchaResponse.setImage("data:image/png;base64, "+encodedString);
+        Date date=new Date();
+        captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
         return captchaResponse;
     }
 

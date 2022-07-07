@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 public class ApiAuthController {
     private final ApiAuthService apiAuthService;
@@ -24,7 +26,7 @@ public class ApiAuthController {
     }
 
     @GetMapping("/api/auth/captcha")
-    private AuthCaptchaResponse captchaCheck() {return apiAuthService.getCaptcha();
+    private AuthCaptchaResponse captchaCheck() throws IOException {return apiAuthService.getCaptcha();
     }
 
     @PostMapping("/api/auth/register")
