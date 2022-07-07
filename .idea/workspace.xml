@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 06.07.22 corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 07.07.22 corrected">
+      <change afterPath="$PROJECT_DIR$/captcha.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/CaptchaCodesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/CaptchaCodesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
     </list>
@@ -380,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657107073666</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="version as of 07.07.22 corrected">
+      <created>1657189790442</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1657189790442</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -397,7 +405,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version 23.03.22" />
     <MESSAGE value="transaction version as of 26.03.22" />
     <MESSAGE value="transaction version as of 03.04.22" />
     <MESSAGE value="version as of 08.04.22" />
@@ -422,6 +429,7 @@
     <MESSAGE value="version as of 04.07.22 corrected" />
     <MESSAGE value="version as of 04.07.22 (2) corrected" />
     <MESSAGE value="version as of 06.07.22 corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 06.07.22 corrected" />
+    <MESSAGE value="version as of 07.07.22 corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 07.07.22 corrected" />
   </component>
 </project>

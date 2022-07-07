@@ -67,8 +67,14 @@ public class ApiAuthService {
         AuthCaptchaResponse captchaResponse = new AuthCaptchaResponse();
         captchaResponse.setSecret(text);
         captchaResponse.setImage("data:image/png;base64, "+encodedString);
-        Date date=new Date();
-        captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
+        Date date=new Date(Calendar.getInstance().getTimeInMillis());
+
+        CaptchaCodes captchaCodes = new CaptchaCodes();
+        captchaCodes.setTime(date);
+        captchaCodes.setCode(text);
+        captchaCodes.setSecretCode("data:image/png;base64, "+encodedString);
+        captchaCodesRepository.save(captchaCodes);
+ //       captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
         return captchaResponse;
     }
 
@@ -103,7 +109,7 @@ public class ApiAuthService {
             regResponse.setResult(true);
             Users user = new Users();
             user.setIsModerator((byte) 0);
-            user.setRegTime((java.sql.Date) new Date());
+            user.setRegTime( new Date());
             user.setName(name);
             user.setEmail(email);
             user.setPassword("0000");//Доделать после 4 этапа!!!BCRYPT.encode(password));

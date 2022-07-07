@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface CaptchaCodesRepository extends JpaRepository<CaptchaCodes,Integer> {
     @Query("SELECT code FROM CaptchaCodes cc WHERE cc.secretCode =:secret")
     Optional<CaptchaCodes> findCaptchaBySecretCode(@Param("secret") String secret);
-    @Query(value = "INSERT INTO CaptchaCodes(time,code,secret_code) VALUES(date,code,secret)",nativeQuery = true)
-    Optional<CaptchaCodes> regNewCaptcha(@Param("date") Date date, @Param("code")String code, @Param("secret") String secret);
+//    @Modifying
+//    @Query(value = "INSERT INTO CaptchaCodes сс(сс.time,cc.code,cc.secret_code) VALUES(date,code,secret)",nativeQuery = true)
+//    Optional<CaptchaCodes> regNewCaptcha(@Param("date") Date date, @Param("code")String code, @Param("secret") String secret);
 }
