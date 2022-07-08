@@ -1,9 +1,11 @@
 package main.service;
 
 import main.api.response.*;
+import main.model.PostComments;
 import main.model.Posts;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
+import main.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +24,7 @@ public class ApiPostService {
     @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
+    private TagsRepository tagsRepository;
     public PostResponse getPostResponse() {
         PostResponse postResponse = new PostResponse();
         postResponse.setCount((int) postsRepository.count());
@@ -43,26 +47,31 @@ public class ApiPostService {
         postResponse.setPosts(postss);
         return postResponse;
     }
-    public PostResponse getPostSearchResponse() {
+    public PostResponse getPostSearch(int offset,int limit,String query) {
         PostResponse postSearchResponse = new PostResponse();
-        postSearchResponse.setCount((int) postsRepository.count());
-        List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostExternal> postss = new ArrayList<>();
-        for (Posts post:posts) {
-            PostExternal postExt = new PostExternal();
-            postExt.setId(post.getId());
-            postExt.setTimestamp(post.getTimestamp());
-            postExt.setUser(post.getUser());
-
-            postExt.setTitle(post.getTitle());
-            postExt.setAnnounce("Анонс поста");
-            postExt.setLikeCount(5);
-            postExt.setDislikeCount(5);
-            postExt.setCommentCount(5);
-            postExt.setViewCount(post.getViewCount());
-
-            postss.add(postExt);}
-        postSearchResponse.setPosts(postss);
+        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Page<Posts> page = postsRepository.findPostsByQuery(pageable, query);
+        postSearchResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList()));
+        postSearchResponse.setCount(page.getTotalElements());
+//        postSearchResponse.setCount((int) postsRepository.count());
+//        List<Posts> posts = postsRepository.findAll();
+//        ArrayList<PostExternal> postss = new ArrayList<>();
+//        for (Posts post:posts) {
+//            PostExternal postExt = new PostExternal();
+//            postExt.setId(post.getId());
+//            postExt.setTimestamp(post.getTimestamp());
+//            postExt.setUser(post.getUser());
+//
+//            postExt.setTitle(post.getTitle());
+//            postExt.setAnnounce("Анонс поста");
+//            postExt.setLikeCount(5);
+//            postExt.setDislikeCount(5);
+//            postExt.setCommentCount(5);
+//            postExt.setViewCount(post.getViewCount());
+//
+//            postss.add(postExt);}
+//        postSearchResponse.setPosts(postss);
         return postSearchResponse;
     }
 
@@ -98,41 +107,30 @@ public class ApiPostService {
 
         return postByDateResponse;
     }
-    public PostResponse getPostByTagResponse() {
+    public PostResponse getPostByTag(int offset, int limit, String tag) {
         PostResponse postByTagResponse = new PostResponse();
-        postByTagResponse.setCount((int) postsRepository.count());
-        List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostExternal> postss = new ArrayList<>();
-        for (Posts post:posts) {
-            PostExternal postExt = new PostExternal();
-            postExt.setId(post.getId());
-            postExt.setTimestamp(post.getTimestamp());
-            postExt.setUser(post.getUser());
-
-            postExt.setTitle(post.getTitle());
-            postExt.setAnnounce("Анонс поста");
-            postExt.setLikeCount(5);
-            postExt.setDislikeCount(5);
-            postExt.setCommentCount(5);
-            postExt.setViewCount(post.getViewCount());
-
-            postss.add(postExt);}
-        postByTagResponse.setPosts(postss);
+        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Page<Posts> page = postsRepository.findPostsByTag(pageable, tag);
+        postByTagResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList()));
+        postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostByIdResponse(int id) {
+    public PostIDResponse getPostById(int id) {
         PostIDResponse postIdResponse = new PostIDResponse();
-        postIdResponse.setId(id);
-        postIdResponse.setTimestamp(postIdResponse.getTimestamp());
-        postIdResponse.setActive(postIdResponse.isActive());
-        postIdResponse.setUser(postIdResponse.getUser());
-        postIdResponse.setTitle(postIdResponse.getTitle());
-        postIdResponse.setText(postIdResponse.getText());
-        postIdResponse.setLikeCount(postIdResponse.getLikeCount());
-        postIdResponse.setDislikeCount(postIdResponse.getDislikeCount());
-        postIdResponse.setViewCount(postIdResponse.getViewCount());
-        postIdResponse.setComments(postIdResponse.getComments());
-        postIdResponse.setTags(postIdResponse.getTags());
+        Optional<Posts> post = postsRepository.findById(id);
+        postIdResponse.setId(post.get().getId());
+        postIdResponse.setTimestamp(post.get().getTimestamp());
+        postIdResponse.setActive(post.get().getIsActive()==1);
+        postIdResponse.setUser(mapperService.convertUserToDto(post.get().getUser()));
+        postIdResponse.setTitle(post.get().getTitle());
+        postIdResponse.setText(post.get().getText());
+        postIdResponse.setLikeCount(postsRepository.findPostLikesCount(post.get().getId()));
+        postIdResponse.setDislikeCount(postsRepository.findPostDislikesCount(post.get().getId()));
+        postIdResponse.setViewCount(post.get().getViewCount());
+        Page<PostComments> pageComm = postCommentsRepository.findCommentsByPostId(Pageable.unpaged(),post.get().getId());
+        postIdResponse.setComments(pageComm.getContent().stream().map(mapperService::convertPostToComment) .collect(Collectors.toList()));
+        postIdResponse.setTags(tagsRepository.findTagsByPost(post.get().getId()));//
 
         return postIdResponse;
     }

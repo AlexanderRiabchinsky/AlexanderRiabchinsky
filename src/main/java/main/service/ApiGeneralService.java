@@ -45,7 +45,7 @@ public class ApiGeneralService {
         tagResponse.setTags(tags1);
         return tagResponse;
     }
-    public CalendarResponse getCalendarResponse(){
+    public CalendarResponse getCalendar(String year){
         CalendarResponse calendarResponse = new CalendarResponse();
 
         return calendarResponse;

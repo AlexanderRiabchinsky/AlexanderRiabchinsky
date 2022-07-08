@@ -23,9 +23,9 @@ public class PostIDResponse {
     private int dislikeCount;
     private int viewCount;
 
-    private PostCommentsExternal comments;
+    private List<PostCommentsExternal> comments;
 
 
-    private List<Tags> tags;
+    private List<String> tags;
 
 }

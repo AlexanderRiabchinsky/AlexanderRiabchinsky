@@ -27,7 +27,9 @@ public class ApiPostController {
 //    }
 
     @GetMapping("/api/post/search")
-   private PostResponse apiPostSearch() { return postResponse.getPostSearchResponse();
+   public ResponseEntity <PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,
+                                                      @RequestParam(defaultValue = "10") int limit,
+                                                      @RequestParam String query) { return ResponseEntity.ok(postResponse.getPostSearch(offset,limit,query));
     }
 
     @GetMapping("/api/post/byDate")
@@ -37,11 +39,13 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post/byTag")
-    public PostResponse apiPostByTagResponse() {return postResponse.getPostByTagResponse();
+    public ResponseEntity<PostResponse> byTag(@RequestParam(defaultValue = "0") int offset,
+                                              @RequestParam(defaultValue = "10") int limit,
+                                              @RequestParam String tag) {return ResponseEntity.ok(postResponse.getPostByTag(offset, limit, tag));
     }
 
     @GetMapping("/api/post/{ID}")
-    public PostIDResponse postIdCheck(@PathVariable int id) {return postResponse.getPostByIdResponse(id);
+    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam int id) {return ResponseEntity.ok(postResponse.getPostById(id));
     }
 
     @GetMapping("/api/post/moderation")

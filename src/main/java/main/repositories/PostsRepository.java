@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
@@ -18,12 +20,29 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Page<Posts> findPostsByMode(Pageable pageable, @Param("mode") String mode);
 
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "AND title LIKE %query% " +
+            "ORDER BY posts.time DESC",
+            nativeQuery = true)
+    Page<Posts> findPostsByQuery(Pageable pageable, @Param("query") String query);
+
         @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
                 "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
                 "AND DATE_FORMAT(posts.time, '%Y-%m-%d') = :date " +
                 "ORDER BY posts.time DESC",
                 nativeQuery = true)
         Page<Posts> findPostsByDate(Pageable pageable, @Param("date") String date);
+
+    @Query(value = "SELECT * FROM posts " +
+            "JOIN tag2post ON posts.id = tag2post.post_id "+
+            "JOIN tags ON tag2post.tag_id = tags.id "+
+            "WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "AND tags.name = :tag " +
+            "ORDER BY posts.time DESC",
+            nativeQuery = true)
+    Page<Posts> findPostsByTag(Pageable pageable,@Param("tag") String tag);
 
 //        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = 1")
         @Query(value = "SELECT COUNT(post_votes.id) FROM posts " +

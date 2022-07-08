@@ -1,8 +1,10 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
+import main.api.response.PostCommentsExternal;
 import main.api.response.PostExternal;
 import main.api.response.UserExternal;
+import main.model.PostComments;
 import main.model.Posts;
 import main.model.Users;
 import main.repositories.PostCommentsRepository;
@@ -18,8 +20,8 @@ public class MapperService {
   //  @Autowired
     private final PostsRepository postsRepository;
     private final UsersRepository usersRepository;
-    private PostCommentsRepository postCommentsRepository;
-    private PostVotesRepository postVotesRepository;
+    private final PostCommentsRepository postCommentsRepository;
+    private final PostVotesRepository postVotesRepository;
 
     public PostExternal convertPostToDto(Posts post) {
         PostExternal postDto = new PostExternal();
@@ -55,5 +57,15 @@ public class MapperService {
         userCheck.setModerationCount(usersRepository.findModerationCount(user.getId()));
         userCheck.setSettings(true);//Непонятно назначение параметра
         return userCheck;
+    }
+
+    public PostCommentsExternal convertPostToComment(PostComments pc) {
+        PostCommentsExternal postToComment = new PostCommentsExternal();
+        postToComment.setId(pc.getId());
+        postToComment.setTimestamp(pc.getTime());
+        postToComment.setText(pc.getText());
+        postToComment.setUser(convertUserToDto(usersRepository.findById(pc.getParentId()).get()));
+
+        return postToComment;
     }
 }
