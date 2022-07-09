@@ -3,10 +3,7 @@ package main.service;
 import com.github.cage.Cage;
 import com.github.cage.GCage;
 import com.github.cage.YCage;
-import main.api.response.AuthCaptchaResponse;
-import main.api.response.AuthCheckResponse;
-import main.api.response.RegRequest;
-import main.api.response.RegResponse;
+import main.api.response.*;
 import main.model.CaptchaCodes;
 import main.model.Users;
 import main.repositories.CaptchaCodesRepository;
@@ -26,57 +23,62 @@ import java.util.stream.Collectors;
 public class ApiAuthService {
     public static final int PASSWORD_LENGTH = 6;
     public static final int MAX_LENGTH = 255;
-    MapperService mapperService;
+    public MapperService mapperService;
+
     @Autowired
     private UsersRepository usersRepository;
     private CaptchaCodesRepository captchaCodesRepository;
 
     public AuthCheckResponse getAuthCheckResponse() {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
-        Integer id = 1;
+        Integer id = 2;
 
-        Optional<Users> user = usersRepository.findById(id);
-        authCheckResponse.setResult(user.get().getIsModerator()==1);
-        authCheckResponse.setUser(mapperService.convertUserToCheck(user.get()));
-//        AuthCheckResponse user = new AuthCheckResponse();
-//        UserExternal users = new UserExternal();
-//        users.setId(id);
-//        users.setName(usersRepository.findNameById(id));
-//        users.setPhoto(usersRepository.findPhotoById(id));
-//        users.setEmail(usersRepository.findEmailById(id));
-//        users.setModeration(true);
-//        users.setModerationCount(87);
-//        users.setSettings(true);
-//        authCheckResponse.setUser(users);
+//        Optional<Users> user = usersRepository.findById(id);
+//        if(user.isPresent()){
+//        authCheckResponse.setResult(user.get().getIsModerator()==1);
+//        authCheckResponse.setUser(mapperService.convertUserToCheck(user.get()));
+//        }
+//        else authCheckResponse.setResult(false);
+
+            UserExternal users = new UserExternal();
+            users.setId(id);
+            users.setName(usersRepository.findNameById(id));
+            users.setPhoto(usersRepository.findPhotoById(id));
+            users.setEmail(usersRepository.findEmailById(id));
+            users.setModeration(true);
+            users.setModerationCount(87);
+            users.setSettings(true);
+            authCheckResponse.setResult(true);
+            authCheckResponse.setUser(users);
         return authCheckResponse;
     }
-    public AuthCaptchaResponse getCaptcha()throws IOException {
-        String encodedString;
-        String text=null;
-
-        Cage cage = new GCage();
-        OutputStream os = new FileOutputStream("captcha.jpg", false);
-        try {
-            text=cage.getTokenGenerator().next();
-            cage.draw(text, os);
-        } finally {
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("captcha.jpg"));
-             encodedString = Base64.getEncoder().encodeToString(fileContent);
-  //          os.close();
-        }
-        AuthCaptchaResponse captchaResponse = new AuthCaptchaResponse();
-        captchaResponse.setSecret(text);
-        captchaResponse.setImage("data:image/png;base64, "+encodedString);
-        Date date=new Date(Calendar.getInstance().getTimeInMillis());
-
-        CaptchaCodes captchaCodes = new CaptchaCodes();
-        captchaCodes.setTime(date);
-        captchaCodes.setCode(text);
-        captchaCodes.setSecretCode("data:image/png;base64, "+encodedString);
-        captchaCodesRepository.save(captchaCodes);
- //       captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
-        return captchaResponse;
-    }
+//    public CaptchaResponse getCaptcha()throws IOException {
+//        String encodedString;
+//        String text=null;
+//
+//        Cage cage = new GCage();
+//        OutputStream os = new FileOutputStream("captcha.jpg", false);
+//        try {
+//            text=cage.getTokenGenerator().next();
+//            cage.draw(text, os);
+//        } finally {
+//            byte[] fileContent = FileUtils.readFileToByteArray(new File("captcha.jpg"));
+//             encodedString = Base64.getEncoder().encodeToString(fileContent);
+//  //          os.close();
+//        }
+//        CaptchaResponse captchaResponse = new CaptchaResponse();
+//        captchaResponse.setSecret(text);
+//        captchaResponse.setImage("data:image/png;base64, "+encodedString);
+//        Date date=new Date(Calendar.getInstance().getTimeInMillis());
+//
+//        CaptchaCodes captchaCodes = new CaptchaCodes();
+//        captchaCodes.setTime(date);
+//        captchaCodes.setCode(text);
+//        captchaCodes.setSecretCode("data:image/png;base64, "+encodedString);
+//        captchaCodesRepository.save(captchaCodes);
+// //       captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
+//        return captchaResponse;
+//    }
 
     public RegResponse getRegResponse(RegRequest regRequest) {
         RegResponse regResponse = new RegResponse();

@@ -21,19 +21,19 @@ public class ApiGeneralController {
 
 
     @GetMapping("/api/settings")
-    private SettingsResponse settings() {
+    public SettingsResponse settings() {
         return generalService.getGlobalSettings();
     }
 
     @GetMapping("/api/init")
-    private InitResponse init() {
+    public InitResponse init() {
         return initResponse;
     }
 
     @GetMapping("/api/tag")
-    public ResponseEntity<TagResponse> apiTag(@RequestParam String query) {return ResponseEntity.ok(generalService.getTagResponse(query));}
+    public ResponseEntity<TagResponse> apiTag(@RequestParam (required = false) String query) {return ResponseEntity.ok(generalService.getTagResponse(query));}
 
     @GetMapping("/api/calendar")
-    private ResponseEntity<CalendarResponse> calendar(@RequestParam String year) {return ResponseEntity.ok(generalService.getCalendar(year));
+    public ResponseEntity<CalendarResponse> calendar(@RequestParam (required = false) String year) {return ResponseEntity.ok(generalService.getCalendar(year));
     }
 }

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ApiPostService {
-    MapperService mapperService;
+    public MapperService mapperService;
     @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;

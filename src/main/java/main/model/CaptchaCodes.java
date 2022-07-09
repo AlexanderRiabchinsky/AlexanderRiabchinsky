@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name = "captcha_codes")
 public class CaptchaCodes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 

@@ -8,13 +8,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CaptchaCodesRepository extends JpaRepository<CaptchaCodes,Integer> {
-    @Query("SELECT code FROM CaptchaCodes cc WHERE cc.secretCode =:secret")
-    Optional<CaptchaCodes> findCaptchaBySecretCode(@Param("secret") String secret);
-//    @Modifying
-//    @Query(value = "INSERT INTO CaptchaCodes сс(сс.time,cc.code,cc.secret_code) VALUES(date,code,secret)",nativeQuery = true)
-//    Optional<CaptchaCodes> regNewCaptcha(@Param("date") Date date, @Param("code")String code, @Param("secret") String secret);
+    @Query(value = "SELECT * FROM captcha_codes WHERE secret_code = :secret_code " +
+            "AND time > (NOW() - INTERVAL 1 HOUR)", nativeQuery = true)
+    Optional<CaptchaCodes> findCaptchaBySecretCode(@Param("secret_code") String secretCode);
+    @Query(value = "SELECT * FROM captcha_codes WHERE time < (NOW() - INTERVAL 1 HOUR)", nativeQuery = true)
+    List<CaptchaCodes> findOldCaptchas();
 }

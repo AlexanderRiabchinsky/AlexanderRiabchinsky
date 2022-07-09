@@ -20,7 +20,7 @@ public class ApiPostController {
     @GetMapping("/api/post")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam String mode) {return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
+                                               @RequestParam (required = false, defaultValue = "recent") String mode) {return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
     }
 //    private PostResponse apiPost() {
 //        return postResponse.getPostResponse();
@@ -29,23 +29,23 @@ public class ApiPostController {
     @GetMapping("/api/post/search")
    public ResponseEntity <PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,
                                                       @RequestParam(defaultValue = "10") int limit,
-                                                      @RequestParam String query) { return ResponseEntity.ok(postResponse.getPostSearch(offset,limit,query));
+                                                      @RequestParam (required = false) String query) { return ResponseEntity.ok(postResponse.getPostSearch(offset,limit,query));
     }
 
     @GetMapping("/api/post/byDate")
     public ResponseEntity<PostResponse> byDate(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam String date) {return ResponseEntity.ok(postResponse.getPostByDate(offset, limit, date));
+                                               @RequestParam (required = false) String date) {return ResponseEntity.ok(postResponse.getPostByDate(offset, limit, date));
     }
 
     @GetMapping("/api/post/byTag")
     public ResponseEntity<PostResponse> byTag(@RequestParam(defaultValue = "0") int offset,
                                               @RequestParam(defaultValue = "10") int limit,
-                                              @RequestParam String tag) {return ResponseEntity.ok(postResponse.getPostByTag(offset, limit, tag));
+                                              @RequestParam (required = false) String tag) {return ResponseEntity.ok(postResponse.getPostByTag(offset, limit, tag));
     }
 
     @GetMapping("/api/post/{ID}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam int id) {return ResponseEntity.ok(postResponse.getPostById(id));
+    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam (required = false) int id) {return ResponseEntity.ok(postResponse.getPostById(id));
     }
 
     @GetMapping("/api/post/moderation")
