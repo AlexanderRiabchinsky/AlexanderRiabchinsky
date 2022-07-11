@@ -15,7 +15,7 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "AND mode = :mode " +
+     //       "AND mode = :mode " +
             "ORDER BY posts.time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByMode(Pageable pageable, @Param("mode") String mode);
@@ -45,24 +45,24 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
     Page<Posts> findPostsByTag(Pageable pageable,@Param("tag") String tag);
 
 //        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = 1")
-        @Query(value = "SELECT COUNT(post_votes.id) FROM posts " +
-        "JOIN post_votes ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
+        @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
+        "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = 1",
         nativeQuery = true)
         int findPostLikesCount(@Param("postId") int postId);
 
 //        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = -1")
-        @Query(value = "SELECT COUNT(post_votes.id) FROM posts " +
-        "JOIN post_votes ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
+        @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
+        "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = -1",
         nativeQuery = true)
         int findPostDislikesCount(@Param("postId") int postId);
 
  //       @Query("SELECT COUNT(post) FROM PostComments pc WHERE pc.post =:postId")
-        @Query(value = "SELECT COUNT(post_comments.id) FROM posts " +
-         "JOIN post_comments ON posts.id = post_comments.post_id WHERE posts.id = :postId " +
+        @Query(value = "SELECT COUNT(post_comments.id) FROM post_comments " +
+         "JOIN posts ON posts.id = post_comments.post_id WHERE posts.id = :postId " +
          "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " + "AND posts.time <= NOW()",
          nativeQuery = true)
         int findPostCommentsCount(@Param("postId") int postId);

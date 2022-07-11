@@ -20,11 +20,10 @@ public class ApiPostController {
     @GetMapping("/api/post")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam (required = false, defaultValue = "recent") String mode) {return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
+                                               @RequestParam (required = false, defaultValue = "recent") String mode) {
+        System.out.println("mode = "+mode);
+        return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
     }
-//    private PostResponse apiPost() {
-//        return postResponse.getPostResponse();
-//    }
 
     @GetMapping("/api/post/search")
    public ResponseEntity <PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,

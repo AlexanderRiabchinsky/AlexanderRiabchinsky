@@ -80,22 +80,22 @@ public class ApiPostService {
 
         switch (mode){
 
-            case "popular": sort = new Sort(Sort.Direction.DESC,"view_count");
+            case "popular": sort = new Sort(Sort.Direction.DESC,"comments_count");
             break;
             case "best": sort = new Sort(Sort.Direction.DESC,"likes_count");
             break;
-            case "early": sort = new Sort(Sort.Direction.ASC,"date");
+            case "early": sort = new Sort(Sort.Direction.ASC,"time");
             break;
-            default: sort = new Sort(Sort.Direction.DESC,"date");
+            default: case "recent":sort = new Sort(Sort.Direction.DESC,"time");
         }
-        PostResponse postByDateResponse = new PostResponse();
+        PostResponse postByMode = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit, sort);
         Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);
-        postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+        postByMode.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
-        postByDateResponse.setCount(page.getTotalElements());
+        postByMode.setCount(page.getTotalElements());
 
-        return postByDateResponse;
+        return postByMode;
     }
     public PostResponse getPostByDate   (int offset, int limit, String date) {
         PostResponse postByDateResponse = new PostResponse();

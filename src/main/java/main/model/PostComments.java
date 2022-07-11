@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "post_comments")
 public class PostComments {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 

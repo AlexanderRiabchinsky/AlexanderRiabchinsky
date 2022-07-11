@@ -6,20 +6,19 @@ import lombok.AllArgsConstructor;
 import main.api.response.CaptchaResponse;
 import main.model.CaptchaCodes;
 import main.repositories.CaptchaCodesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 @EnableScheduling
 public class CaptchaService {
+    public static final long HOUR_IN_MILLISECONDS = 3_600_000;
     private CaptchaCodesRepository captchaCodesRepository;
 
     public CaptchaResponse getCaptchaCode() {
@@ -37,10 +36,8 @@ public class CaptchaService {
         captchaResponse.setImage(image);
         return captchaResponse;
     }
-    @Scheduled(fixedRate = 1000*60*60)
+    @Scheduled(fixedRate = HOUR_IN_MILLISECONDS)
     public void deleteOldCaptchas(){
-        List<CaptchaCodes> list = captchaCodesRepository.findOldCaptchas();
-        for(CaptchaCodes item:list){captchaCodesRepository.delete(item);}
-
+        captchaCodesRepository.deleteAll(captchaCodesRepository.findOldCaptchas());
     }
 }

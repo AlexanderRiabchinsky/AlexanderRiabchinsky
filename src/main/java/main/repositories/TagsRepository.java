@@ -21,4 +21,8 @@ public interface TagsRepository extends JpaRepository<Tags,Integer> {
             "AND posts.id = :postId ",
             nativeQuery = true)
     List<String> findTagsByPost(@Param("postId") int postId);
+    @Query(value = "SELECT COUNT(post_id) FROM tag2post " +
+            "WHERE tag2post.tag_id = :tagId",
+            nativeQuery = true)
+    int findPostNumber(@Param("tagId") int tagId);
 }

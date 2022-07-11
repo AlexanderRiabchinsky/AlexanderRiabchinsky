@@ -13,7 +13,7 @@ import java.util.List;
 public class Posts{
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "is_active")
@@ -54,6 +54,6 @@ public class Posts{
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tags> tags;
 }

@@ -10,7 +10,7 @@ import java.sql.Date;
 @Table(name = "post_votes")
 public class PostVotes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 
