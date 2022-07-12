@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data
-public class PostExternal extends Posts {
+public class PostExternal {
     @Id
     private int id;
     private LocalDateTime timestamp;

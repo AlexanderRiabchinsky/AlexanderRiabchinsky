@@ -30,8 +30,8 @@ public class MapperService {
         postDto.setTimestamp(post.getTimestamp()/*post.getTime().getTime() / 1000*/);// непонятная конструкция post.getTime().getTime() / 1000
         postDto.setUser(convertUserToDto(post.getUser()));
         postDto.setTitle(post.getTitle());
-        postDto.setText(post.getText());
-        String postDtoText = postDto.getText()
+        postDto.setAnnounce(post.getText());
+        String postDtoText = postDto.getAnnounce()
                 .replaceAll("<(/)?([0-9A-Za-z\\-;:./=\"\\s]+)?>", "")
                 .replaceAll(" ", "");
         postDto.setAnnounce(postDtoText.length() < 150 ? postDtoText : postDtoText.substring(0, 150) + "...");

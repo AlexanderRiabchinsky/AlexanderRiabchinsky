@@ -21,7 +21,7 @@ public class ApiPostController {
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
                                                @RequestParam (required = false, defaultValue = "recent") String mode) {
-        System.out.println("mode = "+mode);
+
         return ResponseEntity.ok(postResponse.getPostByMode(offset, limit, mode));
     }
 
@@ -48,7 +48,8 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post/moderation")
-    public PostResponse moderationCheck() {return postResponse.getModerationData();
+    public ResponseEntity<PostResponse> moderationCheck(@RequestParam(defaultValue = "0") int offset,
+                                                        @RequestParam(defaultValue = "10") int limit){return ResponseEntity.ok(postResponse.getModerationData(offset, limit));
     }
 
 }

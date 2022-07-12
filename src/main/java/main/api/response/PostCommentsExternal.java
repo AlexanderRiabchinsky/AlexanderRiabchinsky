@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Data
-public class PostCommentsExternal extends PostComments {
+public class PostCommentsExternal {
     @Id
     private int id;
     private Date timestamp;

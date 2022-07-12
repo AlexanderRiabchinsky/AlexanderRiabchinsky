@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class TagResponse {
- //   @JsonProperty("tags")
+
     private ArrayList<TagExternal> tags;
 
 

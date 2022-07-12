@@ -25,28 +25,7 @@ public class ApiPostService {
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
     private TagsRepository tagsRepository;
-    public PostResponse getPostResponse() {
-        PostResponse postResponse = new PostResponse();
-        postResponse.setCount((int) postsRepository.count());
-        List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostExternal> postss = new ArrayList<>();
-        for (Posts post:posts) {
-            PostExternal postExt = new PostExternal();
-            postExt.setId(post.getId());
-            postExt.setTimestamp(post.getTimestamp());
-            postExt.setUser(post.getUser());
 
-            postExt.setTitle(post.getTitle());
-            postExt.setAnnounce("Анонс поста");
-            postExt.setLikeCount(5);
-            postExt.setDislikeCount(5);
-            postExt.setCommentCount(5);
-            postExt.setViewCount(post.getViewCount());
-
-            postss.add(postExt);}
-        postResponse.setPosts(postss);
-        return postResponse;
-    }
     public PostResponse getPostSearch(int offset,int limit,String query) {
         PostResponse postSearchResponse = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -88,9 +67,9 @@ public class ApiPostService {
             break;
             default: case "recent":sort = new Sort(Sort.Direction.DESC,"time");
         }
-        PostResponse postByMode = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit, sort);
-        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);
+        PostResponse postByMode = new PostResponse();        System.out.println("mode third = "+mode);
+        Pageable pageable = PageRequest.of(offset / limit, limit, sort);        System.out.println("pageable = "+pageable.toString());
+        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);System.out.println(sort.toString());System.out.println("tot elements = "+page.getTotalElements());
         postByMode.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByMode.setCount(page.getTotalElements());
@@ -134,26 +113,14 @@ public class ApiPostService {
 
         return postIdResponse;
     }
-    public PostResponse getModerationData(){
+    public PostResponse getModerationData(int offset, int limit){
         PostResponse postModeration = new PostResponse();
-        postModeration.setCount(postModeration.getCount());
-        List<Posts> posts = postsRepository.findAll();
-        ArrayList<PostExternal> postss = new ArrayList<>();
-        for (Posts post:posts) {
-            PostExternal postExt = new PostExternal();
-            postExt.setId(post.getId());
-            postExt.setTimestamp(post.getTimestamp());
-            postExt.setUser(post.getUser());
+        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Page<Posts> page = postsRepository.findPostsModeration(pageable);
+        postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList()));
+        postModeration.setCount(page.getTotalElements());
 
-            postExt.setTitle(post.getTitle());
-            postExt.setAnnounce("Анонс поста");
-            postExt.setLikeCount(5);
-            postExt.setDislikeCount(5);
-            postExt.setCommentCount(5);
-            postExt.setViewCount(post.getViewCount());
-
-            postss.add(postExt);}
-        postModeration.setPosts(postss);
         return postModeration;
     }
 }

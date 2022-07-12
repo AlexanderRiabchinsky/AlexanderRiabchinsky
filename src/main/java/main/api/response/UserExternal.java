@@ -7,7 +7,7 @@ import main.model.Users;
 import javax.persistence.Id;
 
 @Data
-public class UserExternal extends Users {
+public class UserExternal {
     @Id
     private int id;
     private String name;

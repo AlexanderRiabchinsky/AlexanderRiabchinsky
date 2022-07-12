@@ -13,15 +13,15 @@ import java.util.Optional;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
-    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
-            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+    @Query(value = "SELECT * FROM Posts posts WHERE posts.is_active = 1 " +
+            "AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
      //       "AND mode = :mode " +
             "ORDER BY posts.time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByMode(Pageable pageable, @Param("mode") String mode);
 
-    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
-            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+    @Query(value = "SELECT * FROM Posts posts WHERE posts.is_active = 1 " +
+            "AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
             "AND title LIKE %query% " +
             "ORDER BY posts.time DESC",
             nativeQuery = true)
@@ -44,7 +44,6 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Page<Posts> findPostsByTag(Pageable pageable,@Param("tag") String tag);
 
-//        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = 1")
         @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
         "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
@@ -52,7 +51,6 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
         nativeQuery = true)
         int findPostLikesCount(@Param("postId") int postId);
 
-//        @Query("SELECT COUNT(value) FROM PostVotes pv WHERE pv.post =:postId and pv.value = -1")
         @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
         "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
@@ -69,20 +67,14 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
 
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
-  //      @Query (value = "SELECT id FROM Users u LEFT OUTER JOIN Posts p on u.id=p.user_id  WHERE p.id=postId")
-  //      @Query (value = "SELECT id FROM Users u LEFT OUTER JOIN Posts p on u=p.user  WHERE p.id=postId")
-  //      @Query (value = "SELECT id FROM Users u LEFT OUTER JOIN Posts p on u.id=p.user.id  WHERE p.id=postId")
-   //     @Query (value = "SELECT  Posts p.user.id  WHERE p.id=postId")
         int getUserIdByPostId(@Param("postId") int postId);
         @Query ("SELECT title FROM Posts posts WHERE id=:postId")
         String getTitle(@Param("postId") int postId);
 
-//        @Query("SELECT p FROM Posts p " +
-//                "LEFT JOIN Users u ON u.id = p.user.id " +
-//                "LEFT JOIN PostComments pc ON pc.post.id = p.id " +
-//                "LEFT JOIN PostVotes pvl on pvl.post.id = p.id and pvl.value = 1 " +
-//                "WHERE p.isActive = 1 AND p.enum.valueOf(status) = 'ACCEPTED' AND p.time <= CURRENT_DATE() " +
-//                "GROUP BY p.id ORDER BY COUNT(pvl) DESC"
-//        )
-//        Page<Posts> findPostsOrderByLikes(Pageable pageable);
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND (moderation_status = 'NEW' OR moderator_id = 1) " +
+            "AND time <= NOW() ORDER BY posts.time DESC",
+            nativeQuery = true)
+    Page<Posts> findPostsModeration(Pageable pageable);
+
 }
