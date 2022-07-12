@@ -1,14 +1,19 @@
 package main.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import main.api.response.ModerationStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Accessors(chain = true)
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "posts")
 public class Posts{
     @Id
@@ -29,8 +34,8 @@ public class Posts{
     @Column(name = "moderator_id")
     private int moderatorId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private Users user;
 
     @Column(name = "time")

@@ -49,25 +49,25 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = 1",
         nativeQuery = true)
-        int findPostLikesCount(@Param("postId") int postId);
+        Integer findPostLikesCount(@Param("postId") int postId);
 
         @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
         "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = -1",
         nativeQuery = true)
-        int findPostDislikesCount(@Param("postId") int postId);
+        Integer findPostDislikesCount(@Param("postId") int postId);
 
  //       @Query("SELECT COUNT(post) FROM PostComments pc WHERE pc.post =:postId")
         @Query(value = "SELECT COUNT(post_comments.id) FROM post_comments " +
          "JOIN posts ON posts.id = post_comments.post_id WHERE posts.id = :postId " +
          "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " + "AND posts.time <= NOW()",
          nativeQuery = true)
-        int findPostCommentsCount(@Param("postId") int postId);
+        Integer findPostCommentsCount(@Param("postId") int postId);
 
 
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
-        int getUserIdByPostId(@Param("postId") int postId);
+        Integer getUserIdByPostId(@Param("postId") int postId);
         @Query ("SELECT title FROM Posts posts WHERE id=:postId")
         String getTitle(@Param("postId") int postId);
 

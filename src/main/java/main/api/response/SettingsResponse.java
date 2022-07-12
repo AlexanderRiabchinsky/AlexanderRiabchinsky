@@ -2,9 +2,12 @@ package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-@Data
+@Getter
+@Setter
 @Component
 public class SettingsResponse {
     @JsonProperty("MULTIUSER_MODE")

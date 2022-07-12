@@ -1,12 +1,17 @@
 package main.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Accessors(chain = true)
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "tags")
 public class Tags {
     @Id

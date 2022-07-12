@@ -1,11 +1,16 @@
 package main.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+@Accessors(chain = true)
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "global_settings")
 public class GlobalSettings {
     @Id

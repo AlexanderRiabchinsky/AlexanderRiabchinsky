@@ -11,6 +11,8 @@ import main.repositories.PostCommentsRepository;
 import main.repositories.PostVotesRepository;
 import main.repositories.PostsRepository;
 import main.repositories.UsersRepository;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,9 +25,10 @@ public class MapperService {
     private final PostCommentsRepository postCommentsRepository;
     private final PostVotesRepository postVotesRepository;
 
-    public PostExternal convertPostToDto(Posts post) {
+
+    public PostExternal convertPostToDto(Posts post) {System.out.println("post marker ");
         PostExternal postDto = new PostExternal();
-        postDto.setId(post.getId());
+        postDto.setId(post.getId());System.out.println("postId = "+post.getId());
         postDto.setActive(post.getIsActive() == 1);
         postDto.setTimestamp(post.getTimestamp()/*post.getTime().getTime() / 1000*/);// непонятная конструкция post.getTime().getTime() / 1000
         postDto.setUser(convertUserToDto(post.getUser()));

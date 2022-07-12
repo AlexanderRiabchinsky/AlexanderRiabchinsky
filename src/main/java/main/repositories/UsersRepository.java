@@ -16,13 +16,13 @@ public interface UsersRepository extends JpaRepository<Users,Integer> {
     @Query("SELECT name FROM Users users WHERE id=:id")
     String getUserNameById(@Param("id") int id);
 
-    @Query("select u.name from Users u where u.id = ?1")
-    String findNameById(Integer integer);
+    @Query("select u.name from Users u where u.id =:id")
+    String findNameById(@Param("id") int id);
 
-    @Query("select u.photo from Users u where u.id = ?1")
-    String findPhotoById(Integer integer);
+    @Query("select u.photo from Users u where u.id =:id")
+    String findPhotoById(@Param("id") int id);
 
-    @Query("select u.email from Users u where u.id = ?1")
-    String findEmailById(Integer integer);
+    @Query("select u.email from Users u where u.id =:id")
+    String findEmailById(@Param("id") int id);
 }
 

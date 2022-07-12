@@ -1,14 +1,19 @@
 package main.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+@Accessors(chain = true)
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "post_comments")
 public class PostComments {
     @Id
@@ -23,11 +28,11 @@ public class PostComments {
 //    @JoinColumn(name = "id", insertable = false, updatable = false)
 //    private Posts postComment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = false)
     private Posts post;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 

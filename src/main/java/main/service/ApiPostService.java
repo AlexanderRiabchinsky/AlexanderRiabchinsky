@@ -67,11 +67,13 @@ public class ApiPostService {
             break;
             default: case "recent":sort = new Sort(Sort.Direction.DESC,"time");
         }
-        PostResponse postByMode = new PostResponse();        System.out.println("mode third = "+mode);
-        Pageable pageable = PageRequest.of(offset / limit, limit, sort);        System.out.println("pageable = "+pageable.toString());
-        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);System.out.println(sort.toString());System.out.println("tot elements = "+page.getTotalElements());
+        PostResponse postByMode = new PostResponse();
+        Pageable pageable = PageRequest.of(offset / limit, limit, sort);
+        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);
+        System.out.println("stream = "+page.getContent().stream());
+        System.out.println("map = "+page.getContent().stream().map(mapperService::convertPostToDto));
         postByMode.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()));System.out.println("posts = "+postByMode.getPosts());
         postByMode.setCount(page.getTotalElements());
 
         return postByMode;

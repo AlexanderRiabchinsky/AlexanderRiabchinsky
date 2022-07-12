@@ -1,12 +1,17 @@
 package main.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Date;
 
+@Accessors(chain = true)
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "post_votes")
 public class PostVotes {
     @Id
@@ -16,15 +21,15 @@ public class PostVotes {
 
     //private int userId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Posts postVote;
+//    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", insertable = false, updatable = false)
+//    private Posts postVote;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = false)
     private Posts post;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
