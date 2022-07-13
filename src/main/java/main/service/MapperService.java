@@ -13,22 +13,18 @@ import main.repositories.PostsRepository;
 import main.repositories.UsersRepository;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class MapperService {
-
-  //  @Autowired
     private final PostsRepository postsRepository;
-    private final UsersRepository usersRepository;
-    private final PostCommentsRepository postCommentsRepository;
-    private final PostVotesRepository postVotesRepository;
 
 
-    public PostExternal convertPostToDto(Posts post) {System.out.println("post marker ");
+    public PostExternal convertPostToDto(Posts post) {
         PostExternal postDto = new PostExternal();
-        postDto.setId(post.getId());System.out.println("postId = "+post.getId());
+        postDto.setId(post.getId());
         postDto.setActive(post.getIsActive() == 1);
         postDto.setTimestamp(post.getTimestamp()/*post.getTime().getTime() / 1000*/);// непонятная конструкция post.getTime().getTime() / 1000
         postDto.setUser(convertUserToDto(post.getUser()));
@@ -47,27 +43,39 @@ public class MapperService {
     public UserExternal convertUserToDto(Users user){
         UserExternal userDto = new UserExternal();
         userDto.setId(user.getId());
+        userDto.setRegTime(user.getRegTime());
+        userDto.setPassword(user.getPassword());
         userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhoto(user.getPhoto());
+        userDto.setModeration(user.getIsModerator() == 1);
+        if (userDto.isModeration()) {
+            userDto.setModerationCount(postsRepository.findUnmoderatedPostsCount());
+            userDto.setSettings(true);
+        } else {
+            userDto.setModerationCount(0);
+            userDto.setSettings(false);
+        }
         return userDto;
     }
-    public UserExternal convertUserToCheck(Users user){
-        UserExternal userCheck = new UserExternal();
-        userCheck.setId(user.getId());
-        userCheck.setName(user.getName());
-        userCheck.setPhoto(user.getPhoto());
-        userCheck.setEmail(user.getEmail());
-        userCheck.setModeration(user.getIsModerator()==1);
-        userCheck.setModerationCount(usersRepository.findModerationCount(user.getId()));
-        userCheck.setSettings(true);//Непонятно назначение параметра
-        return userCheck;
-    }
+//    public UserExternal convertUserToCheck(Users user){
+//        UserExternal userCheck = new UserExternal();
+//        userCheck.setId(user.getId());
+//        userCheck.setName(user.getName());
+//        userCheck.setPhoto(user.getPhoto());
+//        userCheck.setEmail(user.getEmail());
+//        userCheck.setModeration(user.getIsModerator()==1);
+//        userCheck.setModerationCount(usersRepository.findModerationCount(user.getId()));
+//        userCheck.setSettings(true);//Непонятно назначение параметра
+//        return userCheck;
+//    }
 
-    public PostCommentsExternal convertPostToComment(PostComments pc) {
+    public PostCommentsExternal convertCommentToDto(PostComments pc) {
         PostCommentsExternal postToComment = new PostCommentsExternal();
         postToComment.setId(pc.getId());
         postToComment.setTimestamp(pc.getTime());
         postToComment.setText(pc.getText());
-        postToComment.setUser(convertUserToDto(usersRepository.findById(pc.getParentId()).get()));
+        postToComment.setUser(convertUserToDto(pc.getUser()));
 
         return postToComment;
     }

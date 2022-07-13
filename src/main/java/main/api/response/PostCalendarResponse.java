@@ -10,6 +10,6 @@ import java.sql.Date;
 @Setter
 public class PostCalendarResponse {
     @Id
-    private Date time;
+    private Date date;
     private int viewCount;
 }

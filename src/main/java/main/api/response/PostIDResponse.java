@@ -31,4 +31,6 @@ public class PostIDResponse {
 
     private List<String> tags;
 
+    public PostIDResponse(int id, LocalDateTime timestamp, boolean active, UserExternal user, String title, String announce, int likeCount, int dislikeCount, int view, List<PostCommentsExternal> comments, List<String> tags) {
+    }
 }

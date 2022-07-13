@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Accessors(chain = true)
 @Entity
 @Getter
 @Setter

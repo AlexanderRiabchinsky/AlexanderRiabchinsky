@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.sql.Date;
 
-@Accessors(chain = true)
 @Entity
 @Getter
 @Setter

@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 12.07.22 corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 12.07.22 (2) corrected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CaptchaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CaptchaResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/InitResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/InitResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/captcha.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostCalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostCalendarResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostCommentsExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostCommentsExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostModeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostModeration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/SettingsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/SettingsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
@@ -31,7 +20,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" afterDir="false" />
     </list>
@@ -101,6 +90,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/db/migration" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -446,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657605425283</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="version as of 12.07.22 (2) corrected">
+      <created>1657625361842</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1657625361842</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,7 +460,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 28.04.22" />
     <MESSAGE value="version as of 09.05.22" />
     <MESSAGE value="version as of 26.05.22" />
     <MESSAGE value="version as of 30.05.22" />
@@ -488,6 +484,7 @@
     <MESSAGE value="version as of 09.07.22 corrected" />
     <MESSAGE value="version as of 11.07.22 corrected" />
     <MESSAGE value="version as of 12.07.22 corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 12.07.22 corrected" />
+    <MESSAGE value="version as of 12.07.22 (2) corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 12.07.22 (2) corrected" />
   </component>
 </project>

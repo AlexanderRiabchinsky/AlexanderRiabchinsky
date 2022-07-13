@@ -3,6 +3,7 @@ package main.service;
 import main.api.response.*;
 import main.model.PostComments;
 import main.model.Posts;
+import main.model.Tags;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ApiPostService {
-    public MapperService mapperService;
+    private MapperService mapperService;
     @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
@@ -55,33 +57,36 @@ public class ApiPostService {
     }
 
     public PostResponse getPostByMode   (int offset, int limit, String mode) {
-        Sort sort;
-
-        switch (mode){
-
-            case "popular": sort = new Sort(Sort.Direction.DESC,"comments_count");
-            break;
-            case "best": sort = new Sort(Sort.Direction.DESC,"likes_count");
-            break;
-            case "early": sort = new Sort(Sort.Direction.ASC,"time");
-            break;
-            default: case "recent":sort = new Sort(Sort.Direction.DESC,"time");
-        }
         PostResponse postByMode = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit, sort);
-        Page<Posts> page = postsRepository.findPostsByMode(pageable,mode);
-        System.out.println("stream = "+page.getContent().stream());
-        System.out.println("map = "+page.getContent().stream().map(mapperService::convertPostToDto));
-        postByMode.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
-                .collect(Collectors.toList()));System.out.println("posts = "+postByMode.getPosts());
-        postByMode.setCount(page.getTotalElements());
-
+        List<Posts> posts = new ArrayList<>();
+        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Page<Posts> page;
+        switch (mode) {
+            case "popular":
+                page = postsRepository.findPopularPosts(pageable);
+                break;
+            case "early":
+                page = postsRepository.findEarlyPosts(pageable);
+                break;
+            case "best":
+                page = postsRepository.findBestPosts(pageable);
+                break;
+            default:
+                page = postsRepository.findRecentPosts(pageable);
+        }System.out.println("offset = "+offset+"; limit = "+limit+"; mode = "+mode);
+        posts.addAll(page.getContent());System.out.println("posts = "+posts);
+        postByMode.setCount(page.getTotalElements());System.out.println("tot elements = "+page.getTotalElements());
+        System.out.println("CHECK = "+posts.stream().map(mapperService::convertPostToDto));
+        List<PostExternal> postDtoList = posts.stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList());
+        postByMode.setPosts(postDtoList);
         return postByMode;
     }
     public PostResponse getPostByDate   (int offset, int limit, String date) {
         PostResponse postByDateResponse = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Pageable pageable = PageRequest.of(offset / limit, limit);System.out.println("date = "+date);
         Page<Posts> page = postsRepository.findPostsByDate(pageable, date);
+        System.out.println("stream = "+page.getContent().stream());
         postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByDateResponse.setCount(page.getTotalElements());
@@ -90,38 +95,73 @@ public class ApiPostService {
     }
     public PostResponse getPostByTag(int offset, int limit, String tag) {
         PostResponse postByTagResponse = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Pageable pageable = PageRequest.of(offset / limit, limit);System.out.println("tag = "+tag);
         Page<Posts> page = postsRepository.findPostsByTag(pageable, tag);
         postByTagResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostById(int id) {
-        PostIDResponse postIdResponse = new PostIDResponse();
-        Optional<Posts> post = postsRepository.findById(id);
-        postIdResponse.setId(post.get().getId());
-        postIdResponse.setTimestamp(post.get().getTimestamp());
-        postIdResponse.setActive(post.get().getIsActive()==1);
-        postIdResponse.setUser(mapperService.convertUserToDto(post.get().getUser()));
-        postIdResponse.setTitle(post.get().getTitle());
-        postIdResponse.setText(post.get().getText());
-        postIdResponse.setLikeCount(postsRepository.findPostLikesCount(post.get().getId()));
-        postIdResponse.setDislikeCount(postsRepository.findPostDislikesCount(post.get().getId()));
-        postIdResponse.setViewCount(post.get().getViewCount());
-        Page<PostComments> pageComm = postCommentsRepository.findCommentsByPostId(Pageable.unpaged(),post.get().getId());
-        postIdResponse.setComments(pageComm.getContent().stream().map(mapperService::convertPostToComment) .collect(Collectors.toList()));
-        postIdResponse.setTags(tagsRepository.findTagsByPost(post.get().getId()));//
+    public PostIDResponse getPostById(Posts post, Principal principal) {
+       // AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
+        int view;
+      /*  if (authCheckResponse.isResult()) {
+            UserExternal user = authCheckResponse.getUser();
+            if (user.isModeration() || user.getId() == post.getUser().getId()) {
+                view = post.getViewCount();
+            } else {
+                view = post.getViewCount() + 1;
+                post.setViewCount(view);
+                postsRepository.save(post);
+            }
+        } else */{
+            view = post.getViewCount() + 1;
+            post.setViewCount(view);
+            postsRepository.save(post);
+        }
 
-        return postIdResponse;
+        List<PostCommentsExternal> comments = post.getPostComments().stream()
+                .map(mapperService::convertCommentToDto)
+                .collect(Collectors.toList());
+        List<String> tags = post.getTags().stream().map(Tags::getName)
+                .collect(Collectors.toList());
+        PostExternal postDto = mapperService.convertPostToDto(post);
+
+        return new PostIDResponse(postDto.getId(), postDto.getTimestamp(),
+                postDto.isActive(), postDto.getUser(), postDto.getTitle(), postDto.getAnnounce(),
+                postDto.getLikeCount(), postDto.getDislikeCount(), view,
+                comments, tags);
     }
-    public PostResponse getModerationData(int offset, int limit){
+
+    public PostResponse getModerationData(int offset, int limit, String status, Principal principal){
         PostResponse postModeration = new PostResponse();
+        int moderatorId = 6;//getAuthorizedUser(principal).getId();
+        List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
-        Page<Posts> page = postsRepository.findPostsModeration(pageable);
+        Page<Posts> page;
+        switch (status) {
+            case "accepted":
+                page = postsRepository.findAcceptedPostsByModerator(pageable, moderatorId);
+                break;
+            case "declined":
+                page = postsRepository.findDeclinedPostsByModerator(pageable, moderatorId);
+                break;
+            default:
+                page = postsRepository.findNewPosts(pageable);
+        }
+        posts.addAll(page.getContent());
+        postModeration.setCount(page.getTotalElements());
+        List<PostExternal> moderatorPosts = posts.stream()
+                .map(mapperService::convertPostToDto)
+       /*         .map(p -> new PostExternal(p.getId(), p.getTimestamp(),
+                        p.getTitle(), p.getAnnounce(), p.getLikeCount(),
+                        p.getDislikeCount(), p.getCommentCount(), p.getViewCount(), p.getUser()))*/
+                .collect(Collectors.toList());
+
         postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
-        postModeration.setCount(page.getTotalElements());
+
+        postModeration.setPosts(moderatorPosts);
 
         return postModeration;
     }

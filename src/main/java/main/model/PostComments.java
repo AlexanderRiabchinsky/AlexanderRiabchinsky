@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-@Accessors(chain = true)
 @Entity
 @Getter
 @Setter

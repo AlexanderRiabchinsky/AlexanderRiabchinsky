@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.util.List;
 
-@Accessors(chain = true)
 @Entity
 @Getter
 @Setter

@@ -34,6 +34,6 @@ public class ApiGeneralController {
     public ResponseEntity<TagResponse> apiTag(@RequestParam (required = false) String query) {return ResponseEntity.ok(generalService.getTagResponse(query));}
 
     @GetMapping("/api/calendar")
-    public ResponseEntity<CalendarResponse> calendar(@RequestParam (required = false) String year) {return ResponseEntity.ok(generalService.getCalendar(year));
+    public ResponseEntity<CalendarResponse> calendar(@RequestParam (required = false) int year) {return ResponseEntity.ok(generalService.getCalendar(year));
     }
 }

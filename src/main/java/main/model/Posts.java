@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Accessors(chain = true)
 @Entity
 @Getter
 @Setter
@@ -34,8 +33,8 @@ public class Posts{
     @Column(name = "moderator_id")
     private int moderatorId;
 
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)//optional = false,cascade = CascadeType.ALL
+    @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
     @Column(name = "time")
