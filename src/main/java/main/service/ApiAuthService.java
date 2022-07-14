@@ -3,6 +3,7 @@ package main.service;
 import com.github.cage.Cage;
 import com.github.cage.GCage;
 import com.github.cage.YCage;
+import lombok.AllArgsConstructor;
 import main.api.response.*;
 import main.model.CaptchaCodes;
 import main.model.Users;
@@ -20,18 +21,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ApiAuthService {
     public static final int PASSWORD_LENGTH = 6;
     public static final int MAX_LENGTH = 255;
     public MapperService mapperService;
 
-    @Autowired
+  //  @Autowired
     private UsersRepository usersRepository;
     private CaptchaCodesRepository captchaCodesRepository;
 
     public AuthCheckResponse getAuthCheckResponse() {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
-        Integer id = 2;
+        int id = 2;
 
 //        Optional<Users> user = usersRepository.findById(id);
 //        if(user.isPresent()){
@@ -52,33 +54,6 @@ public class ApiAuthService {
             authCheckResponse.setUser(users);
         return authCheckResponse;
     }
-//    public CaptchaResponse getCaptcha()throws IOException {
-//        String encodedString;
-//        String text=null;
-//
-//        Cage cage = new GCage();
-//        OutputStream os = new FileOutputStream("captcha.jpg", false);
-//        try {
-//            text=cage.getTokenGenerator().next();
-//            cage.draw(text, os);
-//        } finally {
-//            byte[] fileContent = FileUtils.readFileToByteArray(new File("captcha.jpg"));
-//             encodedString = Base64.getEncoder().encodeToString(fileContent);
-//  //          os.close();
-//        }
-//        CaptchaResponse captchaResponse = new CaptchaResponse();
-//        captchaResponse.setSecret(text);
-//        captchaResponse.setImage("data:image/png;base64, "+encodedString);
-//        Date date=new Date(Calendar.getInstance().getTimeInMillis());
-//
-//        CaptchaCodes captchaCodes = new CaptchaCodes();
-//        captchaCodes.setTime(date);
-//        captchaCodes.setCode(text);
-//        captchaCodes.setSecretCode("data:image/png;base64, "+encodedString);
-//        captchaCodesRepository.save(captchaCodes);
-// //       captchaCodesRepository.regNewCaptcha(date, text,"data:image/png;base64, "+encodedString);
-//        return captchaResponse;
-//    }
 
     public RegResponse getRegResponse(RegRequest regRequest) {
         RegResponse regResponse = new RegResponse();

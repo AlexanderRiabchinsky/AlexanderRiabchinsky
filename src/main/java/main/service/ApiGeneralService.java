@@ -10,10 +10,7 @@ import main.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class ApiGeneralService{
@@ -61,8 +58,10 @@ public class ApiGeneralService{
         tagResponse.setTags(tags1);
         return tagResponse;
     }
-    public CalendarResponse getCalendar(int year){
+    public CalendarResponse getCalendar(int year){System.out.println("year = "+year);
         CalendarResponse calendarResponse = new CalendarResponse();
+        calendarResponse.setYear(year);
+        Map<Date,Integer> postNoByDates= postsRepository.сalendarDates(year);
 
         return calendarResponse;
     }

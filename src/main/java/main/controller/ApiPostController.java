@@ -46,8 +46,8 @@ public class ApiPostController {
     }
 
     @GetMapping("/post/{ID}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam (required = false)Posts post,
-                                                      @RequestParam (required = false) Principal principal) {return ResponseEntity.ok(postService.getPostById(post,principal));
+    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam (required = false)int id,
+                                                      @RequestParam (required = false) Principal principal) {return ResponseEntity.ok(postService.getPostById(id,principal));
     }
 
     @GetMapping("/post/moderation")

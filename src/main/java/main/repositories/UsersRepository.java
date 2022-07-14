@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users,Integer> {
-    @Query(value = "SELECT COUNT(post.id) FROM posts " +
-            "WHERE user = :id " +
-            "AND posts.is_active = 1 AND posts.moderation_status = 'NEW' " + "AND posts.time <= NOW()",
-            nativeQuery = true)
-    long findModerationCount(@Param("id") int id);
-    @Query("SELECT name FROM Users users WHERE id=:id")
-    String getUserNameById(@Param("id") int id);
+//    @Query(value = "SELECT COUNT(post.id) FROM posts " +
+//            "WHERE user =:id " +
+//            "AND posts.is_active = 1 AND posts.moderation_status = 'NEW' " + "AND posts.time <= NOW()",
+//            nativeQuery = true)
+//    long findModerationCount(@Param("id") int id);
+//    @Query("SELECT name FROM Users users WHERE id=:id")
+//    String getUserNameById(@Param("id") int id);
 
     @Query("select u.name from Users u where u.id =:id")
     String findNameById(@Param("id") int id);

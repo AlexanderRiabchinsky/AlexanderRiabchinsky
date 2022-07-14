@@ -16,7 +16,7 @@ public interface PostCommentsRepository extends JpaRepository<PostComments,Integ
 //    @Query("SELECT COUNT(*) FROM post_comments WHERE post = postId")
 //    int findPostCommentsCount(int id);
 
-    @Query(value = "SELECT * FROM PostComments pc WHERE post_id=:postId",
-            nativeQuery = true)
-    Page<PostComments> findCommentsByPostId(Pageable pageable,@Param("postId") int postId);
+//    @Query(value = "SELECT * FROM PostComments pc WHERE post_id=:postId",
+//            nativeQuery = true)
+//    Page<PostComments> findCommentsByPostId(Pageable pageable,@Param("postId") int postId);
 }

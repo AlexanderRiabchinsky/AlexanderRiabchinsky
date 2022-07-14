@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -51,25 +52,25 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = 1",
         nativeQuery = true)
-        Integer findPostLikesCount(@Param("postId") int postId);
+        int findPostLikesCount(@Param("postId") int postId);
 
         @Query(value = "SELECT COUNT(post_votes.id) FROM post_votes " +
         "JOIN posts ON posts.id = post_votes.post_id WHERE posts.id = :postId " +
         "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' " +
         "AND posts.time <= NOW() AND post_votes.value = -1",
         nativeQuery = true)
-        Integer findPostDislikesCount(@Param("postId") int postId);
+        int findPostDislikesCount(@Param("postId") int postId);
 
  //       @Query("SELECT COUNT(post) FROM PostComments pc WHERE pc.post =:postId")
         @Query(value = "SELECT COUNT(post_comments.id) FROM post_comments " +
          "JOIN posts ON posts.id = post_comments.post_id WHERE posts.id = :postId " +
          "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW()",
          nativeQuery = true)
-        Integer findPostCommentsCount(@Param("postId") int postId);
+        int findPostCommentsCount(@Param("postId") int postId);
 
 
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
-        Integer getUserIdByPostId(@Param("postId") int postId);
+        int getUserIdByPostId(@Param("postId") int postId);
         @Query ("SELECT title FROM Posts posts WHERE id=:postId")
         String getTitle(@Param("postId") int postId);
 
@@ -84,7 +85,7 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             "AND DATE_FORMAT(posts.time, '%YYYY%') = :year " +
             "ORDER BY posts.time DESC",
             nativeQuery = true)
-    List<Date> CalendarDates(Pageable pageable, @Param("year") int year);
+    Map<Date, Integer> сalendarDates(@Param("year") int year);
 
     @Query(value = "SELECT * FROM posts " +
             "JOIN post_comments ON posts.id = post_comments.post_id" +
@@ -104,30 +105,28 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
     Page<Posts> findBestPosts(Pageable pageable);
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "ORDER BY posts.time DESC", nativeQuery = true)
+            "ORDER BY time DESC", nativeQuery = true)
     Page<Posts> findRecentPosts(Pageable pageable);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND (moderation_status = 'ACCEPTED' AND moderator_id =: moderatorId) " +
-            "AND time <= NOW() ORDER BY posts.time DESC",
+            "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findAcceptedPostsByModerator(Pageable pageable,@Param("moderatorId") int moderatorId);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND (moderation_status = 'DECLINED' AND moderator_id =: moderatorId) " +
-            "AND time <= NOW() ORDER BY posts.time DESC",
+            "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findDeclinedPostsByModerator(Pageable pageable,@Param("moderatorId") int moderatorId);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND (moderation_status = 'NEW') " +
-            "AND time <= NOW() ORDER BY posts.time DESC",
+            "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findNewPosts(Pageable pageable);
 
     @Query(value = "SELECT COUNT(*) FROM posts " +
-            "WHERE moderation_status = 'NEW' " +
-            "AND posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW()",
-            nativeQuery = true)
-    Integer findUnmoderatedPostsCount();
+            "WHERE moderation_status = 'NEW' AND is_active = 1",nativeQuery = true)
+    int findUnmoderatedPostsCount();
 }

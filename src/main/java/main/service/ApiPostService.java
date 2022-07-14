@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class ApiPostService {
     private MapperService mapperService;
+    private ApiAuthService apiAuthService;
     @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
@@ -76,9 +77,8 @@ public class ApiPostService {
         }System.out.println("offset = "+offset+"; limit = "+limit+"; mode = "+mode);
         posts.addAll(page.getContent());System.out.println("posts = "+posts);
         postByMode.setCount(page.getTotalElements());System.out.println("tot elements = "+page.getTotalElements());
-        System.out.println("CHECK = "+posts.stream().map(mapperService::convertPostToDto));
-        List<PostExternal> postDtoList = posts.stream().map(mapperService::convertPostToDto)
-                .collect(Collectors.toList());
+  //      System.out.println("CHECK = "+posts.stream().map(mapperService::convertPostToDto));
+        List<PostExternal> postDtoList = posts.stream().map(mapperService::convertPostToDto).collect(Collectors.toList());
         postByMode.setPosts(postDtoList);
         return postByMode;
     }
@@ -102,8 +102,9 @@ public class ApiPostService {
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostById(Posts post, Principal principal) {
-       // AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
+    public PostIDResponse getPostById(int id, Principal principal) {
+        Posts post = postsRepository.findById(id).get();
+   //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
         int view;
       /*  if (authCheckResponse.isResult()) {
             UserExternal user = authCheckResponse.getUser();
