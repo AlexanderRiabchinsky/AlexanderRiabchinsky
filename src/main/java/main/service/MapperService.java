@@ -7,13 +7,7 @@ import main.api.response.UserExternal;
 import main.model.PostComments;
 import main.model.Posts;
 import main.model.Users;
-import main.repositories.PostCommentsRepository;
-import main.repositories.PostVotesRepository;
 import main.repositories.PostsRepository;
-import main.repositories.UsersRepository;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,6 +34,7 @@ public class MapperService {
         postDto.setViewCount(post.getViewCount());
         return postDto;
     }
+
     public UserExternal convertUserToDto(Users user){
         UserExternal userDto = new UserExternal();
         userDto.setId(user.getId());
@@ -58,17 +53,6 @@ public class MapperService {
         }
         return userDto;
     }
-//    public UserExternal convertUserToCheck(Users user){
-//        UserExternal userCheck = new UserExternal();
-//        userCheck.setId(user.getId());
-//        userCheck.setName(user.getName());
-//        userCheck.setPhoto(user.getPhoto());
-//        userCheck.setEmail(user.getEmail());
-//        userCheck.setModeration(user.getIsModerator()==1);
-//        userCheck.setModerationCount(usersRepository.findModerationCount(user.getId()));
-//        userCheck.setSettings(true);//Непонятно назначение параметра
-//        return userCheck;
-//    }
 
     public PostCommentsExternal convertCommentToDto(PostComments pc) {
         PostCommentsExternal postToComment = new PostCommentsExternal();

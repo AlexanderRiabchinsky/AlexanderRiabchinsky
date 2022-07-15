@@ -11,5 +11,5 @@ import java.util.List;
 @Setter
 public class CalendarResponse {
     private int year;
-    private ArrayList<PostCalendarResponse> posts;
+    private List<PostCalendarResponse> posts;
 }

@@ -46,15 +46,15 @@ public class ApiPostController {
     }
 
     @GetMapping("/post/{ID}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam (required = false)int id,
-                                                      @RequestParam (required = false) Principal principal) {return ResponseEntity.ok(postService.getPostById(id,principal));
+    public ResponseEntity<PostIDResponse> postIdCheck(@RequestParam (required = false)int id/*,
+                                                      @RequestParam (required = false) Principal principal*/) {return ResponseEntity.ok(postService.getPostById(id/*,principal*/));
     }
 
     @GetMapping("/post/moderation")
     public ResponseEntity<PostResponse> moderationCheck(@RequestParam(defaultValue = "0") int offset,
                                                         @RequestParam(defaultValue = "10") int limit,
-                                                        @RequestParam (required = false) String status,
-                                                        @RequestParam (required = false) Principal principal){return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
+                                                        @RequestParam (required = false) String status/*,
+                                                        @RequestParam (required = false) Principal principal*/){return ResponseEntity.ok(postService.getModerationData(offset, limit, status/*, principal*/));
     }
 
 }

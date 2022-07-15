@@ -1,5 +1,6 @@
 package main.service;
 
+import lombok.AllArgsConstructor;
 import main.api.response.*;
 import main.model.PostComments;
 import main.model.Posts;
@@ -21,10 +22,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ApiPostService {
     private MapperService mapperService;
     private ApiAuthService apiAuthService;
-    @Autowired
+  //  @Autowired
     private PostsRepository postsRepository;
     private PostCommentsRepository postCommentsRepository;
     private TagsRepository tagsRepository;
@@ -74,10 +76,9 @@ public class ApiPostService {
                 break;
             default:
                 page = postsRepository.findRecentPosts(pageable);
-        }System.out.println("offset = "+offset+"; limit = "+limit+"; mode = "+mode);
-        posts.addAll(page.getContent());System.out.println("posts = "+posts);
-        postByMode.setCount(page.getTotalElements());System.out.println("tot elements = "+page.getTotalElements());
-  //      System.out.println("CHECK = "+posts.stream().map(mapperService::convertPostToDto));
+        }
+        posts.addAll(page.getContent());
+        postByMode.setCount(page.getTotalElements());
         List<PostExternal> postDtoList = posts.stream().map(mapperService::convertPostToDto).collect(Collectors.toList());
         postByMode.setPosts(postDtoList);
         return postByMode;
@@ -102,7 +103,7 @@ public class ApiPostService {
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostById(int id, Principal principal) {
+    public PostIDResponse getPostById(int id/*, Principal principal*/) {
         Posts post = postsRepository.findById(id).get();
    //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
         int view;
@@ -134,7 +135,7 @@ public class ApiPostService {
                 comments, tags);
     }
 
-    public PostResponse getModerationData(int offset, int limit, String status, Principal principal){
+    public PostResponse getModerationData(int offset, int limit, String status/*, Principal principal*/){
         PostResponse postModeration = new PostResponse();
         int moderatorId = 6;//getAuthorizedUser(principal).getId();
         List<Posts> posts = new ArrayList<>();
@@ -148,7 +149,7 @@ public class ApiPostService {
                 page = postsRepository.findDeclinedPostsByModerator(pageable, moderatorId);
                 break;
             default:
-                page = postsRepository.findNewPosts(pageable);
+            case "new":    page = postsRepository.findNewPosts(pageable);
         }
         posts.addAll(page.getContent());
         postModeration.setCount(page.getTotalElements());

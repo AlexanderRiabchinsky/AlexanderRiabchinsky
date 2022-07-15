@@ -27,7 +27,6 @@ public class ApiAuthService {
     public static final int MAX_LENGTH = 255;
     public MapperService mapperService;
 
-  //  @Autowired
     private UsersRepository usersRepository;
     private CaptchaCodesRepository captchaCodesRepository;
 
@@ -35,23 +34,13 @@ public class ApiAuthService {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
         int id = 2;
 
-//        Optional<Users> user = usersRepository.findById(id);
-//        if(user.isPresent()){
-//        authCheckResponse.setResult(user.get().getIsModerator()==1);
-//        authCheckResponse.setUser(mapperService.convertUserToCheck(user.get()));
-//        }
-//        else authCheckResponse.setResult(false);
+        Optional<Users> user = usersRepository.findById(id);
+        if(user.isPresent()){
+        authCheckResponse.setResult(user.get().getIsModerator()==1);
+        authCheckResponse.setUser(mapperService.convertUserToDto(user.get()));
+        }
+        else authCheckResponse.setResult(false);
 
-            UserExternal users = new UserExternal();
-            users.setId(id);
-            users.setName(usersRepository.findNameById(id));
-            users.setPhoto(usersRepository.findPhotoById(id));
-            users.setEmail(usersRepository.findEmailById(id));
-            users.setModeration(true);
-            users.setModerationCount(87);
-            users.setSettings(true);
-            authCheckResponse.setResult(true);
-            authCheckResponse.setUser(users);
         return authCheckResponse;
     }
 

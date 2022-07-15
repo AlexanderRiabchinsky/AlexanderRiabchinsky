@@ -1,20 +1,20 @@
 package main.service;
 
-import main.api.response.CalendarResponse;
-import main.api.response.SettingsResponse;
-import main.api.response.TagExternal;
-import main.api.response.TagResponse;
+import lombok.AllArgsConstructor;
+import main.api.response.*;
 import main.model.Tags;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
 @Service
+@AllArgsConstructor
 public class ApiGeneralService{
-    @Autowired
+ //   @Autowired
     private TagsRepository tagsRepository;
     private PostsRepository postsRepository;
     public SettingsResponse getGlobalSettings(){
@@ -61,7 +61,13 @@ public class ApiGeneralService{
     public CalendarResponse getCalendar(int year){System.out.println("year = "+year);
         CalendarResponse calendarResponse = new CalendarResponse();
         calendarResponse.setYear(year);
-        Map<Date,Integer> postNoByDates= postsRepository.сalendarDates(year);
+    //    Map<Date,Integer> postNoByDates= postsRepository.сalendarDates(year);
+        List<PostCalendarResponse> view = new ArrayList<>();
+        PostCalendarResponse item = new PostCalendarResponse();
+        item.setDate("2022-07-14");
+        item.setViewCount(4);
+        view.add(item);
+        calendarResponse.setPosts(view);
 
         return calendarResponse;
     }

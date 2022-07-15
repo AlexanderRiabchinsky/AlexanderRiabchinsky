@@ -16,24 +16,24 @@ import java.util.Optional;
 @Repository
 public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
-    @Query(value = "SELECT * FROM Posts posts WHERE posts.is_active = 1 " +
-            "AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
+    @Query(value = "SELECT * FROM  posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
      //       "AND mode = :mode " +
-            "ORDER BY posts.time DESC",
+            "ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByMode(Pageable pageable, @Param("mode") String mode);
 
-    @Query(value = "SELECT * FROM Posts posts WHERE posts.is_active = 1 " +
-            "AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
-            "AND title LIKE CONCAT('%','query','%') " +
-            "ORDER BY posts.time DESC",
+    @Query(value = "SELECT * FROM  posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "AND title LIKE CONCAT('%','query','%') " +//CONCAT('%','query','%')
+            "ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByQuery(Pageable pageable, @Param("query") String query);
 
         @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
                 "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
                 "AND DATE_FORMAT(posts.time, '%Y-%m-%d') = :date " +
-                "ORDER BY posts.time DESC",
+                "ORDER BY time DESC",
                 nativeQuery = true)
         Page<Posts> findPostsByDate(Pageable pageable, @Param("date") String date);
 
@@ -42,7 +42,7 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             "JOIN tags ON tag2post.tag_id = tags.id "+
             "WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "AND tags.name = :tag " +
+            "AND tags.name =:tag " +
             "ORDER BY posts.time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByTag(Pageable pageable,@Param("tag") String tag);
@@ -71,12 +71,13 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
         @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
         int getUserIdByPostId(@Param("postId") int postId);
+
         @Query ("SELECT title FROM Posts posts WHERE id=:postId")
         String getTitle(@Param("postId") int postId);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND (moderation_status = 'NEW' OR moderator_id = 1) " +
-            "AND time <= NOW() ORDER BY posts.time DESC",
+            "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findPostsModeration(Pageable pageable);
 
@@ -87,21 +88,23 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Map<Date, Integer> сalendarDates(@Param("year") int year);
 
-    @Query(value = "SELECT * FROM posts " +
-            "JOIN post_comments ON posts.id = post_comments.post_id" +
-            "WHERE posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
-            "ORDER BY COUNT(post_comments.post_id) DESC", nativeQuery = true)
+    @Query(value = "SELECT p FROM Posts p " +
+            "LEFT JOIN PostComments pc ON pc.post = p.id" +
+            "WHERE p.isActive = 1 AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
+            "GROUP BY p.id " +
+            "ORDER BY SELECT(COUNT(pc)) DESC", nativeQuery = true)
     Page<Posts> findPopularPosts(Pageable pageable);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "ORDER BY posts.time ASC", nativeQuery = true)
+            "ORDER BY time ASC", nativeQuery = true)
     Page<Posts> findEarlyPosts(Pageable pageable);
 
-    @Query(value = "SELECT * FROM posts " +
-            "JOIN post_votes ON posts.id = post_votes.post_id" +
-            "WHERE posts.is_active = 1 AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
-            "ORDER BY COUNT(post_votes.value) DESC", nativeQuery = true)
+    @Query(value = "SELECT p FROM Posts p " +
+            "LEFT JOIN PostVotes pv ON pv.post = p.id" +
+            "WHERE p.isActive = 1 AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
+            "GROUP BY p.id " +
+            "ORDER BY SELECT(COUNT(pv)) DESC", nativeQuery = true)
     Page<Posts> findBestPosts(Pageable pageable);
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
