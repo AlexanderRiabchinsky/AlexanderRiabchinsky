@@ -25,7 +25,7 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
     @Query(value = "SELECT * FROM  posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "AND title LIKE CONCAT('%','query','%') " +//CONCAT('%','query','%')
+            "AND title LIKE CONCAT('%',:query,'%') " +
             "ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findPostsByQuery(Pageable pageable, @Param("query") String query);
@@ -88,23 +88,26 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Map<Date, Integer> сalendarDates(@Param("year") int year);
 
-    @Query(value = "SELECT p FROM Posts p " +
+    @Query(value = "SELECT * FROM Posts p " +
             "LEFT JOIN PostComments pc ON pc.post = p.id" +
-            "WHERE p.isActive = 1 AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
+            "WHERE p.isActive = 1 " +
+            "AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
             "GROUP BY p.id " +
-            "ORDER BY SELECT(COUNT(pc)) DESC", nativeQuery = true)
+            "ORDER BY SELECT(COUNT(pc.post)) DESC", nativeQuery = true)
     Page<Posts> findPopularPosts(Pageable pageable);
+
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
             "ORDER BY time ASC", nativeQuery = true)
     Page<Posts> findEarlyPosts(Pageable pageable);
 
-    @Query(value = "SELECT p FROM Posts p " +
+    @Query(value = "SELECT * FROM Posts p " +
             "LEFT JOIN PostVotes pv ON pv.post = p.id" +
-            "WHERE p.isActive = 1 AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
-            "GROUP BY p.id " +
-            "ORDER BY SELECT(COUNT(pv)) DESC", nativeQuery = true)
+            "WHERE p.isActive = 1 " +
+            "AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
+            "GROUP BY p.id" +
+            "ORDER BY SELECT(COUNT(pv.post)) DESC", nativeQuery = true)
     Page<Posts> findBestPosts(Pageable pageable);
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
@@ -112,13 +115,13 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
     Page<Posts> findRecentPosts(Pageable pageable);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
-            "AND (moderation_status = 'ACCEPTED' AND moderator_id =: moderatorId) " +
+            "AND (moderation_status = 'ACCEPTED' AND moderator_id =:moderatorId) " +
             "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findAcceptedPostsByModerator(Pageable pageable,@Param("moderatorId") int moderatorId);
 
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
-            "AND (moderation_status = 'DECLINED' AND moderator_id =: moderatorId) " +
+            "AND (moderation_status = 'DECLINED' AND moderator_id =:moderatorId) " +
             "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findDeclinedPostsByModerator(Pageable pageable,@Param("moderatorId") int moderatorId);

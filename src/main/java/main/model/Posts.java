@@ -53,7 +53,7 @@ public class Posts{
     private List<PostComments> postComments;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-   // @JoinColumn(name = "post_id")
+    //@JoinColumn(name = "post_id")
     private List<PostVotes> postVotes;
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)

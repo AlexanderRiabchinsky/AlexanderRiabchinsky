@@ -3,6 +3,7 @@ package main.service;
 import lombok.AllArgsConstructor;
 import main.api.response.*;
 import main.model.Tags;
+import main.repositories.GlobalSettingsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,10 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class ApiGeneralService{
- //   @Autowired
-    private TagsRepository tagsRepository;
-    private PostsRepository postsRepository;
+
+    private final TagsRepository tagsRepository;
+    private final PostsRepository postsRepository;
+    private final GlobalSettingsRepository globalSettingsRepository;
     public SettingsResponse getGlobalSettings(){
         SettingsResponse settingsResponse=new SettingsResponse();
         settingsResponse.setMultiuserMode(true);
@@ -58,7 +60,7 @@ public class ApiGeneralService{
         tagResponse.setTags(tags1);
         return tagResponse;
     }
-    public CalendarResponse getCalendar(int year){System.out.println("year = "+year);
+    public CalendarResponse getCalendar(String year){System.out.println("year = "+year);
         CalendarResponse calendarResponse = new CalendarResponse();
         calendarResponse.setYear(year);
     //    Map<Date,Integer> postNoByDates= postsRepository.сalendarDates(year);
@@ -70,6 +72,9 @@ public class ApiGeneralService{
         calendarResponse.setPosts(view);
 
         return calendarResponse;
+    }
+    public boolean isMultiUser() {
+        return globalSettingsRepository.findSettingValue("MULTIUSER_MODE").equals("YES");
     }
 
 }

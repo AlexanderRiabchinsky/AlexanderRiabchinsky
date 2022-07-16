@@ -38,24 +38,7 @@ public class ApiPostService {
         postSearchResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postSearchResponse.setCount(page.getTotalElements());
-//        postSearchResponse.setCount((int) postsRepository.count());
-//        List<Posts> posts = postsRepository.findAll();
-//        ArrayList<PostExternal> postss = new ArrayList<>();
-//        for (Posts post:posts) {
-//            PostExternal postExt = new PostExternal();
-//            postExt.setId(post.getId());
-//            postExt.setTimestamp(post.getTimestamp());
-//            postExt.setUser(post.getUser());
-//
-//            postExt.setTitle(post.getTitle());
-//            postExt.setAnnounce("Анонс поста");
-//            postExt.setLikeCount(5);
-//            postExt.setDislikeCount(5);
-//            postExt.setCommentCount(5);
-//            postExt.setViewCount(post.getViewCount());
-//
-//            postss.add(postExt);}
-//        postSearchResponse.setPosts(postss);
+
         return postSearchResponse;
     }
 
@@ -104,7 +87,7 @@ public class ApiPostService {
         return postByTagResponse;
     }
     public PostIDResponse getPostById(int id/*, Principal principal*/) {
-        Posts post = postsRepository.findById(id).get();
+        Posts post = postsRepository.findById(id).get();System.out.println(id);
    //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
         int view;
       /*  if (authCheckResponse.isResult()) {

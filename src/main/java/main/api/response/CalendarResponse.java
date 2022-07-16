@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 public class CalendarResponse {
-    private int year;
+    private String year;
     private List<PostCalendarResponse> posts;
 }
