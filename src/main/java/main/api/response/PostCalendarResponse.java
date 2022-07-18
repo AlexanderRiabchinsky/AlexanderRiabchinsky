@@ -9,7 +9,6 @@ import java.sql.Date;
 @Getter
 @Setter
 public class PostCalendarResponse {
-    @Id
     private String date;
     private int viewCount;
 }

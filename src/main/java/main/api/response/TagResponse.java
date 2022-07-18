@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class TagResponse {
 
-    private ArrayList<TagExternal> tags;
+    private List<TagExternal> tags;
 
 
 

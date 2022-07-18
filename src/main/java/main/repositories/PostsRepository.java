@@ -37,6 +37,19 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
                 nativeQuery = true)
         Page<Posts> findPostsByDate(Pageable pageable, @Param("date") String date);
 
+    @Query(value = "SELECT DISTINCT DATE_FORMAT(time, '%Y-%m-%d') FROM posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "AND DATE_FORMAT(posts.time, '%Y') = :year " +
+            "ORDER BY time",
+            nativeQuery = true)
+    List<String> findPostDatesByYear(@Param("year") String year);
+
+    @Query(value = "SELECT COUNT(*) FROM posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "AND DATE_FORMAT(posts.time, '%Y-%m-%d') = :date ",
+            nativeQuery = true)
+    int findPostNumberByDate(@Param("date") String date);
+
     @Query(value = "SELECT * FROM posts " +
             "JOIN tag2post ON posts.id = tag2post.post_id "+
             "JOIN tags ON tag2post.tag_id = tags.id "+

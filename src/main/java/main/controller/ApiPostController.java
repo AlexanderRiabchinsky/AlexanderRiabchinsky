@@ -46,7 +46,7 @@ public class ApiPostController {
     }
 
     @GetMapping("/post/{ID}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable int id/*,
+    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable("id") int id/*,
                                                       @RequestParam (required = false) Principal principal*/) {return ResponseEntity.ok(postService.getPostById(id/*,principal*/));
     }
 

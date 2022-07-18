@@ -68,7 +68,7 @@ public class ApiPostService {
     }
     public PostResponse getPostByDate   (int offset, int limit, String date) {
         PostResponse postByDateResponse = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit);System.out.println("date = "+date);
+        Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page = postsRepository.findPostsByDate(pageable, date);
         System.out.println("stream = "+page.getContent().stream());
         postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
@@ -79,15 +79,16 @@ public class ApiPostService {
     }
     public PostResponse getPostByTag(int offset, int limit, String tag) {
         PostResponse postByTagResponse = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit);System.out.println("tag = "+tag);
+        Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page = postsRepository.findPostsByTag(pageable, tag);
         postByTagResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostById(int id/*, Principal principal*/) {
-        Posts post = postsRepository.findById(id).get();System.out.println(id);
+    public PostIDResponse getPostById(int id/*, Principal principal*/) {System.out.println(id);
+        Posts post = postsRepository.findById(id).get();
+        System.out.println(post);
    //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
         int view;
       /*  if (authCheckResponse.isResult()) {
