@@ -88,7 +88,7 @@ public class ApiPostService {
     }
     public PostIDResponse getPostById(int id/*, Principal principal*/) {System.out.println(id);
         Posts post = postsRepository.findById(id).get();
-        System.out.println(post);
+        System.out.println("id = "+post.getId()+" user = "+post.getUser().getName());
    //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
         int view;
       /*  if (authCheckResponse.isResult()) {
@@ -112,7 +112,7 @@ public class ApiPostService {
         List<String> tags = post.getTags().stream().map(Tags::getName)
                 .collect(Collectors.toList());
         PostExternal postDto = mapperService.convertPostToDto(post);
-
+System.out.println("dtoID = "+postDto.getId()+" dtoUser = " +postDto.getUser().getName()+" dtoTitle = "+postDto.getTitle());
         return new PostIDResponse(postDto.getId(), postDto.getTimestamp(),
                 postDto.isActive(), postDto.getUser(), postDto.getTitle(), postDto.getAnnounce(),
                 postDto.getLikeCount(), postDto.getDislikeCount(), view,

@@ -101,12 +101,9 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Map<Date, Integer> сalendarDates(@Param("year") int year);
 
-    @Query(value = "SELECT * FROM Posts p " +
-            "LEFT JOIN PostComments pc ON pc.post = p.id" +
-            "WHERE p.isActive = 1 " +
-            "AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
-            "GROUP BY p.id " +
-            "ORDER BY SELECT(COUNT(pc.post)) DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts p LEFT JOIN post_comments pc ON pc.post_id = p.id " +
+        "WHERE is_active = 1 AND p.moderation_status = 'ACCEPTED' " +
+        "AND p.time <= NOW() GROUP BY p.id ORDER BY COUNT(pc.post_id) DESC", nativeQuery = true)
     Page<Posts> findPopularPosts(Pageable pageable);
 
 
@@ -115,12 +112,9 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             "ORDER BY time ASC", nativeQuery = true)
     Page<Posts> findEarlyPosts(Pageable pageable);
 
-    @Query(value = "SELECT * FROM Posts p " +
-            "LEFT JOIN PostVotes pv ON pv.post = p.id" +
-            "WHERE p.isActive = 1 " +
-            "AND p.status = 'ACCEPTED' AND p.time <= NOW() " +
-            "GROUP BY p.id" +
-            "ORDER BY SELECT(COUNT(pv.post)) DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts p LEFT JOIN post_votes pv ON pv.post_id = p.id " +
+            "WHERE is_active = 1 AND p.moderation_status = 'ACCEPTED' " +
+            "AND p.time <= NOW() GROUP BY p.id ORDER BY COUNT(pv.post_id) DESC", nativeQuery = true)
     Page<Posts> findBestPosts(Pageable pageable);
     @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
             "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
