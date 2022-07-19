@@ -2,6 +2,7 @@ package main.service;
 
 import lombok.AllArgsConstructor;
 import main.api.response.*;
+import main.model.Posts;
 import main.model.Tags;
 import main.repositories.GlobalSettingsRepository;
 import main.repositories.PostsRepository;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -31,10 +35,10 @@ public class ApiGeneralService {
     public TagResponse getTagResponse(String query) {
         TagResponse tagResponse = new TagResponse();
         List<Tags> tags = tagsRepository.findAll();
-        ArrayList<TagExternal> tags1 = new ArrayList<>();
+        ArrayList<TagExternal> tagsDT = new ArrayList<>();
         //Пробуем собрать тэги содержащие query
         int weightMax = 0;
-        if (!(query == null)) {
+        if (query != null) {
             for (Tags tag : tags) {
                 TagExternal tagExt = new TagExternal();
                 tagExt.setName(tag.getName());
@@ -44,12 +48,12 @@ public class ApiGeneralService {
                 }
                 tagExt.setWeight(weight);
                 if (tag.getName().contains(query)) {
-                    tags1.add(tagExt);
+                    tagsDT.add(tagExt);
                 }
             }
         }
         //Если тэгов с query нет, берем все тэги
-        if (tags1.size() == 0) {
+        if (tagsDT.size() == 0) {
             weightMax = 0;
             for (Tags tag : tags) {
                 TagExternal tagExt = new TagExternal();
@@ -59,37 +63,39 @@ public class ApiGeneralService {
                     weightMax = weight;
                 }
                 tagExt.setWeight(weight);
-                tags1.add(tagExt);
+                tagsDT.add(tagExt);
             }
         }
         //Нормирование весов
-        for (TagExternal tag1 : tags1) {
-            tag1.setWeight((double) Math.round(tag1.getWeight() / weightMax * 1000) / 1000);
+        for (TagExternal tagDT : tagsDT) {
+            tagDT.setWeight((double) Math.round(tagDT.getWeight() / weightMax * 1000) / 1000);
         }
-        tagResponse.setTags(tags1);
+        tagResponse.setTags(tagsDT);
         return tagResponse;
     }
 
     public CalendarResponse getCalendar(String year) {
-        if(year==null){year= String.valueOf((new Date().getYear())+1900);
-        }
         CalendarResponse calendarResponse = new CalendarResponse();
-        List<PostCalendarResponse> item = new ArrayList<>();
-        calendarResponse.setYear(year);
-        List<String> datesByYear = postsRepository.findPostDatesByYear(year);
+        int requestYear = year==null ? LocalDateTime.now().getYear() : Integer.parseInt(year);
+        String[] allYearsPost = postsRepository.findAllYearValue();
+        calendarResponse.setYears(allYearsPost);
+        //DateTimeFormatter formatDate = DateTimeFormatter.ofPattern(config.getTimeDateFormat());
+        Map<String, Integer> dateCount = new HashMap<>();
+
+        List<String> datesByYear = postsRepository.findPostDatesByYear(String.valueOf(requestYear));
         for (String data:datesByYear){
-            PostCalendarResponse view = new PostCalendarResponse();
-            view.setDate(data);
-            view.setViewCount(postsRepository.findPostNumberByDate(data));
-            item.add(view);
+            dateCount.put(data,postsRepository.findPostNumberByDate(data));
         }
-        calendarResponse.setPosts(item);
+        calendarResponse.setPosts(dateCount);
 
         return calendarResponse;
     }
 
     public boolean isMultiUser() {
         return globalSettingsRepository.findSettingValue("MULTIUSER_MODE").equals("YES");
+    }
+    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
+        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 
 }

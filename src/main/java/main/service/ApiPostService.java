@@ -16,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -150,5 +152,8 @@ System.out.println("dtoID = "+postDto.getId()+" dtoUser = " +postDto.getUser().g
         postModeration.setPosts(moderatorPosts);
 
         return postModeration;
+    }
+    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
+        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 }

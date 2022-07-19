@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
@@ -36,8 +38,12 @@ public class CaptchaService {
         captchaResponse.setImage(image);
         return captchaResponse;
     }
+
     @Scheduled(fixedRate = HOUR_IN_MILLISECONDS)
-    public void deleteOldCaptchas(){
+    public void deleteOldCaptchas() {
         captchaCodesRepository.deleteAll(captchaCodesRepository.findOldCaptchas());
+    }
+    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
+        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 }

@@ -30,6 +30,12 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Page<Posts> findPostsByQuery(Pageable pageable, @Param("query") String query);
 
+    @Query(value = "SELECT DISTINCT DATE_FORMAT(posts.time, '%Y') FROM posts WHERE is_active = 1 " +
+            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
+            "GROUP BY DATE_FORMAT(posts.time, '%Y') ORDER BY DATE_FORMAT(posts.time, '%Y')",
+            nativeQuery = true)
+    String[] findAllYearValue();
+
         @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
                 "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
                 "AND DATE_FORMAT(posts.time, '%Y-%m-%d') = :date " +
@@ -94,12 +100,6 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             nativeQuery = true)
     Page<Posts> findPostsModeration(Pageable pageable);
 
-    @Query(value = "SELECT time FROM posts WHERE is_active = 1 " +
-            "AND moderation_status = 'ACCEPTED' AND time <= NOW() " +
-            "AND DATE_FORMAT(posts.time, '%YYYY%') = :year " +
-            "ORDER BY posts.time DESC",
-            nativeQuery = true)
-    Map<Date, Integer> сalendarDates(@Param("year") int year);
 
     @Query(value = "SELECT * FROM posts p LEFT JOIN post_comments pc ON pc.post_id = p.id " +
         "WHERE is_active = 1 AND p.moderation_status = 'ACCEPTED' " +

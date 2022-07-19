@@ -6,10 +6,11 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
 public class CalendarResponse {
-    private String year;
-    private List<PostCalendarResponse> posts;
+    private String[] years;
+    private Map<String, Integer> posts;
 }

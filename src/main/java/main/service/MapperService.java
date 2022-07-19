@@ -10,6 +10,9 @@ import main.model.Users;
 import main.repositories.PostsRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @Service
 @AllArgsConstructor
 public class MapperService {
@@ -62,5 +65,8 @@ public class MapperService {
         postToComment.setUser(convertUserToDto(pc.getUser()));
 
         return postToComment;
+    }
+    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
+        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 }

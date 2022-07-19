@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -85,5 +87,8 @@ public class ApiAuthService {
             regResponse.setErrors(errors);
         }
         return regResponse;
+    }
+    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
+        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 }
