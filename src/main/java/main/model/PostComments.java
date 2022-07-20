@@ -23,9 +23,6 @@ public class PostComments {
     @Column(name = "parent_id")
     private Integer parentId;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", insertable = false, updatable = false)
-//    private Posts postComment;
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = false)
@@ -35,9 +32,8 @@ public class PostComments {
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
-    //private int userId;
 
-    private Date time;
+    private LocalDateTime time;
 
     private String text;
 }

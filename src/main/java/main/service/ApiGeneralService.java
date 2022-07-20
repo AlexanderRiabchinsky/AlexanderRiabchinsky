@@ -94,8 +94,4 @@ public class ApiGeneralService {
     public boolean isMultiUser() {
         return globalSettingsRepository.findSettingValue("MULTIUSER_MODE").equals("YES");
     }
-    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
-        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
-    }
-
 }

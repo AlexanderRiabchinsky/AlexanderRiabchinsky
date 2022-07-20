@@ -43,7 +43,4 @@ public class CaptchaService {
     public void deleteOldCaptchas() {
         captchaCodesRepository.deleteAll(captchaCodesRepository.findOldCaptchas());
     }
-    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
-        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
-    }
 }

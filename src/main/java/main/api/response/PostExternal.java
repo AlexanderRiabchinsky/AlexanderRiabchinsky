@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class PostExternal {
     @Id
     private int id;
-    private LocalDateTime timestamp;
+    private long timestamp;
     private UserExternal user;
     private String title;
     private String announce;

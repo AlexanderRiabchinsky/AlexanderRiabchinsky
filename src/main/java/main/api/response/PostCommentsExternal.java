@@ -14,7 +14,7 @@ import java.util.Date;
 public class PostCommentsExternal {
     @Id
     private int id;
-    private Date timestamp;
+    private long timestamp;
     private String text;
 
     private UserExternal user;

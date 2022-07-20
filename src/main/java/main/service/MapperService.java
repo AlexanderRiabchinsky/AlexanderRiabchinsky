@@ -23,7 +23,7 @@ public class MapperService {
         PostExternal postDto = new PostExternal();
         postDto.setId(post.getId());
         postDto.setActive(post.getIsActive() == 1);
-        postDto.setTimestamp(post.getTimestamp()/*post.getTime().getTime() / 1000*/);// непонятная конструкция post.getTime().getTime() / 1000
+        postDto.setTimestamp(getTimestampFromLocalDateTime(post.getTimestamp()));
         postDto.setUser(convertUserToDto(post.getUser()));
         postDto.setTitle(post.getTitle());
         postDto.setAnnounce(post.getText());
@@ -41,7 +41,7 @@ public class MapperService {
     public UserExternal convertUserToDto(Users user){
         UserExternal userDto = new UserExternal();
         userDto.setId(user.getId());
-        userDto.setRegTime(user.getRegTime());
+        userDto.setRegTime(getTimestampFromLocalDateTime(user.getRegTime()));
         userDto.setPassword(user.getPassword());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
@@ -60,7 +60,7 @@ public class MapperService {
     public PostCommentsExternal convertCommentToDto(PostComments pc) {
         PostCommentsExternal postToComment = new PostCommentsExternal();
         postToComment.setId(pc.getId());
-        postToComment.setTimestamp(pc.getTime());
+        postToComment.setTimestamp(getTimestampFromLocalDateTime(pc.getTime()));
         postToComment.setText(pc.getText());
         postToComment.setUser(convertUserToDto(pc.getUser()));
 

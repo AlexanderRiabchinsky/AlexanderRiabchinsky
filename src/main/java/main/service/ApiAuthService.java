@@ -77,7 +77,7 @@ public class ApiAuthService {
             regResponse.setResult(true);
             Users user = new Users();
             user.setIsModerator((byte) 0);
-            user.setRegTime( new Date());
+            user.setRegTime( (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
             user.setName(name);
             user.setEmail(email);
             user.setPassword("0000");//Доделать после 4 этапа!!!BCRYPT.encode(password));
@@ -87,8 +87,5 @@ public class ApiAuthService {
             regResponse.setErrors(errors);
         }
         return regResponse;
-    }
-    public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
-        return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 }

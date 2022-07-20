@@ -1,6 +1,7 @@
 package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,10 +13,11 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class PostIDResponse {
 
     private int id;
-    private LocalDateTime timestamp;
+    private long timestamp;
     private boolean active;
 
     private UserExternal user;
@@ -31,6 +33,4 @@ public class PostIDResponse {
 
     private List<String> tags;
 
-    public PostIDResponse(int id, LocalDateTime timestamp, boolean active, UserExternal user, String title, String announce, int likeCount, int dislikeCount, int view, List<PostCommentsExternal> comments, List<String> tags) {
-    }
 }

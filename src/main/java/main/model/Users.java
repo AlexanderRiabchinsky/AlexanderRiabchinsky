@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Users {
     private int isModerator;
 
     @Column(name = "reg_time")
-    private Date regTime;
+    private LocalDateTime regTime;
 
     private String name;
 
@@ -36,7 +37,6 @@ public class Users {
     private String photo;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-  //  @JoinColumn(name = "user_id")
     private List<Posts> posts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

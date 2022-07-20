@@ -15,7 +15,7 @@ public class UserExternal {
     @Id
     private int id;
     @Column(name = "reg_time")
-    private Date regTime;
+    private long regTime;
     private String password;
     private String name;
     private String photo;
