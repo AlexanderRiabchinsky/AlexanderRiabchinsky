@@ -88,7 +88,7 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
         int findPostCommentsCount(@Param("postId") int postId);
 
 
-        @Query (value = "SELECT id FROM Users u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
+        @Query (value = "SELECT id FROM User u WHERE u=(SELECT p.user FROM Posts p WHERE p.id=:postId)")
         int getUserIdByPostId(@Param("postId") int postId);
 
         @Query ("SELECT title FROM Posts posts WHERE id=:postId")

@@ -1,13 +1,9 @@
 package main.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,7 +26,7 @@ public class PostComments {
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
 
     private LocalDateTime time;

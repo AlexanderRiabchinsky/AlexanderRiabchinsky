@@ -88,7 +88,7 @@ public class ApiPostService {
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
-    public PostIDResponse getPostById(int id/*, Principal principal*/) {
+    public PostIDResponse getPostById(int id, Principal principal) {
         Posts post = postsRepository.findById(id).get();
 
    //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
@@ -121,7 +121,7 @@ public class ApiPostService {
                 comments, tags);
     }
 
-    public PostResponse getModerationData(int offset, int limit, String status/*, Principal principal*/){
+    public PostResponse getModerationData(int offset, int limit, String status, Principal principal){
         PostResponse postModeration = new PostResponse();
         int moderatorId = 6;//getAuthorizedUser(principal).getId();
         List<Posts> posts = new ArrayList<>();

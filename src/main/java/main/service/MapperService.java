@@ -6,7 +6,7 @@ import main.api.response.PostExternal;
 import main.api.response.UserExternal;
 import main.model.PostComments;
 import main.model.Posts;
-import main.model.Users;
+import main.model.User;
 import main.repositories.PostsRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +38,7 @@ public class MapperService {
         return postDto;
     }
 
-    public UserExternal convertUserToDto(Users user){
+    public UserExternal convertUserToDto(User user){
         UserExternal userDto = new UserExternal();
         userDto.setId(user.getId());
         userDto.setRegTime(getTimestampFromLocalDateTime(user.getRegTime()));

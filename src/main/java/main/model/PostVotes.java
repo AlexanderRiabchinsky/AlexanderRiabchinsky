@@ -1,9 +1,7 @@
 package main.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -30,7 +28,7 @@ public class PostVotes {
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     private Date time;
 

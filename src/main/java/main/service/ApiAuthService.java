@@ -1,23 +1,14 @@
 package main.service;
 
-import com.github.cage.Cage;
-import com.github.cage.GCage;
-import com.github.cage.YCage;
 import lombok.AllArgsConstructor;
 import main.api.response.*;
 import main.model.CaptchaCodes;
-import main.model.Users;
+import main.model.User;
 import main.repositories.CaptchaCodesRepository;
-import main.repositories.UsersRepository;
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,19 +20,21 @@ public class ApiAuthService {
     public static final int MAX_LENGTH = 255;
     public MapperService mapperService;
 
-    private UsersRepository usersRepository;
+    private final UserRepository userRepository;
     private CaptchaCodesRepository captchaCodesRepository;
 
-    public AuthCheckResponse getAuthCheckResponse() {
+    public AuthCheckResponse getLoginResponse(String email) {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
-        int id = 2;
+        main.model.User currentUser  = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+        UserExternal userResponse = new UserExternal();
+        userResponse.setEmail(currentUser.getEmail());
+        userResponse.setName(currentUser.getName());
+        userResponse.setModeration(currentUser.getIsModerator()==1);
+        userResponse.setId(currentUser.getId());
 
-        Optional<Users> user = usersRepository.findById(id);
-        if(user.isPresent()){
-        authCheckResponse.setResult(user.get().getIsModerator()==1);
-        authCheckResponse.setUser(mapperService.convertUserToDto(user.get()));
-        }
-        else authCheckResponse.setResult(false);
+        authCheckResponse.setResult(true);
+        authCheckResponse.setUser(userResponse);
 
         return authCheckResponse;
     }
@@ -49,8 +42,8 @@ public class ApiAuthService {
     public RegResponse getRegResponse(RegRequest regRequest) {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
-        List<String> emails = usersRepository.findAll().stream()
-                .map(Users::getEmail).collect(Collectors.toList());
+        List<String> emails = userRepository.findAll().stream()
+                .map(User::getEmail).collect(Collectors.toList());
         String email = regRequest.getEmail();
         if (emails.contains(email)) {
             errors.put("email", "Этот e-mail уже зарегистрирован");
@@ -75,13 +68,13 @@ public class ApiAuthService {
         }
         if (errors.isEmpty()) {
             regResponse.setResult(true);
-            Users user = new Users();
+            User user = new User();
             user.setIsModerator((byte) 0);
             user.setRegTime( (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
             user.setName(name);
             user.setEmail(email);
             user.setPassword("0000");//Доделать после 4 этапа!!!BCRYPT.encode(password));
-            usersRepository.save(user);
+            userRepository.save(user);
         } else {
             regResponse.setResult(false);
             regResponse.setErrors(errors);

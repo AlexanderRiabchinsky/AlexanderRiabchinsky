@@ -1,14 +1,11 @@
 package main.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import main.model.Users;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Getter @Setter
 public class UserExternal {

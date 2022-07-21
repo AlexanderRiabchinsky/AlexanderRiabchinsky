@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "users")
-public class Users {
+public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,4 +44,8 @@ public class Users {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostComments> postComments;
+
+    public Role getRole(){
+        return isModerator==1 ? Role.MODERATOR : Role.USER;
+    }
 }

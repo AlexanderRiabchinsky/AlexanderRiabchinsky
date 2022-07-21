@@ -4,18 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 19.07.22 corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 20.07.22  3rd Stage Completed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/request/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/model/Permission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/security/SecurityUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/security/UserDetailsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostCommentsExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostCommentsExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/CaptchaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/CaptchaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +39,7 @@
         <option value="AnnotationType" />
         <option value="com.haulmont.jpb.JpaEntity" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -81,6 +92,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/db/migration" />
@@ -88,6 +100,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="main.api.response" />
       <recent name="model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -135,13 +148,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00002" summary="version 21.01.2022">
-      <created>1643006411413</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1643006411414</updated>
     </task>
     <task id="LOCAL-00003" summary="version 21.01.2022">
       <created>1643006441596</created>
@@ -479,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658223837416</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="version as of 20.07.22  3rd Stage Completed">
+      <created>1658298528719</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1658298528720</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,7 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 09.06.22" />
     <MESSAGE value="version as of 10.06.22" />
     <MESSAGE value="version as of 10.06.22 corrected" />
     <MESSAGE value="version as of 12.06.22 corrected" />
@@ -521,6 +533,7 @@
     <MESSAGE value="version as of 18.07.22 corrected" />
     <MESSAGE value="version as of 18.07.22 (2) corrected" />
     <MESSAGE value="version as of 19.07.22 corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 19.07.22 corrected" />
+    <MESSAGE value="version as of 20.07.22  3rd Stage Completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 20.07.22  3rd Stage Completed" />
   </component>
 </project>

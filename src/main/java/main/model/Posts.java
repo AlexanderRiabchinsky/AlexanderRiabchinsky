@@ -1,9 +1,7 @@
 package main.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import main.api.response.ModerationStatus;
 
 import javax.persistence.*;
@@ -35,7 +33,7 @@ public class Posts{
 
     @ManyToOne(fetch = FetchType.LAZY)//optional = false,cascade = CascadeType.ALL
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @Column(name = "time")
     private LocalDateTime timestamp;
