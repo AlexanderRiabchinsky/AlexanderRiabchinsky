@@ -6,6 +6,7 @@ import main.repositories.UserRepository;
 import main.service.ApiAuthService;
 import main.service.ApiGeneralService;
 import main.service.CaptchaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +29,7 @@ public class ApiAuthController {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
+    @Autowired
     public ApiAuthController(ApiAuthService apiAuthService, SettingsResponse settingsResponse, CaptchaService captchaService, ApiGeneralService apiGeneralService, AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.apiAuthService = apiAuthService;
         this.settingsResponse = settingsResponse;
