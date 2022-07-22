@@ -24,9 +24,10 @@ public class ApiPostController {
     @PreAuthorize("hasAuthority('user:write')")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam (required = false, defaultValue = "recent") String mode) {
+                                               @RequestParam (required = false, defaultValue = "recent") String mode,
+                                               @RequestParam (required = false) Principal principal) {
 
-        return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode));
+        return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode,principal));
     }
 
     @GetMapping("/post/search")
@@ -59,5 +60,13 @@ public class ApiPostController {
                                                         @RequestParam (required = false) String status,
                                                         @RequestParam (required = false) Principal principal){return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
     }
+
+    @GetMapping("/post/my")
+    public ResponseEntity<PostResponse> postMy(@RequestParam(defaultValue = "0") int offset,
+                                                        @RequestParam(defaultValue = "10") int limit,
+                                                        @RequestParam (required = false) String status,
+                                                        @RequestParam (required = false) Principal principal){return ResponseEntity.ok(postService.getMyPosts(offset, limit, status, principal));
+    }
+
 
 }

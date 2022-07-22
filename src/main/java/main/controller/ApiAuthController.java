@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @RestController
@@ -48,6 +49,11 @@ public class ApiAuthController {
 
         return ResponseEntity.ok(apiAuthService.getLoginResponse(user.getUsername()));
 
+    }
+    @GetMapping("/logout")
+    public ResponseEntity<ResultResponse> logout(Principal principal) {
+        SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+        return ResponseEntity.ok(apiAuthService.getLogoutResponse());
     }
 
 

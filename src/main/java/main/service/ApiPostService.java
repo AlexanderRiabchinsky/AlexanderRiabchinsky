@@ -8,11 +8,13 @@ import main.model.Tags;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
+import main.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -30,6 +32,7 @@ public class ApiPostService {
     private ApiAuthService apiAuthService;
   //  @Autowired
     private PostsRepository postsRepository;
+    private final UserRepository userRepository;
     private PostCommentsRepository postCommentsRepository;
     private TagsRepository tagsRepository;
 
@@ -44,7 +47,7 @@ public class ApiPostService {
         return postSearchResponse;
     }
 
-    public PostResponse getPostByMode   (int offset, int limit, String mode) {
+    public PostResponse getPostByMode   (int offset, int limit, String mode,Principal principal) {
         PostResponse postByMode = new PostResponse();
         List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -152,5 +155,38 @@ public class ApiPostService {
         postModeration.setPosts(moderatorPosts);
 
         return postModeration;
+    }
+
+    public PostResponse getMyPosts(int offset, int limit, String status, Principal principal){
+        PostResponse myPosts = new PostResponse();
+//        int moderatorId = 6;//getAuthorizedUser(principal).getId();
+//        List<Posts> posts = new ArrayList<>();
+//        Pageable pageable = PageRequest.of(offset / limit, limit);
+//        Page<Posts> page;
+//        switch (status) {
+//            case "accepted":
+//                page = postsRepository.findAcceptedPostsByModerator(pageable, moderatorId);
+//                break;
+//            case "declined":
+//                page = postsRepository.findDeclinedPostsByModerator(pageable, moderatorId);
+//                break;
+//            default:
+//            case "new":    page = postsRepository.findNewPosts(pageable);
+//        }
+//        posts.addAll(page.getContent());
+//        postModeration.setCount(page.getTotalElements());
+//        List<PostExternal> moderatorPosts = posts.stream()
+//                .map(mapperService::convertPostToDto)
+//                /*         .map(p -> new PostExternal(p.getId(), p.getTimestamp(),
+//                                 p.getTitle(), p.getAnnounce(), p.getLikeCount(),
+//                                 p.getDislikeCount(), p.getCommentCount(), p.getViewCount(), p.getUser()))*/
+//                .collect(Collectors.toList());
+//
+//        postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+//                .collect(Collectors.toList()));
+//
+//        postModeration.setPosts(moderatorPosts);
+
+        return myPosts;
     }
 }

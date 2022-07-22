@@ -38,6 +38,11 @@ public class ApiAuthService {
 
         return authCheckResponse;
     }
+    public ResultResponse getLogoutResponse(){
+        ResultResponse resultResponse = new ResultResponse();
+        resultResponse.setResult(true);
+        return resultResponse;
+    }
 
     public RegResponse getRegResponse(RegRequest regRequest) {
         RegResponse regResponse = new RegResponse();

@@ -43,8 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin().disable()
-         //       .logout().logoutSuccessUrl()
-                .httpBasic();
+       //         .logout().logoutSuccessUrl("/login")
+                .httpBasic()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login");
     }
 
 //    @Bean
