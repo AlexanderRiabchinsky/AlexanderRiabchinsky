@@ -5,6 +5,7 @@ import main.api.response.*;
 import main.model.PostComments;
 import main.model.Posts;
 import main.model.Tags;
+import main.model.User;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -75,7 +75,6 @@ public class ApiPostService {
         PostResponse postByDateResponse = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page = postsRepository.findPostsByDate(pageable, date);
-        System.out.println("stream = "+page.getContent().stream());
         postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByDateResponse.setCount(page.getTotalElements());
@@ -94,7 +93,7 @@ public class ApiPostService {
     public PostIDResponse getPostById(int id, Principal principal) {
         Posts post = postsRepository.findById(id).get();
 
-   //     AuthCheckResponse authCheckResponse = authCheckService.getAuthCheck(principal);
+   //     AuthCheckResponse authCheckResponse = apiAuthService.getAuthCheck(principal);
         int view;
       /*  if (authCheckResponse.isResult()) {
             UserExternal user = authCheckResponse.getUser();
@@ -126,7 +125,7 @@ public class ApiPostService {
 
     public PostResponse getModerationData(int offset, int limit, String status, Principal principal){
         PostResponse postModeration = new PostResponse();
-        int moderatorId = 6;//getAuthorizedUser(principal).getId();
+        int moderatorId = getAuthorizedUser(principal).getId();
         List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page;
@@ -188,5 +187,10 @@ public class ApiPostService {
 //        postModeration.setPosts(moderatorPosts);
 
         return myPosts;
+    }
+
+    private User getAuthorizedUser(Principal principal){
+        User user = userRepository.findByEmail(principal.getName()).get();
+        return user;
     }
 }

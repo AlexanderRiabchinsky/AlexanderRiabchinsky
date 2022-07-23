@@ -49,9 +49,8 @@ public class ApiPostController {
                                               @RequestParam (required = false) String tag) {return ResponseEntity.ok(postService.getPostByTag(offset, limit, tag));
     }
 
-    @GetMapping("/post/{ID}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable("ID") int ID,
-                                                      @RequestParam (required = false) Principal principal) {return ResponseEntity.ok(postService.getPostById(ID,principal));
+    @GetMapping("/post/{id}")
+    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable int id, Principal principal) {return ResponseEntity.ok(postService.getPostById(id,principal));
     }
 
     @GetMapping("/post/moderation")

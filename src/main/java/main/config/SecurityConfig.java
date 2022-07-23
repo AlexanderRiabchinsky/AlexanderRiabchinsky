@@ -37,17 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
-//                .antMatchers(HttpMethod.GET,"/api/post").hasAuthority(Permission.USER.getPermission())
-//                .antMatchers(HttpMethod.GET,"/api/post/search*").hasAuthority(Permission.MODERATE.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin().disable()
-       //         .logout().logoutSuccessUrl("/login")
-                .httpBasic()
-                .and()
                 .logout()
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/login")
+                .and()
+                .httpBasic().disable();
     }
 
 //    @Bean
