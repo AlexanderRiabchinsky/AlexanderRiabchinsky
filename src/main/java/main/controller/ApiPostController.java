@@ -55,14 +55,14 @@ public class ApiPostController {
     public ResponseEntity<PostResponse> moderationCheck(@RequestParam(defaultValue = "0") int offset,
                                                         @RequestParam(defaultValue = "10") int limit,
                                                         @RequestParam (required = false) String status,
-                                                        @RequestParam (required = false) Principal principal){return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
+                                                        Principal principal){return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
     }
 
     @GetMapping("/post/my")
     public ResponseEntity<PostResponse> postMy(@RequestParam(defaultValue = "0") int offset,
                                                         @RequestParam(defaultValue = "10") int limit,
                                                         @RequestParam (required = false) String status,
-                                                        @RequestParam (required = false) Principal principal){return ResponseEntity.ok(postService.getMyPosts(offset, limit, status, principal));
+                                                        Principal principal){return ResponseEntity.ok(postService.getMyPosts(offset, limit, status, principal));
     }
 
 

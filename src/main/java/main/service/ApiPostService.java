@@ -158,6 +158,7 @@ public class ApiPostService {
 
     public PostResponse getMyPosts(int offset, int limit, String status, Principal principal){
         PostResponse myPosts = new PostResponse();
+        System.out.println("my principal = "+principal.getName());
         int myId = getAuthorizedUser(principal).getId();
             List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -194,7 +195,7 @@ public class ApiPostService {
         User user=new User();
         if(principal !=null){
         user = userRepository.findByEmail(principal.getName()).get();}
-        System.out.println(user);
+        System.out.println(user.getName());
         return user;
     }
     public AuthCheckResponse getAuthCheck(Principal principal) {
