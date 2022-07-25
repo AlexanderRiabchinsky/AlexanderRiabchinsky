@@ -24,10 +24,8 @@ public class ApiPostController {
     @PreAuthorize("hasAuthority('user:write')")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam (required = false, defaultValue = "recent") String mode,
-                                               @RequestParam (required = false) Principal principal) {
-
-        return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode,principal));
+                                               @RequestParam (required = false, defaultValue = "recent") String mode) {
+        return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode));
     }
 
     @GetMapping("/post/search")

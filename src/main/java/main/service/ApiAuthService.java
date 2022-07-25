@@ -7,6 +7,7 @@ import main.model.User;
 import main.repositories.CaptchaCodesRepository;
 import main.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
@@ -22,6 +23,7 @@ public class ApiAuthService {
 
     private final UserRepository userRepository;
     private CaptchaCodesRepository captchaCodesRepository;
+    PasswordEncoder passwordEncoder;
 
     public AuthCheckResponse getLoginResponse(String email) {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
@@ -78,7 +80,7 @@ public class ApiAuthService {
             user.setRegTime( (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
             user.setName(name);
             user.setEmail(email);
-            user.setPassword("0000");//Доделать после 4 этапа!!!BCRYPT.encode(password));
+            user.setPassword(passwordEncoder.encode(password));//Доделать после 4 этапа!!!BCRYPT.encode(password));
             userRepository.save(user);
         } else {
             regResponse.setResult(false);

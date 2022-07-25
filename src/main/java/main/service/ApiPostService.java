@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -30,7 +31,6 @@ import java.util.stream.Collectors;
 public class ApiPostService {
     private MapperService mapperService;
     private ApiAuthService apiAuthService;
-  //  @Autowired
     private PostsRepository postsRepository;
     private final UserRepository userRepository;
     private PostCommentsRepository postCommentsRepository;
@@ -47,7 +47,7 @@ public class ApiPostService {
         return postSearchResponse;
     }
 
-    public PostResponse getPostByMode   (int offset, int limit, String mode,Principal principal) {
+    public PostResponse getPostByMode   (int offset, int limit, String mode) {
         PostResponse postByMode = new PostResponse();
         List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -63,7 +63,7 @@ public class ApiPostService {
                 page = postsRepository.findBestPosts(pageable);
                 break;
             default:
-                page = postsRepository.findRecentPosts(pageable);
+            case "recent":    page = postsRepository.findRecentPosts(pageable);
         }
         posts.addAll(page.getContent());
         postByMode.setCount(page.getTotalElements());
@@ -93,9 +93,9 @@ public class ApiPostService {
     public PostIDResponse getPostById(int id, Principal principal) {
         Posts post = postsRepository.findById(id).get();
 
-   //     AuthCheckResponse authCheckResponse = apiAuthService.getAuthCheck(principal);
+        AuthCheckResponse authCheckResponse = getAuthCheck(principal);
         int view;
-      /*  if (authCheckResponse.isResult()) {
+        if (authCheckResponse.isResult()) {
             UserExternal user = authCheckResponse.getUser();
             if (user.isModeration() || user.getId() == post.getUser().getId()) {
                 view = post.getViewCount();
@@ -104,7 +104,7 @@ public class ApiPostService {
                 post.setViewCount(view);
                 postsRepository.save(post);
             }
-        } else */{
+        } else {
             view = post.getViewCount() + 1;
             post.setViewCount(view);
             postsRepository.save(post);
@@ -158,39 +158,61 @@ public class ApiPostService {
 
     public PostResponse getMyPosts(int offset, int limit, String status, Principal principal){
         PostResponse myPosts = new PostResponse();
-//        int moderatorId = 6;//getAuthorizedUser(principal).getId();
-//        List<Posts> posts = new ArrayList<>();
-//        Pageable pageable = PageRequest.of(offset / limit, limit);
-//        Page<Posts> page;
-//        switch (status) {
-//            case "accepted":
-//                page = postsRepository.findAcceptedPostsByModerator(pageable, moderatorId);
-//                break;
-//            case "declined":
-//                page = postsRepository.findDeclinedPostsByModerator(pageable, moderatorId);
-//                break;
-//            default:
-//            case "new":    page = postsRepository.findNewPosts(pageable);
-//        }
-//        posts.addAll(page.getContent());
-//        postModeration.setCount(page.getTotalElements());
-//        List<PostExternal> moderatorPosts = posts.stream()
-//                .map(mapperService::convertPostToDto)
-//                /*         .map(p -> new PostExternal(p.getId(), p.getTimestamp(),
-//                                 p.getTitle(), p.getAnnounce(), p.getLikeCount(),
-//                                 p.getDislikeCount(), p.getCommentCount(), p.getViewCount(), p.getUser()))*/
-//                .collect(Collectors.toList());
-//
-//        postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
-//                .collect(Collectors.toList()));
-//
-//        postModeration.setPosts(moderatorPosts);
+        int myId = getAuthorizedUser(principal).getId();
+            List<Posts> posts = new ArrayList<>();
+        Pageable pageable = PageRequest.of(offset / limit, limit);
+        Page<Posts> page;
+        switch (status) {
+            case "inactive":
+                page = postsRepository.findMyInactivePosts(pageable, myId);
+                break;
+            case "pending":
+                page = postsRepository.findMyPendingPosts(pageable, myId);
+                break;
+            case "declined":
+                page = postsRepository.findMyDeclinedPosts(pageable, myId);
+                break;
+            default:
+            case "published":
+                page = postsRepository.findMyPublishedPosts(pageable, myId);
+        }
+        posts.addAll(page.getContent());
+        myPosts.setCount(page.getTotalElements());
+        List<PostExternal> moderatorPosts = posts.stream()
+                .map(mapperService::convertPostToDto)
+                .collect(Collectors.toList());
+
+        myPosts.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+                .collect(Collectors.toList()));
+
+        myPosts.setPosts(moderatorPosts);
 
         return myPosts;
     }
 
     private User getAuthorizedUser(Principal principal){
-        User user = userRepository.findByEmail(principal.getName()).get();
+        User user=new User();
+        if(principal !=null){
+        user = userRepository.findByEmail(principal.getName()).get();}
+        System.out.println(user);
         return user;
+    }
+    public AuthCheckResponse getAuthCheck(Principal principal) {
+        if (principal == null) {
+            AuthCheckResponse authCheck = new AuthCheckResponse();
+            authCheck.setResult(false);
+            return authCheck;
+        }
+        return getResponse(principal.getName());
+    }
+
+    private AuthCheckResponse getResponse(String email) {
+        main.model.User currentUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found"));
+        UserExternal userDto = mapperService.convertUserToDto(currentUser);
+        AuthCheckResponse authCheck = new AuthCheckResponse();
+        authCheck.setResult(true);
+        authCheck.setUser(userDto);
+        return authCheck;
     }
 }

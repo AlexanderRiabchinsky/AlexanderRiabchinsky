@@ -142,4 +142,26 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
     @Query(value = "SELECT COUNT(*) FROM posts " +
             "WHERE moderation_status = 'NEW' AND is_active = 1",nativeQuery = true)
     int findUnmoderatedPostsCount();
+
+    @Query(value = "SELECT * FROM posts WHERE is_active = 0 " +
+            "AND user_id =:myId", nativeQuery = true)
+    Page<Posts> findMyInactivePosts(Pageable pageable,@Param("myId") int myId);
+
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND (moderation_status = 'NEW' AND user_id =:myId) " +
+            "AND time <= NOW() ORDER BY time DESC",
+            nativeQuery = true)
+    Page<Posts> findMyPendingPosts(Pageable pageable,@Param("myId") int myId);
+
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND (moderation_status = 'DECLINED' AND user_id =:myId) " +
+            "AND time <= NOW() ORDER BY time DESC",
+            nativeQuery = true)
+    Page<Posts> findMyDeclinedPosts(Pageable pageable,@Param("myId") int myId);
+
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND (moderation_status = 'ACCEPTED' AND user_id =:myId) " +
+            "AND time <= NOW() ORDER BY time DESC",
+            nativeQuery = true)
+    Page<Posts> findMyPublishedPosts(Pageable pageable,@Param("myId") int myId);
 }
