@@ -29,7 +29,7 @@ public class Posts{
 
 
     @Column(name = "moderator_id")
-    private int moderatorId;
+    private Integer moderatorId;
 
     @ManyToOne(fetch = FetchType.LAZY)//optional = false,cascade = CascadeType.ALL
     @JoinColumn(name = "user_id", nullable = false)

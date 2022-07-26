@@ -94,4 +94,7 @@ public class ApiGeneralService {
     public boolean isMultiUser() {
         return globalSettingsRepository.findSettingValue("MULTIUSER_MODE").equals("YES");
     }
+    public boolean isPostPremoderated() {
+        return globalSettingsRepository.findSettingValue("POST_PREMODERATION").equals("YES");
+    }
 }

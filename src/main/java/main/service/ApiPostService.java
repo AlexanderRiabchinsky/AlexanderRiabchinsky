@@ -2,10 +2,7 @@ package main.service;
 
 import lombok.AllArgsConstructor;
 import main.api.response.*;
-import main.model.PostComments;
-import main.model.Posts;
-import main.model.Tags;
-import main.model.User;
+import main.model.*;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
@@ -19,22 +16,26 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.ZoneOffset;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ApiPostService {
-    private MapperService mapperService;
-    private ApiAuthService apiAuthService;
-    private PostsRepository postsRepository;
+    private final MapperService mapperService;
+    private final ApiAuthService apiAuthService;
+    private final PostsRepository postsRepository;
     private final UserRepository userRepository;
-    private PostCommentsRepository postCommentsRepository;
-    private TagsRepository tagsRepository;
+    private final PostCommentsRepository postCommentsRepository;
+    private final TagsRepository tagsRepository;
+    private final ApiGeneralService apiGeneralService;
+
+    public static final int TITLE_LENGTH = 3;
+    public static final int TEXT_LENGTH = 50;
 
     public PostResponse getPostSearch(int offset,int limit,String query) {
         PostResponse postSearchResponse = new PostResponse();
@@ -143,9 +144,6 @@ public class ApiPostService {
         postModeration.setCount(page.getTotalElements());
         List<PostExternal> moderatorPosts = posts.stream()
                 .map(mapperService::convertPostToDto)
-       /*         .map(p -> new PostExternal(p.getId(), p.getTimestamp(),
-                        p.getTitle(), p.getAnnounce(), p.getLikeCount(),
-                        p.getDislikeCount(), p.getCommentCount(), p.getViewCount(), p.getUser()))*/
                 .collect(Collectors.toList());
 
         postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
@@ -158,7 +156,6 @@ public class ApiPostService {
 
     public PostResponse getMyPosts(int offset, int limit, String status, Principal principal){
         PostResponse myPosts = new PostResponse();
-        System.out.println("my principal = "+principal.getName());
         int myId = getAuthorizedUser(principal).getId();
             List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -195,7 +192,6 @@ public class ApiPostService {
         User user=new User();
         if(principal !=null){
         user = userRepository.findByEmail(principal.getName()).get();}
-        System.out.println(user.getName());
         return user;
     }
     public AuthCheckResponse getAuthCheck(Principal principal) {
@@ -215,5 +211,42 @@ public class ApiPostService {
         authCheck.setResult(true);
         authCheck.setUser(userDto);
         return authCheck;
+    }
+
+    public RegResponse getRegPostResponse(RegPostRequest regRequest,Principal principal) {
+        RegResponse regResponse = new RegResponse();
+        Map<String, String> errors = new HashMap<>();
+        String title = regRequest.getTitle();
+        if(title.length()<TITLE_LENGTH){
+            errors.put("title","Название поста короче 3 символов");
+        }
+        String text = regRequest.getText();
+        if(text.length()<TEXT_LENGTH){
+            errors.put("text","Текст поста короче 50 символов");
+        }
+        if (errors.isEmpty()) {
+            regResponse.setResult(true);
+            Posts post = new Posts();
+            post.setIsActive(regRequest.getActive());
+            ModerationStatus status = ((!apiGeneralService.isPostPremoderated()|getAuthorizedUser(principal).getIsModerator()==1)&regRequest.getActive()==1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
+            post.setStatus(status);
+            post.setModeratorId((getAuthorizedUser(principal).getIsModerator()==1)? getAuthorizedUser(principal).getId(): null);
+            post.setUser(getAuthorizedUser(principal));
+
+            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
+            int result = localDateTime.compareTo(LocalDateTime.now());
+            LocalDateTime time = (result<0)? LocalDateTime.now():localDateTime;
+            post.setTimestamp(time);
+
+            post.setTitle(title);
+            post.setText(text);
+            post.setViewCount(0);
+            postsRepository.save(post);
+            for(Tags tag:regRequest.getTags()){tagsRepository.save(tag);}
+        } else {
+            regResponse.setResult(false);
+            regResponse.setErrors(errors);
+        }
+        return regResponse;
     }
 }
