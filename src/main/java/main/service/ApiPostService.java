@@ -249,4 +249,41 @@ public class ApiPostService {
         }
         return regResponse;
     }
+    public RegResponse getUpdatePostResponse(int id,RegPostRequest regRequest,Principal principal) {
+        RegResponse regResponse = new RegResponse();
+        Map<String, String> errors = new HashMap<>();
+        String title = regRequest.getTitle();
+        if(title.length()<TITLE_LENGTH){
+            errors.put("title","Название поста короче 3 символов");
+        }
+        String text = regRequest.getText();
+        if(text.length()<TEXT_LENGTH){
+            errors.put("text","Текст поста короче 50 символов");
+        }
+        if (errors.isEmpty()) {
+            regResponse.setResult(true);
+            Posts post = new Posts();
+            post.setId(id);
+            post.setIsActive(regRequest.getActive());
+            ModerationStatus status = ((!apiGeneralService.isPostPremoderated()|getAuthorizedUser(principal).getIsModerator()==1)&regRequest.getActive()==1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
+            post.setStatus(status);
+            post.setModeratorId((getAuthorizedUser(principal).getIsModerator()==1)? getAuthorizedUser(principal).getId(): null);
+            post.setUser(getAuthorizedUser(principal));
+
+            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
+            int result = localDateTime.compareTo(LocalDateTime.now());
+            LocalDateTime time = (result<0)? LocalDateTime.now():localDateTime;
+            post.setTimestamp(time);
+
+            post.setTitle(title);
+            post.setText(text);
+            post.setViewCount(0);
+            postsRepository.save(post);
+            for(Tags tag:regRequest.getTags()){tagsRepository.save(tag);}
+        } else {
+            regResponse.setResult(false);
+            regResponse.setErrors(errors);
+        }
+        return regResponse;
+    }
 }

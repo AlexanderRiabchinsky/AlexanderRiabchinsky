@@ -75,5 +75,12 @@ public class ApiPostController {
         return ResponseEntity.ok(postService.getRegPostResponse(regPostRequest,principal));
     }
 
+  @PreAuthorize("hasAuthority('user:write')")
+  @PutMapping("/post/{id}")
+  public ResponseEntity<RegResponse> updatePost(@PathVariable int id,
+                                                @RequestBody RegPostRequest regPostRequest,
+                                                Principal principal) {
+    return ResponseEntity.ok(postService.getUpdatePostResponse(id, regPostRequest,principal));
+  }
 
 }
