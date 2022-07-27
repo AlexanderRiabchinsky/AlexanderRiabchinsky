@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SetCommentRequest {
-    private Integer parent_id;
+    private int parent_id=1;
     private int post_id;
     private String text;
 }

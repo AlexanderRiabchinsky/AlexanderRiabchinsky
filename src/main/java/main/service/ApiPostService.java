@@ -185,7 +185,7 @@ public class ApiPostService {
         return myPosts;
     }
 
-    private User getAuthorizedUser(Principal principal){
+    public User getAuthorizedUser(Principal principal){
         User user=new User();
         if(principal !=null){
         user = userRepository.findByEmail(principal.getName()).get();}

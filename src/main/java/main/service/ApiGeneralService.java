@@ -1,6 +1,7 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
+import main.api.request.ModerationRequest;
 import main.api.request.RegPostRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
@@ -9,6 +10,7 @@ import main.model.Tags;
 import main.repositories.GlobalSettingsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
+import main.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +37,7 @@ public class ApiGeneralService {
     private final TagsRepository tagsRepository;
     private final PostsRepository postsRepository;
     private final GlobalSettingsRepository globalSettingsRepository;
+    private final UserRepository userRepository;
 
     public SettingsResponse getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
@@ -190,4 +193,24 @@ public class ApiGeneralService {
             }
             return sb.toString();
     }
+    public ResultResponse moderation(ModerationRequest moderationRequest,
+                                     Principal principal){
+        ResultResponse response = new ResultResponse();
+        int moderatorAuth = userRepository.findByEmail(principal.getName()).get().getIsModerator();
+        int moderatorId = userRepository.findByEmail(principal.getName()).get().getId();
+        Optional<Posts> postToModerate = postsRepository.findById(moderationRequest.getPost_id());
+        if (!postToModerate.isPresent()|| (!moderationRequest.getDecision().equals("accept")&&!moderationRequest.getDecision().equals("decline"))||!(moderatorAuth==1)){
+            response.setResult(false);
+        } else {
+            Posts post = postToModerate.get();
+            if(moderationRequest.getDecision().equals("accept")){post.setStatus(ModerationStatus.ACCEPTED);}
+            if(moderationRequest.getDecision().equals("declined")){post.setStatus(ModerationStatus.DECLINED);}
+            post.setModeratorId(moderatorId);
+            postsRepository.save(post);
+            response.setResult(true);
+        }
+
+        return response;
+    }
+
 }

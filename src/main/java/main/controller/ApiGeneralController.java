@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.api.request.ModerationRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
 import main.service.ApiGeneralService;
@@ -53,5 +54,12 @@ public class ApiGeneralController {
     public ResponseEntity<RegResponse> setComment(@RequestBody SetCommentRequest setCommentRequest,
                                                  Principal principal) {
         return ResponseEntity.ok(generalService.comment(setCommentRequest,principal));
+    }
+
+    @PreAuthorize("hasAuthority('user:moderate')")
+    @PostMapping("/api/moderation")
+    public ResponseEntity<ResultResponse> moderation(@RequestBody ModerationRequest moderationRequest,
+                                                     Principal principal) {
+        return ResponseEntity.ok(generalService.moderation(moderationRequest,principal));
     }
 }
