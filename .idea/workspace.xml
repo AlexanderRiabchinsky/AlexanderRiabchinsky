@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 26.07.22  corrected /post/{id}">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/request/SetCommentRequest.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 27.07.22  corrected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RegPostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RegRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/TagsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/TagsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
     </list>
@@ -140,13 +130,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00011" summary="version 23.03.22">
-      <created>1648030071278</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1648030071278</updated>
     </task>
     <task id="LOCAL-00012" summary="transaction version as of 26.03.22">
       <created>1648272827262</created>
@@ -484,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658830665376</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="version as of 27.07.22  corrected">
+      <created>1658910296955</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1658910296955</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +491,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 04.07.22 corrected" />
     <MESSAGE value="version as of 04.07.22 (2) corrected" />
     <MESSAGE value="version as of 06.07.22 corrected" />
     <MESSAGE value="version as of 07.07.22 corrected" />
@@ -526,6 +515,7 @@
     <MESSAGE value="version as of 25.07.22  corrected" />
     <MESSAGE value="version as of 26.07.22  corrected" />
     <MESSAGE value="version as of 26.07.22  corrected /post/{id}" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 26.07.22  corrected /post/{id}" />
+    <MESSAGE value="version as of 27.07.22  corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 27.07.22  corrected" />
   </component>
 </project>

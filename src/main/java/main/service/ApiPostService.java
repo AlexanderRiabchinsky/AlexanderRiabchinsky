@@ -282,11 +282,11 @@ public class ApiPostService {
             post.setText(text);
             post.setViewCount(0);
 
-            List<Tags> tags = regRequest.getTags().stream()
-                    .map(t -> tagsRepository.findTagByName(t)
-                            .orElseThrow(NoSuchElementException::new))
-                    .collect(Collectors.toList());
-            post.setTags(tags);
+//            List<Tags> tags = regRequest.getTags().stream()
+//                    .map(t -> tagsRepository.findTagByName(t)
+//                            .orElseThrow(NoSuchElementException::new))
+//                    .collect(Collectors.toList());
+//            post.setTags(tags);
             postsRepository.save(post);
 
         } else {

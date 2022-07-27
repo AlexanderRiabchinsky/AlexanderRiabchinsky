@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -98,12 +102,36 @@ public class ApiGeneralService {
         return calendarResponse;
     }
 
-    public RegResponse saveImage(MultipartFile photo){
+    public RegResponse saveImage(MultipartFile photo) throws IOException {
         RegResponse response = new RegResponse();
         String dir1 = gen(2);
         String dir2 = gen(2);
         String dir3 = gen(2);
-        String fileName = gen(5);
+        String newFileName = gen(5);
+        String[] fileName = Objects.requireNonNull(photo.getOriginalFilename()).split(".");
+        long fileLenth = photo.getSize();
+        Map<String, String> errors = new HashMap<>();
+        if (!fileName[1].equals("jpg")||fileName[1].equals("png")){
+            errors.put("type","Отправлен файл не формата изображение jpg, png");
+        }
+        if (fileLenth>30720){
+            errors.put("size","Размер файла превышает допустимый размер");
+        }
+
+        if (errors.isEmpty()) {
+            String dirName = "/upload/" + dir1+"/"+dir2+"/"+dir3;
+            newFileName = dirName+"/"+newFileName+"."+fileName[1];
+            File dir = new File(dirName);
+            if(!dir.exists()) {
+                dir.mkdir();
+            }
+            BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
+            File outputfile = new File(newFileName);
+            ImageIO.write(bufferedImage, fileName[1], outputfile);
+        } else {
+            response.setResult(false);
+            response.setErrors(errors);
+        }
 
         return response;
     }
