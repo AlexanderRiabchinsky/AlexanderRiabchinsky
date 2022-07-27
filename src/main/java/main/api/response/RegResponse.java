@@ -10,5 +10,6 @@ import java.util.Map;
 @Setter
 public class RegResponse {
     private boolean result;
+    int id;
     private Map<String,String>errors;
 }

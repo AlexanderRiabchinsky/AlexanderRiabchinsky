@@ -1,24 +1,21 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
+import main.api.request.RegPostRequest;
 import main.api.response.*;
 import main.model.*;
 import main.repositories.PostCommentsRepository;
 import main.repositories.PostsRepository;
 import main.repositories.TagsRepository;
 import main.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -213,7 +210,7 @@ public class ApiPostService {
         return authCheck;
     }
 
-    public RegResponse getRegPostResponse(RegPostRequest regRequest,Principal principal) {
+    public RegResponse getRegPostResponse(RegPostRequest regRequest, Principal principal) {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         String title = regRequest.getTitle();
@@ -241,8 +238,14 @@ public class ApiPostService {
             post.setTitle(title);
             post.setText(text);
             post.setViewCount(0);
+
+//            List<Tags> tags = regRequest.getTags().stream()
+//                    .map(t -> tagsRepository.findTagByName(t)
+//                            .orElseThrow(NoSuchElementException::new))
+//                    .collect(Collectors.toList());
+//            post.setTags(tags);
+
             postsRepository.save(post);
-            for(Tags tag:regRequest.getTags()){tagsRepository.save(tag);}
         } else {
             regResponse.setResult(false);
             regResponse.setErrors(errors);
@@ -278,12 +281,21 @@ public class ApiPostService {
             post.setTitle(title);
             post.setText(text);
             post.setViewCount(0);
+
+            List<Tags> tags = regRequest.getTags().stream()
+                    .map(t -> tagsRepository.findTagByName(t)
+                            .orElseThrow(NoSuchElementException::new))
+                    .collect(Collectors.toList());
+            post.setTags(tags);
             postsRepository.save(post);
-            for(Tags tag:regRequest.getTags()){tagsRepository.save(tag);}
+
         } else {
             regResponse.setResult(false);
             regResponse.setErrors(errors);
         }
-        return regResponse;
+        return regResponse;}
+    public Posts getOptionalPostById(int id, Principal principal){
+        return postsRepository.getOptionalPostById(id);
     }
+
 }

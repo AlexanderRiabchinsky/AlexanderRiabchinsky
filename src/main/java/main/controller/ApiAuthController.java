@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.api.request.LoginRequest;
+import main.api.request.RegRequest;
 import main.api.response.*;
 import main.repositories.UserRepository;
 import main.service.ApiAuthService;
@@ -14,10 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @RestController

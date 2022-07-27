@@ -1,11 +1,16 @@
 package main.controller;
 
+import main.api.request.SetCommentRequest;
 import main.api.response.*;
 import main.service.ApiGeneralService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 public class ApiGeneralController {
@@ -35,5 +40,18 @@ public class ApiGeneralController {
 
     @GetMapping("/api/calendar")
     public ResponseEntity<CalendarResponse> calendar(@RequestParam  (required = false) String year) {return ResponseEntity.ok(generalService.getCalendar(year));
+    }
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping(value = "/api/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<?> image(@RequestParam MultipartFile image) throws IOException {
+        return ResponseEntity.ok(generalService.saveImage(image));
+    }
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping("/api/comment")
+    public ResponseEntity<RegResponse> setComment(@RequestBody SetCommentRequest setCommentRequest,
+                                                 Principal principal) {
+        return ResponseEntity.ok(generalService.comment(setCommentRequest,principal));
     }
 }

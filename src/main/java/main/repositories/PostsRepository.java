@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -164,4 +165,9 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
             "AND time <= NOW() ORDER BY time DESC",
             nativeQuery = true)
     Page<Posts> findMyPublishedPosts(Pageable pageable,@Param("myId") int myId);
+
+
+    @Query(value = "SELECT * FROM posts WHERE id =:id ",
+            nativeQuery = true)
+    Posts getOptionalPostById(@Param("id") int id);
 }

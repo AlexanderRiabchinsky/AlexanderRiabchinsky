@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.api.request.RegPostRequest;
 import main.api.response.*;
 import main.model.Posts;
 import main.service.*;
@@ -9,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -80,7 +81,11 @@ public class ApiPostController {
   public ResponseEntity<RegResponse> updatePost(@PathVariable int id,
                                                 @RequestBody RegPostRequest regPostRequest,
                                                 Principal principal) {
-    return ResponseEntity.ok(postService.getUpdatePostResponse(id, regPostRequest,principal));
+    Optional<Posts> optionalPost = Optional.ofNullable(postService.getOptionalPostById(id, principal));
+    if (optionalPost.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(postService.getUpdatePostResponse(optionalPost.get().getId(), regPostRequest,principal));
   }
 
 }

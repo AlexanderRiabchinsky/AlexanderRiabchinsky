@@ -1,6 +1,7 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
+import main.api.request.RegRequest;
 import main.api.response.*;
 import main.model.CaptchaCodes;
 import main.model.User;

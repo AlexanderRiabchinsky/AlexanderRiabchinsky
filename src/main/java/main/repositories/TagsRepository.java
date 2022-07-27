@@ -10,19 +10,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TagsRepository extends JpaRepository<Tags,Integer> {
-//    @Query(value = "SELECT name FROM tags " +
-//            "JOIN tag2post ON tags.id = tag2post.tag_id "+
-//            "JOIN posts ON tag2post.post_id = posts.id "+
-//            "WHERE posts.is_active = 1 " +
-//            "AND posts.moderation_status = 'ACCEPTED' AND posts.time <= NOW() " +
-//            "AND posts.id = :postId ",
-//            nativeQuery = true)
-//    List<String> findTagsByPost(@Param("postId") int postId);
+
     @Query(value = "SELECT COUNT(post_id) FROM tag2post " +
             "WHERE tag2post.tag_id = :tagId",
             nativeQuery = true)
     int findPostNumber(@Param("tagId") int tagId);
+
+    @Query(value = "SELECT * FROM tags WHERE name = :name",
+            nativeQuery = true)
+    Tags findTagByName(@Param("name") String t);
+
 }
