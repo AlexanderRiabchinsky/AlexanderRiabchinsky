@@ -128,6 +128,7 @@ public class ApiGeneralService {
             BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
             File outputfile = new File(newFileName);
             ImageIO.write(bufferedImage, fileName[1], outputfile);
+            response.setString(newFileName);
         } else {
             response.setResult(false);
             response.setErrors(errors);

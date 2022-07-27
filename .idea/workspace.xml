@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 27.07.22  corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 27.07.22  corrected photo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,13 +130,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00012" summary="transaction version as of 26.03.22">
-      <created>1648272827262</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1648272827263</updated>
     </task>
     <task id="LOCAL-00013" summary="transaction version as of 03.04.22">
       <created>1648962195183</created>
@@ -474,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658910296955</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="version as of 27.07.22  corrected photo">
+      <created>1658918189655</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1658918189655</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,7 +491,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 04.07.22 (2) corrected" />
     <MESSAGE value="version as of 06.07.22 corrected" />
     <MESSAGE value="version as of 07.07.22 corrected" />
     <MESSAGE value="version as of 07.07.22 (2) corrected" />
@@ -516,6 +515,7 @@
     <MESSAGE value="version as of 26.07.22  corrected" />
     <MESSAGE value="version as of 26.07.22  corrected /post/{id}" />
     <MESSAGE value="version as of 27.07.22  corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 27.07.22  corrected" />
+    <MESSAGE value="version as of 27.07.22  corrected photo" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 27.07.22  corrected photo" />
   </component>
 </project>
