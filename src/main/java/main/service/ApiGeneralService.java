@@ -5,13 +5,13 @@ import main.api.request.ModerationRequest;
 import main.api.request.RegPostRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
+import main.model.PostComments;
 import main.model.Posts;
 import main.model.Tags;
-import main.repositories.GlobalSettingsRepository;
-import main.repositories.PostsRepository;
-import main.repositories.TagsRepository;
-import main.repositories.UserRepository;
+import main.repositories.*;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +38,10 @@ public class ApiGeneralService {
     private final PostsRepository postsRepository;
     private final GlobalSettingsRepository globalSettingsRepository;
     private final UserRepository userRepository;
+    private final PostCommentsRepository postCommentsRepository;
+
+    private final static int MAX_IMAGE_LENTH = 30720;
+    private final static int MIN_COMMENT_LENTH = 5;
 
     public SettingsResponse getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
@@ -91,14 +95,14 @@ public class ApiGeneralService {
 
     public CalendarResponse getCalendar(String year) {
         CalendarResponse calendarResponse = new CalendarResponse();
-        int requestYear = year==null ? LocalDateTime.now().getYear() : Integer.parseInt(year);
+        int requestYear = year == null ? LocalDateTime.now().getYear() : Integer.parseInt(year);
         String[] allYearsPost = postsRepository.findAllYearValue();
         calendarResponse.setYears(allYearsPost);
         Map<String, Integer> dateCount = new HashMap<>();
 
         List<String> datesByYear = postsRepository.findPostDatesByYear(String.valueOf(requestYear));
-        for (String data:datesByYear){
-            dateCount.put(data,postsRepository.findPostNumberByDate(data));
+        for (String data : datesByYear) {
+            dateCount.put(data, postsRepository.findPostNumberByDate(data));
         }
         calendarResponse.setPosts(dateCount);
 
@@ -111,26 +115,26 @@ public class ApiGeneralService {
         String dir2 = gen(2);
         String dir3 = gen(2);
         String newFileName = gen(5);
-        String[] fileName = Objects.requireNonNull(photo.getOriginalFilename()).split(".");
+        String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
         long fileLenth = photo.getSize();
         Map<String, String> errors = new HashMap<>();
-        if (!fileName[1].equals("jpg")||fileName[1].equals("png")){
-            errors.put("type","Отправлен файл не формата изображение jpg, png");
+        if (!extension.equals("jpg") && !extension.equals("png")) {
+            errors.put("type", "Отправлен файл не формата изображение jpg, png");
         }
-        if (fileLenth>30720){
-            errors.put("size","Размер файла превышает допустимый размер");
+        if (fileLenth > MAX_IMAGE_LENTH) {
+            errors.put("size", "Размер файла превышает допустимый размер");
         }
 
         if (errors.isEmpty()) {
-            String dirName = "/upload/" + dir1+"/"+dir2+"/"+dir3;
-            newFileName = dirName+"/"+newFileName+"."+fileName[1];
+            String dirName = "/upload/" + dir1 + "/" + dir2 + "/" + dir3;
+            newFileName = dirName + "/" + newFileName + "." + extension;
             File dir = new File(dirName);
-            if(!dir.exists()) {
+            if (!dir.exists()) {
                 dir.mkdir();
             }
             BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
             File outputfile = new File(newFileName);
-            ImageIO.write(bufferedImage, fileName[1], outputfile);
+            ImageIO.write(bufferedImage, extension, outputfile);
             response.setString(newFileName);
         } else {
             response.setResult(false);
@@ -140,71 +144,73 @@ public class ApiGeneralService {
         return response;
     }
 
-    public RegResponse comment(SetCommentRequest setCommentRequest,
+    public RegResponse comment(SetCommentRequest request,
                                Principal principal) {
         RegResponse regResponse = new RegResponse();
-//        Map<String, String> errors = new HashMap<>();
-//        String title = regRequest.getTitle();
-//        if(title.length()<TITLE_LENGTH){
-//            errors.put("title","Название поста короче 3 символов");
-//        }
-//        String text = regRequest.getText();
-//        if(text.length()<TEXT_LENGTH){
-//            errors.put("text","Текст поста короче 50 символов");
-//        }
-//        if (errors.isEmpty()) {
-//            regResponse.setResult(true);
-//            Posts post = new Posts();
-//            post.setId(id);
-//            post.setIsActive(regRequest.getActive());
-//            ModerationStatus status = ((!apiGeneralService.isPostPremoderated()|getAuthorizedUser(principal).getIsModerator()==1)&regRequest.getActive()==1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
-//            post.setStatus(status);
-//            post.setModeratorId((getAuthorizedUser(principal).getIsModerator()==1)? getAuthorizedUser(principal).getId(): null);
-//            post.setUser(getAuthorizedUser(principal));
-//
-//            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
-//            int result = localDateTime.compareTo(LocalDateTime.now());
-//            LocalDateTime time = (result<0)? LocalDateTime.now():localDateTime;
-//            post.setTimestamp(time);
-//
-//            post.setTitle(title);
-//            post.setText(text);
-//            post.setViewCount(0);
-//            postsRepository.save(post);
-//            for(Tags tag:regRequest.getTags()){tagsRepository.save(tag);}
-//        } else {
-//            regResponse.setResult(false);
-//            regResponse.setErrors(errors);
-//        }
+        Map<String, String> errors = new HashMap<>();
+        Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
+        Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
+        if(!postOpt.isPresent()){}
+        if(!postCommOpt.isPresent()){}
+
+        String text = request.getText();
+        if(text.length()<MIN_COMMENT_LENTH){
+            errors.put("text","Текст комментария отсутствует или менее "+MIN_COMMENT_LENTH+" символов");
+        }
+        if (errors.isEmpty()) {
+            regResponse.setResult(true);
+            PostComments pc = new PostComments();
+            if (request.getParentId()>0){
+                pc.setParentId(request.getParentId());
+            } else pc.setParentId(null);
+            pc.setPost(postOpt.get());
+            pc.setUser(userRepository.findByEmail(principal.getName()).get());
+            pc.setTime(LocalDateTime.now());
+            pc.setText(request.getText());
+            postCommentsRepository.save(pc);
+
+            regResponse.setId(postCommentsRepository.findRecentId());
+        } else {
+            regResponse.setResult(false);
+            regResponse.setErrors(errors);
+        }
         return regResponse;
     }
 
     public boolean isMultiUser() {
         return globalSettingsRepository.findSettingValue("MULTIUSER_MODE").equals("YES");
     }
+
     public boolean isPostPremoderated() {
         return globalSettingsRepository.findSettingValue("POST_PREMODERATION").equals("YES");
     }
-        public static String gen(int length) {
-            StringBuffer sb = new StringBuffer();
-            for (int i = length; i > 0; i -= 12) {
-                int n =  min(12, abs(i));
-                sb.append(leftPad(Long.toString(round(random() * pow(36, n)), 36), n, '0'));
-            }
-            return sb.toString();
+
+    public static String gen(int length) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = length; i > 0; i -= 12) {
+            int n = min(12, abs(i));
+            sb.append(leftPad(Long.toString(round(random() * pow(36, n)), 36), n, '0'));
+        }
+        return sb.toString();
     }
+
     public ResultResponse moderation(ModerationRequest moderationRequest,
-                                     Principal principal){
+                                     Principal principal) {
         ResultResponse response = new ResultResponse();
         int moderatorAuth = userRepository.findByEmail(principal.getName()).get().getIsModerator();
         int moderatorId = userRepository.findByEmail(principal.getName()).get().getId();
         Optional<Posts> postToModerate = postsRepository.findById(moderationRequest.getPost_id());
-        if (!postToModerate.isPresent()|| (!moderationRequest.getDecision().equals("accept")&&!moderationRequest.getDecision().equals("decline"))||!(moderatorAuth==1)){
+        if (!postToModerate.isPresent() || (!moderationRequest.getDecision().equals("accept")
+                && !moderationRequest.getDecision().equals("decline")) || (moderatorAuth != 1)) {
             response.setResult(false);
         } else {
             Posts post = postToModerate.get();
-            if(moderationRequest.getDecision().equals("accept")){post.setStatus(ModerationStatus.ACCEPTED);}
-            if(moderationRequest.getDecision().equals("declined")){post.setStatus(ModerationStatus.DECLINED);}
+            if (moderationRequest.getDecision().equals("accept")) {
+                post.setStatus(ModerationStatus.ACCEPTED);
+            }
+            if (moderationRequest.getDecision().equals("declined")) {
+                post.setStatus(ModerationStatus.DECLINED);
+            }
             post.setModeratorId(moderatorId);
             postsRepository.save(post);
             response.setResult(true);

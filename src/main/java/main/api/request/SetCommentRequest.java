@@ -7,7 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SetCommentRequest {
-    private int parent_id=1;
-    private int post_id;
+    @JsonProperty("parent_id")
+    private int parentId;
+    @JsonProperty("post_id")
+    private int postId;
     private String text;
 }
