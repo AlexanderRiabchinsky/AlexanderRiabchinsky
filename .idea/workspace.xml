@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 27.07.22  corrected photo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/request/ModerationRequest.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 27.07.22  corrected moderation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/SetCommentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/SetCommentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/RegPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RegPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,13 +131,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00014" summary="version as of 08.04.22">
-      <created>1649421140642</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1649421140642</updated>
     </task>
     <task id="LOCAL-00015" summary="version as of 11.04.22">
       <created>1649669256949</created>
@@ -477,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658918739164</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="version as of 27.07.22  corrected moderation">
+      <created>1658925519801</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1658925519801</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -494,7 +492,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 06.07.22 corrected" />
     <MESSAGE value="version as of 07.07.22 corrected" />
     <MESSAGE value="version as of 07.07.22 (2) corrected" />
     <MESSAGE value="version as of 08.07.22 corrected" />
@@ -519,6 +516,7 @@
     <MESSAGE value="version as of 26.07.22  corrected /post/{id}" />
     <MESSAGE value="version as of 27.07.22  corrected" />
     <MESSAGE value="version as of 27.07.22  corrected photo" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 27.07.22  corrected photo" />
+    <MESSAGE value="version as of 27.07.22  corrected moderation" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 27.07.22  corrected moderation" />
   </component>
 </project>

@@ -16,6 +16,6 @@ public class RegPostRequest {
     private long timestamp;
     private byte active;
     private String title;
-    private String[] tags;
+    private List<String> tags;
     private String text;
 }

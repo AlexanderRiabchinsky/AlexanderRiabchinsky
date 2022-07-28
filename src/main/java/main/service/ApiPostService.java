@@ -239,12 +239,16 @@ public class ApiPostService {
             post.setText(text);
             post.setViewCount(0);
 
-//            List<Tags> tags = regRequest.getTags().stream()
-//                    .map(t -> tagsRepository.findTagByName(t)
-//                            .orElseThrow(NoSuchElementException::new))
-//                    .collect(Collectors.toList());
-//            post.setTags(tags);
-
+            List<Tags> tags = new ArrayList<>();
+            for (String t : regRequest.getTags()) {
+                if (tagsRepository.findTagByName(t)==null){
+                    Tags newTag = new Tags();
+                    newTag.setName(t);
+                    tagsRepository.save(newTag);
+                }
+                tags.add(tagsRepository.findTagByName(t));
+            }
+            post.setTags(tags);
             postsRepository.save(post);
         } else {
             regResponse.setResult(false);
@@ -282,11 +286,16 @@ public class ApiPostService {
             post.setText(text);
             post.setViewCount(0);
 
-//            List<Tags> tags = regRequest.getTags().stream()
-//                    .map(t -> tagsRepository.findTagByName(t)
-//                            .orElseThrow(NoSuchElementException::new))
-//                    .collect(Collectors.toList());
-//            post.setTags(tags);
+            List<Tags> tags = new ArrayList<>();
+            for (String t : regRequest.getTags()) {
+                if (tagsRepository.findTagByName(t)==null){
+                    Tags newTag = new Tags();
+                    newTag.setName(t);
+                    tagsRepository.save(newTag);
+                }
+                tags.add(tagsRepository.findTagByName(t));
+            }
+            post.setTags(tags);
             postsRepository.save(post);
 
         } else {

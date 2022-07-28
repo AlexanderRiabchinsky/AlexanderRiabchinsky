@@ -22,7 +22,6 @@ public class ApiPostController {
         this.postService = postService;
     }
 
-  //  @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/post")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
@@ -30,7 +29,6 @@ public class ApiPostController {
         return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode));
     }
 
-  //  @PreAuthorize("hasAuthority('user:moderate')")
     @GetMapping("/post/search")
     public ResponseEntity <PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,
                                                       @RequestParam(defaultValue = "10") int limit,
