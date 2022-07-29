@@ -27,6 +27,7 @@ public class MapperService {
         postDto.setUser(convertUserToDto(post.getUser()));
         postDto.setTitle(post.getTitle());
         postDto.setAnnounce(post.getText());
+        postDto.setText(post.getText());
         String postDtoText = postDto.getAnnounce()
                 .replaceAll("<(/)?([0-9A-Za-z\\-;:./=\"\\s]+)?>", "")
                 .replaceAll(" ", "");

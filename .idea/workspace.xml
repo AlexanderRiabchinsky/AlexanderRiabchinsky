@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 28.07.22  corrected post registration&amp; correction">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 28.07.22  corrected comment">
+      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/request/ProfileRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/SetCommentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/SetCommentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/MapperService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +134,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00016" summary="version as of 16.04.22">
-      <created>1650094146162</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1650094146162</updated>
     </task>
     <task id="LOCAL-00017" summary="version as of 28.04.22">
       <created>1651140393927</created>
@@ -475,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658996925625</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="version as of 28.07.22  corrected comment">
+      <created>1659011014213</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1659011014213</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 07.07.22 (2) corrected" />
     <MESSAGE value="version as of 08.07.22 corrected" />
     <MESSAGE value="version as of 09.07.22 corrected" />
     <MESSAGE value="version as of 11.07.22 corrected" />
@@ -517,6 +519,7 @@
     <MESSAGE value="version as of 27.07.22  corrected photo" />
     <MESSAGE value="version as of 27.07.22  corrected moderation" />
     <MESSAGE value="version as of 28.07.22  corrected post registration&amp; correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 28.07.22  corrected post registration&amp; correction" />
+    <MESSAGE value="version as of 28.07.22  corrected comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 28.07.22  corrected comment" />
   </component>
 </project>

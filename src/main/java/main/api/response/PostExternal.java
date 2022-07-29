@@ -1,5 +1,6 @@
 package main.api.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,8 @@ public class PostExternal {
     private UserExternal user;
     private String title;
     private String announce;
+    @JsonIgnore
+    private String text;
     private int likeCount;
     private int dislikeCount;
     private int commentCount;

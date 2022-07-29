@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.api.request.ModerationRequest;
+import main.api.request.ProfileRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
 import main.service.ApiGeneralService;
@@ -51,8 +52,12 @@ public class ApiGeneralController {
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/api/comment")
-    public ResponseEntity<RegResponse> setComment(@RequestBody SetCommentRequest setCommentRequest,
+    public ResponseEntity<?> setComment(@RequestBody SetCommentRequest setCommentRequest,
                                                  Principal principal) {
+        if (!generalService.checkComment(setCommentRequest).isResult()) {
+            return ResponseEntity.badRequest()
+                    .body(generalService.getErrorResponse(setCommentRequest));
+        }
         return ResponseEntity.ok(generalService.comment(setCommentRequest,principal));
     }
 
@@ -62,4 +67,10 @@ public class ApiGeneralController {
                                                      Principal principal) {
         return ResponseEntity.ok(generalService.moderation(moderationRequest,principal));
     }
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping(value = "/api/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<RegResponse> updateProfile(@RequestParam MultipartFile photo,
+                                                     @RequestBody ProfileRequest profileRequest,
+                                                     Principal principal) throws IOException {
+        return ResponseEntity.ok(generalService.profile(photo,profileRequest,principal));}
 }

@@ -34,7 +34,7 @@ public class ApiPostService {
     public static final int TITLE_LENGTH = 3;
     public static final int TEXT_LENGTH = 50;
 
-    public PostResponse getPostSearch(int offset,int limit,String query) {
+    public PostResponse getPostSearch(int offset, int limit, String query) {
         PostResponse postSearchResponse = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page = postsRepository.findPostsByQuery(pageable, query);
@@ -45,7 +45,7 @@ public class ApiPostService {
         return postSearchResponse;
     }
 
-    public PostResponse getPostByMode   (int offset, int limit, String mode) {
+    public PostResponse getPostByMode(int offset, int limit, String mode) {
         PostResponse postByMode = new PostResponse();
         List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -61,7 +61,8 @@ public class ApiPostService {
                 page = postsRepository.findBestPosts(pageable);
                 break;
             default:
-            case "recent":    page = postsRepository.findRecentPosts(pageable);
+            case "recent":
+                page = postsRepository.findRecentPosts(pageable);
         }
         posts.addAll(page.getContent());
         postByMode.setCount(page.getTotalElements());
@@ -69,7 +70,8 @@ public class ApiPostService {
         postByMode.setPosts(postDtoList);
         return postByMode;
     }
-    public PostResponse getPostByDate   (int offset, int limit, String date) {
+
+    public PostResponse getPostByDate(int offset, int limit, String date) {
         PostResponse postByDateResponse = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page = postsRepository.findPostsByDate(pageable, date);
@@ -79,6 +81,7 @@ public class ApiPostService {
 
         return postByDateResponse;
     }
+
     public PostResponse getPostByTag(int offset, int limit, String tag) {
         PostResponse postByTagResponse = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
@@ -88,6 +91,7 @@ public class ApiPostService {
         postByTagResponse.setCount(page.getTotalElements());
         return postByTagResponse;
     }
+
     public PostIDResponse getPostById(int id, Principal principal) {
         Posts post = postsRepository.findById(id).get();
 
@@ -116,12 +120,12 @@ public class ApiPostService {
         PostExternal postDto = mapperService.convertPostToDto(post);
 
         return new PostIDResponse(postDto.getId(), postDto.getTimestamp(),
-                postDto.isActive(), postDto.getUser(), postDto.getTitle(), postDto.getAnnounce(),
+                postDto.isActive(), postDto.getUser(), postDto.getTitle(), postDto.getText(),
                 postDto.getLikeCount(), postDto.getDislikeCount(), view,
                 comments, tags);
     }
 
-    public PostResponse getModerationData(int offset, int limit, String status, Principal principal){
+    public PostResponse getModerationData(int offset, int limit, String status, Principal principal) {
         PostResponse postModeration = new PostResponse();
         int moderatorId = getAuthorizedUser(principal).getId();
         List<Posts> posts = new ArrayList<>();
@@ -135,7 +139,8 @@ public class ApiPostService {
                 page = postsRepository.findDeclinedPostsByModerator(pageable, moderatorId);
                 break;
             default:
-            case "new":    page = postsRepository.findNewPosts(pageable);
+            case "new":
+                page = postsRepository.findNewPosts(pageable);
         }
         posts.addAll(page.getContent());
         postModeration.setCount(page.getTotalElements());
@@ -151,10 +156,10 @@ public class ApiPostService {
         return postModeration;
     }
 
-    public PostResponse getMyPosts(int offset, int limit, String status, Principal principal){
+    public PostResponse getMyPosts(int offset, int limit, String status, Principal principal) {
         PostResponse myPosts = new PostResponse();
         int myId = getAuthorizedUser(principal).getId();
-            List<Posts> posts = new ArrayList<>();
+        List<Posts> posts = new ArrayList<>();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         Page<Posts> page;
         switch (status) {
@@ -185,12 +190,14 @@ public class ApiPostService {
         return myPosts;
     }
 
-    public User getAuthorizedUser(Principal principal){
-        User user=new User();
-        if(principal !=null){
-        user = userRepository.findByEmail(principal.getName()).get();}
+    public User getAuthorizedUser(Principal principal) {
+        User user = new User();
+        if (principal != null) {
+            user = userRepository.findByEmail(principal.getName()).get();
+        }
         return user;
     }
+
     public AuthCheckResponse getAuthCheck(Principal principal) {
         if (principal == null) {
             AuthCheckResponse authCheck = new AuthCheckResponse();
@@ -214,25 +221,30 @@ public class ApiPostService {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         String title = regRequest.getTitle();
-        if(title.length()<TITLE_LENGTH){
-            errors.put("title","Название поста короче 3 символов");
+        if (title.length() < TITLE_LENGTH) {
+            errors.put("title", "Название поста короче 3 символов");
         }
         String text = regRequest.getText();
-        if(text.length()<TEXT_LENGTH){
-            errors.put("text","Текст поста короче 50 символов");
+        if (text.length() < TEXT_LENGTH) {
+            errors.put("text", "Текст поста короче 50 символов");
         }
         if (errors.isEmpty()) {
             regResponse.setResult(true);
             Posts post = new Posts();
             post.setIsActive(regRequest.getActive());
-            ModerationStatus status = ((!apiGeneralService.isPostPremoderated()|getAuthorizedUser(principal).getIsModerator()==1)&regRequest.getActive()==1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
+            ModerationStatus status =
+                    ((!apiGeneralService.isPostPremoderated() || getAuthorizedUser(principal)
+                            .getIsModerator() == 1) && regRequest.getActive() == 1) ?
+                            ModerationStatus.ACCEPTED : ModerationStatus.NEW;
             post.setStatus(status);
-            post.setModeratorId((getAuthorizedUser(principal).getIsModerator()==1)? getAuthorizedUser(principal).getId(): null);
+            post.setModeratorId((getAuthorizedUser(principal).
+                    getIsModerator() == 1) ? getAuthorizedUser(principal).getId() : null);
             post.setUser(getAuthorizedUser(principal));
 
-            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
+            LocalDateTime localDateTime = LocalDateTime.
+                    ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
             int result = localDateTime.compareTo(LocalDateTime.now());
-            LocalDateTime time = (result<0)? LocalDateTime.now():localDateTime;
+            LocalDateTime time = (result < 0) ? LocalDateTime.now() : localDateTime;
             post.setTimestamp(time);
 
             post.setTitle(title);
@@ -241,7 +253,7 @@ public class ApiPostService {
 
             List<Tags> tags = new ArrayList<>();
             for (String t : regRequest.getTags()) {
-                if (tagsRepository.findTagByName(t)==null){
+                if (tagsRepository.findTagByName(t) == null) {
                     Tags newTag = new Tags();
                     newTag.setName(t);
                     tagsRepository.save(newTag);
@@ -256,30 +268,34 @@ public class ApiPostService {
         }
         return regResponse;
     }
-    public RegResponse getUpdatePostResponse(int id,RegPostRequest regRequest,Principal principal) {
+
+    public RegResponse getUpdatePostResponse(int id, RegPostRequest regRequest, Principal principal) {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         String title = regRequest.getTitle();
-        if(title.length()<TITLE_LENGTH){
-            errors.put("title","Название поста короче 3 символов");
+        if (title.length() < TITLE_LENGTH) {
+            errors.put("title", "Название поста короче 3 символов");
         }
         String text = regRequest.getText();
-        if(text.length()<TEXT_LENGTH){
-            errors.put("text","Текст поста короче 50 символов");
+        if (text.length() < TEXT_LENGTH) {
+            errors.put("text", "Текст поста короче 50 символов");
         }
         if (errors.isEmpty()) {
             regResponse.setResult(true);
             Posts post = new Posts();
             post.setId(id);
             post.setIsActive(regRequest.getActive());
-            ModerationStatus status = ((!apiGeneralService.isPostPremoderated()|getAuthorizedUser(principal).getIsModerator()==1)&regRequest.getActive()==1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
+            ModerationStatus status =
+                    ((!apiGeneralService.isPostPremoderated() || getAuthorizedUser(principal)
+                            .getIsModerator() == 1) && regRequest.getActive() == 1) ? ModerationStatus.ACCEPTED : ModerationStatus.NEW;
             post.setStatus(status);
-            post.setModeratorId((getAuthorizedUser(principal).getIsModerator()==1)? getAuthorizedUser(principal).getId(): null);
+            post.setModeratorId((getAuthorizedUser(principal).getIsModerator() == 1) ?
+                    getAuthorizedUser(principal).getId() : null);
             post.setUser(getAuthorizedUser(principal));
 
             LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
             int result = localDateTime.compareTo(LocalDateTime.now());
-            LocalDateTime time = (result<0)? LocalDateTime.now():localDateTime;
+            LocalDateTime time = (result < 0) ? LocalDateTime.now() : localDateTime;
             post.setTimestamp(time);
 
             post.setTitle(title);
@@ -288,7 +304,7 @@ public class ApiPostService {
 
             List<Tags> tags = new ArrayList<>();
             for (String t : regRequest.getTags()) {
-                if (tagsRepository.findTagByName(t)==null){
+                if (tagsRepository.findTagByName(t) == null) {
                     Tags newTag = new Tags();
                     newTag.setName(t);
                     tagsRepository.save(newTag);
@@ -302,8 +318,10 @@ public class ApiPostService {
             regResponse.setResult(false);
             regResponse.setErrors(errors);
         }
-        return regResponse;}
-    public Posts getOptionalPostById(int id, Principal principal){
+        return regResponse;
+    }
+
+    public Posts getOptionalPostById(int id, Principal principal) {
         return postsRepository.getOptionalPostById(id);
     }
 

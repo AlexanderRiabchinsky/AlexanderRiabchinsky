@@ -2,6 +2,7 @@ package main.service;
 
 import lombok.AllArgsConstructor;
 import main.api.request.ModerationRequest;
+import main.api.request.ProfileRequest;
 import main.api.request.RegPostRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
@@ -126,11 +127,11 @@ public class ApiGeneralService {
         }
 
         if (errors.isEmpty()) {
-            String dirName = "/upload/" + dir1 + "/" + dir2 + "/" + dir3;
+            String dirName = "D://Others/BlogDriver/src/upload/" + dir1 + "/" + dir2 + "/" + dir3;
             newFileName = dirName + "/" + newFileName + "." + extension;
             File dir = new File(dirName);
             if (!dir.exists()) {
-                dir.mkdir();
+                dir.mkdirs();
             }
             BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
             File outputfile = new File(newFileName);
@@ -150,8 +151,6 @@ public class ApiGeneralService {
         Map<String, String> errors = new HashMap<>();
         Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
         Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
-        if(!postOpt.isPresent()){}
-        if(!postCommOpt.isPresent()){}
 
         String text = request.getText();
         if(text.length()<MIN_COMMENT_LENTH){
@@ -216,6 +215,32 @@ public class ApiGeneralService {
             response.setResult(true);
         }
 
+        return response;
+    }
+
+    public RegResponse profile(MultipartFile photo, ProfileRequest request, Principal principal) throws IOException {
+        RegResponse response = new RegResponse();
+
+        return response;
+    }
+    public ResultResponse checkComment(SetCommentRequest request){
+        ResultResponse response = new ResultResponse();
+        response.setResult(true);
+        Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
+        Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
+        if(!postOpt.isPresent()){response.setResult(false);}
+        if(!postCommOpt.isPresent()&&(request.getParentId()!=0)){response.setResult(false);}
+        return response;
+    }
+    public RegResponse getErrorResponse(SetCommentRequest request){
+        Map<String, String> errors = new HashMap<>();
+        RegResponse response = new RegResponse();
+        Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
+        Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
+        if(!postOpt.isPresent()){ errors.put("post","Пост отсутствует");}
+        if(!postCommOpt.isPresent()){ errors.put("comment","Комментарий отсутствует");}
+        response.setResult(false);
+        response.setErrors(errors);
         return response;
     }
 
