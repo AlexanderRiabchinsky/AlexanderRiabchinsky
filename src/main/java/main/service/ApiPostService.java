@@ -1,6 +1,7 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
+import main.api.request.LikeDislikeRequest;
 import main.api.request.RegPostRequest;
 import main.api.response.*;
 import main.model.*;
@@ -320,6 +321,18 @@ public class ApiPostService {
         }
         return regResponse;
     }
+    public ResultResponse getLike(LikeDislikeRequest request, Principal principal) {
+        ResultResponse response = new ResultResponse();
+
+        return response;
+    }
+
+    public ResultResponse getDislike(LikeDislikeRequest request, Principal principal) {
+        ResultResponse response = new ResultResponse();
+
+        return response;
+    }
+
 
     public Posts getOptionalPostById(int id, Principal principal) {
         return postsRepository.getOptionalPostById(id);

@@ -73,4 +73,22 @@ public class ApiGeneralController {
                                                      @RequestBody ProfileRequest profileRequest,
                                                      Principal principal) throws IOException {
         return ResponseEntity.ok(generalService.profile(photo,profileRequest,principal));}
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @GetMapping("/api/statistics/my")
+    public ResponseEntity<StatisticsResponse> statMy() {
+        return ResponseEntity.ok(generalService.statisticsMy());
+    }
+
+    @GetMapping("/api/statistics/all")
+    public ResponseEntity<StatisticsResponse> statAll() {
+        return ResponseEntity.ok(generalService.statisticsAll());
+    }
+
+    @PreAuthorize("hasAuthority('user:moderate')")
+    @PostMapping("/api/settings")
+    public ResponseEntity<ResultResponse> settings(@RequestBody SettingsResponse request,
+                                                     Principal principal) {
+        return ResponseEntity.ok(generalService.settings(request,principal));
+    }
 }

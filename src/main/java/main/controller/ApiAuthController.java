@@ -77,4 +77,14 @@ public class ApiAuthController {
         return ResponseEntity.ok(apiAuthService.getRegResponse(regRequest));
     }
 
+    @PostMapping("/restore")
+    public ResponseEntity<ResultResponse> restore(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(apiAuthService.getRestoreResponse(loginRequest));
+    }
+
+    @PostMapping("/password")
+    public ResponseEntity<RegResponse> restore(@RequestBody RegRequest regRequest) {
+        return ResponseEntity.ok(apiAuthService.getPasswordResponse(regRequest));
+    }
+
 }

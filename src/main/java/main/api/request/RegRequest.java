@@ -10,6 +10,7 @@ import lombok.Setter;
 public class RegRequest {
     @JsonProperty("e_mail")
     private String email;
+    private String code;
     private String password;
     private String name;
     private String captcha;

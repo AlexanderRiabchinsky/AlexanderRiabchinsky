@@ -244,4 +244,22 @@ public class ApiGeneralService {
         return response;
     }
 
+    public StatisticsResponse statisticsMy(){
+        StatisticsResponse response = new StatisticsResponse();
+
+        return response;
+    }
+
+    public StatisticsResponse statisticsAll(){
+        StatisticsResponse response = new StatisticsResponse();
+
+        return response;
+    }
+    public ResultResponse settings(SettingsResponse request,
+                         Principal principal) {
+        ResultResponse response = new ResultResponse();
+
+
+        return  response;
+    }
 }

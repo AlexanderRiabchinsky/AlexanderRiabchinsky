@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.api.request.LikeDislikeRequest;
 import main.api.request.RegPostRequest;
 import main.api.response.*;
 import main.model.Posts;
@@ -85,5 +86,19 @@ public class ApiPostController {
     }
     return ResponseEntity.ok(postService.getUpdatePostResponse(optionalPost.get().getId(), regPostRequest,principal));
   }
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping("/post/like")
+    public ResponseEntity<ResultResponse> like(@RequestBody LikeDislikeRequest request,
+                                               Principal principal) {
+        return ResponseEntity.ok(postService.getLike(request,principal));
+    }
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping("/post/dislike")
+    public ResponseEntity<ResultResponse> dislike(@RequestBody LikeDislikeRequest request,
+                                               Principal principal) {
+        return ResponseEntity.ok(postService.getDislike(request,principal));
+    }
 
 }
