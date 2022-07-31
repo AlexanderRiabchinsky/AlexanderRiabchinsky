@@ -8,9 +8,9 @@ import java.util.Map;
 @Getter
 @Setter
 public class StatisticsResponse {
-    int postsCount;
+    long postsCount;
     int likesCount;
     int dislikesCount;
-    int viewCount;
+    int viewsCount;
     long firstPublication;
 }

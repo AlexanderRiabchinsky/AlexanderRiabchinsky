@@ -4,7 +4,9 @@ import main.api.request.ModerationRequest;
 import main.api.request.ProfileRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
+import main.repositories.UserRepository;
 import main.service.ApiGeneralService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,11 +21,13 @@ public class ApiGeneralController {
 
     private final ApiGeneralService generalService;
     private final InitResponse initResponse;
+    private final UserRepository userRepository;
 
-    public ApiGeneralController(ApiGeneralService generalService, InitResponse initResponse) {
+    public ApiGeneralController(ApiGeneralService generalService, InitResponse initResponse, UserRepository userRepository) {
 
         this.generalService = generalService;
         this.initResponse = initResponse;
+        this.userRepository = userRepository;
     }
 
 
@@ -76,12 +80,15 @@ public class ApiGeneralController {
 
     @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/api/statistics/my")
-    public ResponseEntity<StatisticsResponse> statMy() {
-        return ResponseEntity.ok(generalService.statisticsMy());
+    public ResponseEntity<StatisticsResponse> statMy(Principal principal) {
+        return ResponseEntity.ok(generalService.statisticsMy(principal));
     }
 
     @GetMapping("/api/statistics/all")
-    public ResponseEntity<StatisticsResponse> statAll() {
+    public ResponseEntity<StatisticsResponse> statAll(Principal principal) {
+        if (!generalService.ststisticIsPublic()&&(userRepository.findIfModerator(principal.getName())!=1)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
         return ResponseEntity.ok(generalService.statisticsAll());
     }
 

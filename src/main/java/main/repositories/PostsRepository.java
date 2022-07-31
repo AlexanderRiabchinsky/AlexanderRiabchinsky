@@ -170,4 +170,10 @@ public interface PostsRepository extends JpaRepository<Posts,Integer> {
     @Query(value = "SELECT * FROM posts WHERE id =:id ",
             nativeQuery = true)
     Posts getOptionalPostById(@Param("id") int id);
+
+    @Query(value = "SELECT * FROM posts WHERE is_active = 1 " +
+            "AND (moderation_status = 'ACCEPTED' AND user_id =:myId) " +
+            "AND time <= NOW() ORDER BY time DESC",
+            nativeQuery = true)
+    List<Posts> findMyActivePosts(@Param("myId") int myId);
 }

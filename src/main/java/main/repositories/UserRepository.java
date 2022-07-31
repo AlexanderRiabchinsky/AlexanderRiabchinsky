@@ -10,13 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
-//    @Query(value = "SELECT COUNT(post.id) FROM posts " +
-//            "WHERE user =:id " +
-//            "AND posts.is_active = 1 AND posts.moderation_status = 'NEW' " + "AND posts.time <= NOW()",
-//            nativeQuery = true)
-//    long findModerationCount(@Param("id") int id);
-//    @Query("SELECT name FROM Users users WHERE id=:id")
-//    String getUserNameById(@Param("id") int id);
+
     Optional<User> findByEmail(String email);
 
     @Query("select u.name from User u where u.id =:id")
@@ -27,5 +21,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query("select u.email from User u where u.id =:id")
     String findEmailById(@Param("id") int id);
+
+    @Query("select u.is_moderator from User u where u.email =:email")
+    int findIfModerator(@Param("email") String email);
 }
 
