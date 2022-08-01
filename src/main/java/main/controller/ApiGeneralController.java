@@ -110,7 +110,7 @@ public class ApiGeneralController {
     }
 
     @PreAuthorize("hasAuthority('user:moderate')")
-    @PostMapping("/api/settings")
+    @PutMapping("/api/settings")
     public ResponseEntity settings(@RequestBody SettingsResponse request) {
         generalService.settings(request);
         return ResponseEntity.ok().body(null);

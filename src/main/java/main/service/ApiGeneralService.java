@@ -3,7 +3,6 @@ package main.service;
 import lombok.AllArgsConstructor;
 import main.api.request.ModerationRequest;
 import main.api.request.ProfileRequest;
-import main.api.request.RegPostRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
 import main.model.PostComments;
@@ -12,10 +11,7 @@ import main.model.Posts;
 import main.model.Tags;
 import main.repositories.*;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -24,9 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.lang.Math.*;
@@ -317,10 +310,13 @@ public class ApiGeneralService {
         return response;
     }
 
-    public ResultResponse settings(SettingsResponse request) {
-        ResultResponse response = new ResultResponse();
+    public void settings(SettingsResponse request) {
 
-
-        return  response;
+        String multiuser = (request.isMultiuserMode())? "YES":"NO";
+        String postPremoderation = (request.isPostPremoderation())? "YES":"NO";
+        String statisticsPublic = (request.isStatisticsIsPublic())? "YES":"NO";
+        globalSettingsRepository.setSettingValue("MULTIUSER_MODE",multiuser);
+        globalSettingsRepository.setSettingValue("POST_PREMODERATION",postPremoderation);
+        globalSettingsRepository.setSettingValue("STATISTICS_IS_PUBLIC",statisticsPublic);
     }
 }
