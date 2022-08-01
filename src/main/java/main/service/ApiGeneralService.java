@@ -112,13 +112,16 @@ public class ApiGeneralService {
 
         return calendarResponse;
     }
+    public boolean checkImage(MultipartFile image){
+        String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+        long fileLenth = image.getSize();
+        if ((extension.equals("jpg") || extension.equals("png")) && fileLenth < MAX_IMAGE_LENTH){
+            return true;
+        } else return false;
+    }
 
-    public RegResponse saveImage(MultipartFile photo) throws IOException {
+    public RegResponse getImageError(MultipartFile photo){
         RegResponse response = new RegResponse();
-        String dir1 = gen(2);
-        String dir2 = gen(2);
-        String dir3 = gen(2);
-        String newFileName = gen(5);
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
         long fileLenth = photo.getSize();
         Map<String, String> errors = new HashMap<>();
@@ -128,9 +131,20 @@ public class ApiGeneralService {
         if (fileLenth > MAX_IMAGE_LENTH) {
             errors.put("size", "Размер файла превышает допустимый размер");
         }
+        response.setResult(false);
+        response.setErrors(errors);
+        return response;
+    }
 
-        if (errors.isEmpty()) {
-            String dirName = "D://Others/BlogDriver/src/upload/" + dir1 + "/" + dir2 + "/" + dir3;
+    public String saveImage(MultipartFile photo) throws IOException {
+        RegResponse response = new RegResponse();
+        String dir1 = gen(2);
+        String dir2 = gen(2);
+        String dir3 = gen(2);
+        String newFileName = gen(5);
+        String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
+
+            String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
             newFileName = dirName + "/" + newFileName + "." + extension;
             File dir = new File(dirName);
             if (!dir.exists()) {
@@ -140,12 +154,8 @@ public class ApiGeneralService {
             File outputfile = new File(newFileName);
             ImageIO.write(bufferedImage, extension, outputfile);
             response.setString(newFileName);
-        } else {
-            response.setResult(false);
-            response.setErrors(errors);
-        }
 
-        return response;
+        return "/" + newFileName;
     }
 
     public RegResponse comment(SetCommentRequest request,
@@ -225,7 +235,13 @@ public class ApiGeneralService {
         return response;
     }
 
-    public RegResponse profile(MultipartFile photo, ProfileRequest request, Principal principal) throws IOException {
+    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password){
+        RegResponse response = new RegResponse();
+
+        return  response;
+    }
+
+    public RegResponse profile(ProfileRequest request, Principal principal) {
         RegResponse response = new RegResponse();
 
         return response;
@@ -301,8 +317,7 @@ public class ApiGeneralService {
         return response;
     }
 
-    public ResultResponse settings(SettingsResponse request,
-                         Principal principal) {
+    public ResultResponse settings(SettingsResponse request) {
         ResultResponse response = new ResultResponse();
 
 

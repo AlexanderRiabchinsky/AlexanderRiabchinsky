@@ -51,6 +51,9 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/api/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<?> image(@RequestParam MultipartFile image) throws IOException {
+        if (!generalService.checkImage(image)) {
+            return ResponseEntity.badRequest().body(generalService.getImageError(image));
+        }
         return ResponseEntity.ok(generalService.saveImage(image));
     }
 
@@ -71,12 +74,26 @@ public class ApiGeneralController {
                                                      Principal principal) {
         return ResponseEntity.ok(generalService.moderation(moderationRequest,principal));
     }
+
     @PreAuthorize("hasAuthority('user:write')")
-    @PostMapping(value = "/api/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<RegResponse> updateProfile(@RequestParam MultipartFile photo,
-                                                     @RequestBody ProfileRequest profileRequest,
-                                                     Principal principal) throws IOException {
-        return ResponseEntity.ok(generalService.profile(photo,profileRequest,principal));}
+    @PostMapping(value = "/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<RegResponse> editProfile(
+            @RequestParam(value = "photo") MultipartFile photo,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "removePhoto") int removePhoto,
+            Principal principal) throws IOException {
+        return ResponseEntity
+                .ok(generalService.editImage(principal, photo, name, email, password));
+    }
+
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping("/profile/my")
+    public ResponseEntity<RegResponse> editProfile(@RequestBody ProfileRequest profileRequest,
+                                                   Principal principal) {
+        return ResponseEntity.ok(generalService.profile( profileRequest,principal));
+    }
 
     @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/api/statistics/my")
@@ -94,8 +111,8 @@ public class ApiGeneralController {
 
     @PreAuthorize("hasAuthority('user:moderate')")
     @PostMapping("/api/settings")
-    public ResponseEntity<ResultResponse> settings(@RequestBody SettingsResponse request,
-                                                     Principal principal) {
-        return ResponseEntity.ok(generalService.settings(request,principal));
+    public ResponseEntity settings(@RequestBody SettingsResponse request) {
+        generalService.settings(request);
+        return ResponseEntity.ok().body(null);
     }
 }

@@ -2,6 +2,7 @@ package main.service;
 
 import lombok.AllArgsConstructor;
 import main.api.request.LoginRequest;
+import main.api.request.PasswordRequest;
 import main.api.request.RegRequest;
 import main.api.response.*;
 import main.model.CaptchaCodes;
@@ -98,7 +99,7 @@ public class ApiAuthService {
         return response;
     }
 
-    public RegResponse getPasswordResponse(RegRequest request) {
+    public RegResponse getPasswordResponse(PasswordRequest request) {
         RegResponse response = new RegResponse();
 
         return response;

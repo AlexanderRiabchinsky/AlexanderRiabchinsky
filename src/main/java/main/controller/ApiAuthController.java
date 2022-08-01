@@ -1,6 +1,7 @@
 package main.controller;
 
 import main.api.request.LoginRequest;
+import main.api.request.PasswordRequest;
 import main.api.request.RegRequest;
 import main.api.response.*;
 import main.repositories.UserRepository;
@@ -83,8 +84,8 @@ public class ApiAuthController {
     }
 
     @PostMapping("/password")
-    public ResponseEntity<RegResponse> restore(@RequestBody RegRequest regRequest) {
-        return ResponseEntity.ok(apiAuthService.getPasswordResponse(regRequest));
+    public ResponseEntity<RegResponse> restore(@RequestBody PasswordRequest request) {
+        return ResponseEntity.ok(apiAuthService.getPasswordResponse(request));
     }
 
 }
