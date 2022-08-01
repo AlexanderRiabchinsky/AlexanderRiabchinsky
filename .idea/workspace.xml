@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 01.08.22  corrections">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 01.08.22  globalSettings trial">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/GlobalSettingsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/GlobalSettingsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +132,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00021" summary="version as of 31.05.22">
-      <created>1654022675184</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1654022675184</updated>
     </task>
     <task id="LOCAL-00022" summary="version as of 02.06.22">
       <created>1654152280371</created>
@@ -475,7 +469,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659352848634</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="version as of 01.08.22  globalSettings trial">
+      <created>1659361091872</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1659361091872</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +493,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 12.07.22 (2) corrected" />
     <MESSAGE value="version as of 13.07.22 corrected" />
     <MESSAGE value="version as of 14.07.22 corrected" />
     <MESSAGE value="version as of 15.07.22 corrected" />
@@ -517,6 +517,7 @@
     <MESSAGE value="version as of 30.07.22  all controllers" />
     <MESSAGE value="version as of 31.07.22  statistics" />
     <MESSAGE value="version as of 01.08.22  corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 01.08.22  corrections" />
+    <MESSAGE value="version as of 01.08.22  globalSettings trial" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 01.08.22  globalSettings trial" />
   </component>
 </project>

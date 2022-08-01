@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,7 +31,7 @@ public class PostVotes {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private Date time;
+    private LocalDateTime time;
 
     private int value;
 }

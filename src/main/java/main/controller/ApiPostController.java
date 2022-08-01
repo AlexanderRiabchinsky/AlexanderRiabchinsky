@@ -3,7 +3,10 @@ package main.controller;
 import main.api.request.LikeDislikeRequest;
 import main.api.request.RegPostRequest;
 import main.api.response.*;
+import main.model.PostVotes;
 import main.model.Posts;
+import main.repositories.PostVotesRepository;
+import main.repositories.UserRepository;
 import main.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,87 +21,117 @@ import java.util.Optional;
 public class ApiPostController {
 
     private final ApiPostService postService;
+    private final PostVotesRepository postVotesRepository;
+    private final UserRepository userRepository;
 
-    public ApiPostController(ApiPostService postService) {
+    public ApiPostController(ApiPostService postService, PostVotesRepository postVotesRepository, UserRepository userRepository) {
         this.postService = postService;
+        this.postVotesRepository = postVotesRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/post")
     public ResponseEntity<PostResponse> byMode(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam (required = false, defaultValue = "recent") String mode) {
+                                               @RequestParam(required = false, defaultValue = "recent") String mode) {
         return ResponseEntity.ok(postService.getPostByMode(offset, limit, mode));
     }
 
     @GetMapping("/post/search")
-    public ResponseEntity <PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,
+    public ResponseEntity<PostResponse> apiPostSearch(@RequestParam(defaultValue = "0") int offset,
                                                       @RequestParam(defaultValue = "10") int limit,
-                                                      @RequestParam (required = false) String query) { return ResponseEntity.ok(postService.getPostSearch(offset,limit,query));
+                                                      @RequestParam(required = false) String query) {
+        return ResponseEntity.ok(postService.getPostSearch(offset, limit, query));
     }
 
     @GetMapping("/post/byDate")
     public ResponseEntity<PostResponse> byDate(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
-                                               @RequestParam (required = false) String date) {return ResponseEntity.ok(postService.getPostByDate(offset, limit, date));
+                                               @RequestParam(required = false) String date) {
+        return ResponseEntity.ok(postService.getPostByDate(offset, limit, date));
     }
 
     @GetMapping("/post/byTag")
     public ResponseEntity<PostResponse> byTag(@RequestParam(defaultValue = "0") int offset,
                                               @RequestParam(defaultValue = "10") int limit,
-                                              @RequestParam (required = false) String tag) {return ResponseEntity.ok(postService.getPostByTag(offset, limit, tag));
+                                              @RequestParam(required = false) String tag) {
+        return ResponseEntity.ok(postService.getPostByTag(offset, limit, tag));
     }
 
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable int id, Principal principal) {return ResponseEntity.ok(postService.getPostById(id,principal));
+    public ResponseEntity<PostIDResponse> postIdCheck(@PathVariable int id, Principal principal) {
+        return ResponseEntity.ok(postService.getPostById(id, principal));
     }
 
     @PreAuthorize("hasAuthority('user:moderate')")
     @GetMapping("/post/moderation")
     public ResponseEntity<PostResponse> moderationCheck(@RequestParam(defaultValue = "0") int offset,
                                                         @RequestParam(defaultValue = "10") int limit,
-                                                        @RequestParam (defaultValue = "new") String status,
-                                                        Principal principal){return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
+                                                        @RequestParam(defaultValue = "new") String status,
+                                                        Principal principal) {
+        return ResponseEntity.ok(postService.getModerationData(offset, limit, status, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/post/my")
     public ResponseEntity<PostResponse> postMy(@RequestParam(defaultValue = "0") int offset,
-                                                        @RequestParam(defaultValue = "10") int limit,
-                                                        @RequestParam (required = false) String status,
-                                                        Principal principal){return ResponseEntity.ok(postService.getMyPosts(offset, limit, status, principal));
+                                               @RequestParam(defaultValue = "10") int limit,
+                                               @RequestParam(required = false) String status,
+                                               Principal principal) {
+        return ResponseEntity.ok(postService.getMyPosts(offset, limit, status, principal));
     }
 
-  @PreAuthorize("hasAuthority('user:write')")
+    @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post")
     public ResponseEntity<RegResponse> newPost(@RequestBody RegPostRequest regPostRequest,
                                                Principal principal) {
-        return ResponseEntity.ok(postService.getRegPostResponse(regPostRequest,principal));
+        return ResponseEntity.ok(postService.getRegPostResponse(regPostRequest, principal));
     }
 
-  @PreAuthorize("hasAuthority('user:write')")
-  @PutMapping("/post/{id}")
-  public ResponseEntity<RegResponse> updatePost(@PathVariable int id,
-                                                @RequestBody RegPostRequest regPostRequest,
-                                                Principal principal) {
-    Optional<Posts> optionalPost = Optional.ofNullable(postService.getOptionalPostById(id, principal));
-    if (optionalPost.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @PreAuthorize("hasAuthority('user:write')")
+    @PutMapping("/post/{id}")
+    public ResponseEntity<RegResponse> updatePost(@PathVariable int id,
+                                                  @RequestBody RegPostRequest regPostRequest,
+                                                  Principal principal) {
+        Optional<Posts> optionalPost = Optional.ofNullable(postService.getOptionalPostById(id, principal));
+        if (optionalPost.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(postService.getUpdatePostResponse(optionalPost.get().getId(), regPostRequest, principal));
     }
-    return ResponseEntity.ok(postService.getUpdatePostResponse(optionalPost.get().getId(), regPostRequest,principal));
-  }
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post/like")
     public ResponseEntity<ResultResponse> like(@RequestBody LikeDislikeRequest request,
                                                Principal principal) {
-        return ResponseEntity.ok(postService.getLike(request,principal));
+        Optional<PostVotes> like = postVotesRepository.checkVote(request.getPostId(),
+                userRepository.findByEmail(principal.getName()).get().getId());
+        if (like.isPresent()) {
+            if (like.get().getValue() == 1) {
+                return ResponseEntity.ok(postService.getFalse());
+            } else if (like.get().getValue() == -1) {
+                return ResponseEntity.ok(postService.getChangeTolike(like.get()));
+            }
+        }
+        return ResponseEntity.ok(postService.getLike(userRepository.findByEmail(principal.getName()).get().getId(),
+                request.getPostId()));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post/dislike")
     public ResponseEntity<ResultResponse> dislike(@RequestBody LikeDislikeRequest request,
-                                               Principal principal) {
-        return ResponseEntity.ok(postService.getDislike(request,principal));
+                                                  Principal principal) {
+        Optional<PostVotes> disLike = postVotesRepository.checkVote(request.getPostId(),
+                userRepository.findByEmail(principal.getName()).get().getId());
+        if (disLike.isPresent()) {
+            if (disLike.get().getValue() == -1) {
+                return ResponseEntity.ok(postService.getFalse());
+            } else if (disLike.get().getValue() == 1) {
+                return ResponseEntity.ok(postService.getChangeToDislike(disLike.get()));
+            }
+        }
+        return ResponseEntity.ok(postService.getDislike(userRepository.findByEmail(principal.getName()).get().getId(),
+                request.getPostId()));
     }
 
 }

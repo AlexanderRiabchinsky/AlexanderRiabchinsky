@@ -5,10 +5,7 @@ import main.api.request.LikeDislikeRequest;
 import main.api.request.RegPostRequest;
 import main.api.response.*;
 import main.model.*;
-import main.repositories.PostCommentsRepository;
-import main.repositories.PostsRepository;
-import main.repositories.TagsRepository;
-import main.repositories.UserRepository;
+import main.repositories.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +26,7 @@ public class ApiPostService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
     private final PostCommentsRepository postCommentsRepository;
+    private final PostVotesRepository postVotesRepository;
     private final TagsRepository tagsRepository;
     private final ApiGeneralService apiGeneralService;
 
@@ -321,15 +319,57 @@ public class ApiPostService {
         }
         return regResponse;
     }
-    public ResultResponse getLike(LikeDislikeRequest request, Principal principal) {
+    public ResultResponse getLike(int userId, int postId) {
+        PostVotes newPV = new PostVotes();
+        newPV.setPost(postsRepository.getOne(postId));
+        newPV.setUser(userRepository.getOne(userId));
+        newPV.setTime(LocalDateTime.now());
+        newPV.setValue(1);
+        postVotesRepository.save(newPV);
         ResultResponse response = new ResultResponse();
-
+        response.setResult(true);
         return response;
     }
 
-    public ResultResponse getDislike(LikeDislikeRequest request, Principal principal) {
+    public ResultResponse getDislike(int userId, int postId) {
+        PostVotes newPV = new PostVotes();
+        newPV.setPost(postsRepository.getOne(postId));
+        newPV.setUser(userRepository.getOne(userId));
+        newPV.setTime(LocalDateTime.now());
+        newPV.setValue(-1);
+        postVotesRepository.save(newPV);
         ResultResponse response = new ResultResponse();
+        response.setResult(true);
 
+        return response;
+    }
+    public ResultResponse getFalse(){
+        ResultResponse response = new ResultResponse();
+        response.setResult(false);
+        return response;
+    }
+    public ResultResponse getChangeTolike(PostVotes like){
+        PostVotes newPV = new PostVotes();
+        newPV.setId(like.getId());
+        newPV.setPost(like.getPost());
+        newPV.setUser(like.getUser());
+        newPV.setTime(LocalDateTime.now());
+        newPV.setValue(1);
+        postVotesRepository.save(newPV);
+        ResultResponse response = new ResultResponse();
+        response.setResult(true);
+        return response;
+    }
+    public ResultResponse getChangeToDislike(PostVotes disLike){
+        PostVotes newPV = new PostVotes();
+        newPV.setId(disLike.getId());
+        newPV.setPost(disLike.getPost());
+        newPV.setUser(disLike.getUser());
+        newPV.setTime(LocalDateTime.now());
+        newPV.setValue(-1);
+        postVotesRepository.save(newPV);
+        ResultResponse response = new ResultResponse();
+        response.setResult(true);
         return response;
     }
 
