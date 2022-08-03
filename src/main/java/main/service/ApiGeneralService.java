@@ -5,10 +5,7 @@ import main.api.request.ModerationRequest;
 import main.api.request.ProfileRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
-import main.model.PostComments;
-import main.model.PostVotes;
-import main.model.Posts;
-import main.model.Tags;
+import main.model.*;
 import main.repositories.*;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -105,15 +102,16 @@ public class ApiGeneralService {
 
         return calendarResponse;
     }
-    public boolean checkImage(MultipartFile image){
+
+    public boolean checkImage(MultipartFile image) {
         String extension = FilenameUtils.getExtension(image.getOriginalFilename());
         long fileLenth = image.getSize();
-        if ((extension.equals("jpg") || extension.equals("png")) && fileLenth < MAX_IMAGE_LENTH){
+        if ((extension.equals("jpg") || extension.equals("png")) && fileLenth < MAX_IMAGE_LENTH) {
             return true;
         } else return false;
     }
 
-    public RegResponse getImageError(MultipartFile photo){
+    public RegResponse getImageError(MultipartFile photo) {
         RegResponse response = new RegResponse();
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
         long fileLenth = photo.getSize();
@@ -137,16 +135,16 @@ public class ApiGeneralService {
         String newFileName = gen(5);
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
 
-            String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
-            newFileName = dirName + "/" + newFileName + "." + extension;
-            File dir = new File(dirName);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
-            File outputfile = new File(newFileName);
-            ImageIO.write(bufferedImage, extension, outputfile);
-            response.setString(newFileName);
+        String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
+        newFileName = dirName + "/" + newFileName + "." + extension;
+        File dir = new File(dirName);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
+        File outputfile = new File(newFileName);
+        ImageIO.write(bufferedImage, extension, outputfile);
+        response.setString(newFileName);
 
         return "/" + newFileName;
     }
@@ -156,16 +154,16 @@ public class ApiGeneralService {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
-        Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
+     //   Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
 
         String text = request.getText();
-        if(text.length()<MIN_COMMENT_LENTH){
-            errors.put("text","Текст комментария отсутствует или менее "+MIN_COMMENT_LENTH+" символов");
+        if (text.length() < MIN_COMMENT_LENTH) {
+            errors.put("text", "Текст комментария отсутствует или менее " + MIN_COMMENT_LENTH + " символов");
         }
         if (errors.isEmpty()) {
             regResponse.setResult(true);
             PostComments pc = new PostComments();
-            if (request.getParentId()>0){
+            if (request.getParentId() > 0) {
                 pc.setParentId(request.getParentId());
             } else pc.setParentId(null);
             pc.setPost(postOpt.get());
@@ -190,8 +188,12 @@ public class ApiGeneralService {
         return globalSettingsRepository.findSettingValue("POST_PREMODERATION").equals("YES");
     }
 
-    public boolean ststisticIsPublic() {
+    public boolean statisticIsPublic() {
         return globalSettingsRepository.findSettingValue("STATISTICS_IS_PUBLIC").equals("YES");
+    }
+
+    public boolean checkIfModerator(Principal principal) {
+        return (userRepository.findIfModerator(principal.getName()) == 1);
     }
 
     public static String gen(int length) {
@@ -228,10 +230,10 @@ public class ApiGeneralService {
         return response;
     }
 
-    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password){
+    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password) {
         RegResponse response = new RegResponse();
 
-        return  response;
+        return response;
     }
 
     public RegResponse profile(ProfileRequest request, Principal principal) {
@@ -239,66 +241,84 @@ public class ApiGeneralService {
 
         return response;
     }
-    public ResultResponse checkComment(SetCommentRequest request){
+
+    public ResultResponse checkComment(SetCommentRequest request) {
         ResultResponse response = new ResultResponse();
         response.setResult(true);
         Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
         Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
-        if(!postOpt.isPresent()){response.setResult(false);}
-        if(!postCommOpt.isPresent()&&(request.getParentId()!=0)){response.setResult(false);}
+        if (!postOpt.isPresent()) {
+            response.setResult(false);
+        }
+        if (!postCommOpt.isPresent() && (request.getParentId() != 0)) {
+            response.setResult(false);
+        }
         return response;
     }
-    public RegResponse getErrorResponse(SetCommentRequest request){
+
+    public RegResponse getErrorResponse(SetCommentRequest request) {
         Map<String, String> errors = new HashMap<>();
         RegResponse response = new RegResponse();
         Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
         Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
-        if(!postOpt.isPresent()){ errors.put("post","Пост отсутствует");}
-        if(!postCommOpt.isPresent()){ errors.put("comment","Комментарий отсутствует");}
+        if (!postOpt.isPresent()) {
+            errors.put("post", "Пост отсутствует");
+        }
+        if (!postCommOpt.isPresent()) {
+            errors.put("comment", "Комментарий отсутствует");
+        }
         response.setResult(false);
         response.setErrors(errors);
         return response;
     }
 
-    public StatisticsResponse statisticsMy(Principal principal){
+    public StatisticsResponse statisticsMy(Principal principal) {
         int likes = 0;
         int dislikes = 0;
         int views = 0;
         long first = mapperService.getTimestampFromLocalDateTime(LocalDateTime.now());
         List<Posts> posts = postsRepository.findMyActivePosts(userRepository.findByEmail(principal.getName()).get().getId());
         List<PostVotes> postVotes = postVotesRepository.findAll();
-        for(Posts post:posts){
-            for (PostVotes pv:postVotes){
-                if(post.getId()==pv.getPost().getId() && pv.getValue()==1) {likes++;}
-                if(post.getId()==pv.getPost().getId() && pv.getValue()==-1) {dislikes++;}
+        for (Posts post : posts) {
+            for (PostVotes pv : postVotes) {
+                if (post.getId() == pv.getPost().getId() && pv.getValue() == 1) {
+                    likes++;
+                }
+                if (post.getId() == pv.getPost().getId() && pv.getValue() == -1) {
+                    dislikes++;
+                }
             }
-            views+=post.getViewCount();
-            first=Math.min(first,mapperService.getTimestampFromLocalDateTime(post.getTimestamp()));
+            views += post.getViewCount();
+            first = Math.min(first, mapperService.getTimestampFromLocalDateTime(post.getTimestamp()));
         }
         StatisticsResponse response = new StatisticsResponse();
-        response.setPostsCount(posts.stream().count());
+        response.setPostsCount(posts.size());
         response.setLikesCount(likes);
         response.setDislikesCount(dislikes);
         response.setViewsCount(views);
-        response.setFirstPublication(response.getPostsCount()==0? 0:first);
+        response.setFirstPublication(response.getPostsCount() == 0 ? 0 : first);
 
         return response;
     }
 
-    public StatisticsResponse statisticsAll(){
+    public StatisticsResponse statisticsAll() {
         int likes = 0;
         int dislikes = 0;
         int views = 0;
         long first = mapperService.getTimestampFromLocalDateTime(LocalDateTime.now());
         List<Posts> posts = postsRepository.findAll();
         List<PostVotes> postVotes = postVotesRepository.findAll();
-        for(Posts post:posts){
-            for (PostVotes pv:postVotes){
-                if(post.getId()==pv.getPost().getId() && pv.getValue()==1) {likes++;}
-                if(post.getId()==pv.getPost().getId() && pv.getValue()==-1) {dislikes++;}
+        for (Posts post : posts) {
+            for (PostVotes pv : postVotes) {
+                if (post.getId() == pv.getPost().getId() && pv.getValue() == 1) {
+                    likes++;
+                }
+                if (post.getId() == pv.getPost().getId() && pv.getValue() == -1) {
+                    dislikes++;
+                }
             }
-            views+=post.getViewCount();
-            first=Math.min(first,mapperService.getTimestampFromLocalDateTime(post.getTimestamp()));
+            views += post.getViewCount();
+            first = Math.min(first, mapperService.getTimestampFromLocalDateTime(post.getTimestamp()));
         }
         StatisticsResponse response = new StatisticsResponse();
         response.setPostsCount(posts.stream().count());
@@ -312,11 +332,20 @@ public class ApiGeneralService {
 
     public void settings(SettingsResponse request) {
 
-        String multiuser = (request.isMultiuserMode())? "YES":"NO";
-        String postPremoderation = (request.isPostPremoderation())? "YES":"NO";
-        String statisticsPublic = (request.isStatisticsIsPublic())? "YES":"NO";
-        globalSettingsRepository.setSettingValue("MULTIUSER_MODE",multiuser);
-        globalSettingsRepository.setSettingValue("POST_PREMODERATION",postPremoderation);
-        globalSettingsRepository.setSettingValue("STATISTICS_IS_PUBLIC",statisticsPublic);
+        List<GlobalSettings> settings = globalSettingsRepository.findAll();
+        for (GlobalSettings setting : settings) {
+            switch (setting.getCode()) {
+                case "MULTIUSER_MODE":
+                    setting.setValue(request.isMultiuserMode() ? "YES" : "NO");
+                    break;
+                case "POST_PREMODERATION":
+                    setting.setValue(request.isPostPremoderation() ? "YES" : "NO");
+                    break;
+                case "STATISTICS_IS_PUBLIC":
+                    setting.setValue(request.isStatisticsIsPublic() ? "YES" : "NO");
+                    break;
+            }
+            globalSettingsRepository.save(setting);
+        }
     }
 }

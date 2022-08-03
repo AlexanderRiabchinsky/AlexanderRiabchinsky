@@ -39,7 +39,7 @@ public class MapperService {
         return postDto;
     }
 
-    public UserExternal convertUserToDto(User user){
+    public UserExternal convertUserToDto(User user) {
         UserExternal userDto = new UserExternal();
         userDto.setId(user.getId());
         userDto.setRegTime(getTimestampFromLocalDateTime(user.getRegTime()));
@@ -67,6 +67,7 @@ public class MapperService {
 
         return postToComment;
     }
+
     public long getTimestampFromLocalDateTime(LocalDateTime localDateTime) {
         return localDateTime == null ? 0 : localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }

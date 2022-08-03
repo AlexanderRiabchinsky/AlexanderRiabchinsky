@@ -9,6 +9,7 @@ import main.repositories.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -319,10 +320,20 @@ public class ApiPostService {
         }
         return regResponse;
     }
-    public ResultResponse getLike(int userId, int postId) {
+
+    public ResultResponse getLike(LikeDislikeRequest request, Principal principal) {
+        Optional<PostVotes> like = postVotesRepository.checkVote(request.getPostId(),
+                userRepository.findByEmail(principal.getName()).get().getId());
+        if (like.isPresent()) {
+            if (like.get().getValue() == 1) {
+                return getFalse();
+            } else if (like.get().getValue() == -1) {
+                return getChangeTolike(like.get());
+            }
+        }
         PostVotes newPV = new PostVotes();
-        newPV.setPost(postsRepository.getOne(postId));
-        newPV.setUser(userRepository.getOne(userId));
+        newPV.setPost(postsRepository.getOne(request.getPostId()));
+        newPV.setUser(userRepository.findByEmail(principal.getName()).get());
         newPV.setTime(LocalDateTime.now());
         newPV.setValue(1);
         postVotesRepository.save(newPV);
@@ -331,24 +342,34 @@ public class ApiPostService {
         return response;
     }
 
-    public ResultResponse getDislike(int userId, int postId) {
+    public ResultResponse getDislike(LikeDislikeRequest request, Principal principal) {
+        Optional<PostVotes> disLike = postVotesRepository.checkVote(request.getPostId(),
+                userRepository.findByEmail(principal.getName()).get().getId());
+        if (disLike.isPresent()) {
+            if (disLike.get().getValue() == -1) {
+                return getFalse();
+            } else if (disLike.get().getValue() == 1) {
+                return getChangeToDislike(disLike.get());
+            }
+        }
         PostVotes newPV = new PostVotes();
-        newPV.setPost(postsRepository.getOne(postId));
-        newPV.setUser(userRepository.getOne(userId));
+        newPV.setPost(postsRepository.getOne(request.getPostId()));
+        newPV.setUser(userRepository.findByEmail(principal.getName()).get());
         newPV.setTime(LocalDateTime.now());
         newPV.setValue(-1);
         postVotesRepository.save(newPV);
         ResultResponse response = new ResultResponse();
         response.setResult(true);
-
         return response;
     }
-    public ResultResponse getFalse(){
+
+    public ResultResponse getFalse() {
         ResultResponse response = new ResultResponse();
         response.setResult(false);
         return response;
     }
-    public ResultResponse getChangeTolike(PostVotes like){
+
+    public ResultResponse getChangeTolike(PostVotes like) {
         PostVotes newPV = new PostVotes();
         newPV.setId(like.getId());
         newPV.setPost(like.getPost());
@@ -360,7 +381,8 @@ public class ApiPostService {
         response.setResult(true);
         return response;
     }
-    public ResultResponse getChangeToDislike(PostVotes disLike){
+
+    public ResultResponse getChangeToDislike(PostVotes disLike) {
         PostVotes newPV = new PostVotes();
         newPV.setId(disLike.getId());
         newPV.setPost(disLike.getPost());

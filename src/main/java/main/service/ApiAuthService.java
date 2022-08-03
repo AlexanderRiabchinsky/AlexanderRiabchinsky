@@ -14,6 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.security.Principal;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,12 +38,12 @@ public class ApiAuthService {
 
     public AuthCheckResponse getLoginResponse(String email) {
         AuthCheckResponse authCheckResponse = new AuthCheckResponse();
-        main.model.User currentUser  = userRepository.findByEmail(email)
+        main.model.User currentUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
         UserExternal userResponse = new UserExternal();
         userResponse.setEmail(currentUser.getEmail());
         userResponse.setName(currentUser.getName());
-        userResponse.setModeration(currentUser.getIsModerator()==1);
+        userResponse.setModeration(currentUser.getIsModerator() == 1);
         userResponse.setId(currentUser.getId());
 
         authCheckResponse.setResult(true);
@@ -44,7 +51,8 @@ public class ApiAuthService {
 
         return authCheckResponse;
     }
-    public ResultResponse getLogoutResponse(){
+
+    public ResultResponse getLogoutResponse() {
         ResultResponse resultResponse = new ResultResponse();
         resultResponse.setResult(true);
         return resultResponse;
@@ -81,7 +89,7 @@ public class ApiAuthService {
             regResponse.setResult(true);
             User user = new User();
             user.setIsModerator((byte) 0);
-            user.setRegTime( (new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+            user.setRegTime((new Date()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
             user.setName(name);
             user.setEmail(email);
             user.setPassword(BCRYPT.encode(password));
@@ -95,6 +103,40 @@ public class ApiAuthService {
 
     public ResultResponse getRestoreResponse(LoginRequest request) {
         ResultResponse response = new ResultResponse();
+        Optional<User> user = userRepository.findByEmail(request.getEmail());
+        if (!user.isPresent()) {response.setResult(false);
+        return response;}
+        String to = request.getEmail();
+        String from = "web@gmail.com";
+        String host = "localhost";
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", host);
+
+        Session session = Session.getDefaultInstance(properties);
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+
+            // Установить От: поле заголовка
+            message.setFrom(new InternetAddress(from));
+
+            // Установить Кому: поле заголовка
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Установить тему: поле заголовка
+            message.setSubject("Восстановление пароля");
+
+            // Теперь установите фактическое сообщение
+            message.setText("Это актуальное сообщение");
+
+            // Отправить сообщение
+            Transport.send(message);
+            System.out.println("Сообщение успешно отправлено....");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+
+        response.setResult(true);
 
         return response;
     }
@@ -104,4 +146,5 @@ public class ApiAuthService {
 
         return response;
     }
+
 }

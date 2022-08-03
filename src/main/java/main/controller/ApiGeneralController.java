@@ -42,10 +42,13 @@ public class ApiGeneralController {
     }
 
     @GetMapping("/api/tag")
-    public ResponseEntity<TagResponse> apiTag(@RequestParam (required = false) String query) {return ResponseEntity.ok(generalService.getTagResponse(query));}
+    public ResponseEntity<TagResponse> apiTag(@RequestParam(required = false) String query) {
+        return ResponseEntity.ok(generalService.getTagResponse(query));
+    }
 
     @GetMapping("/api/calendar")
-    public ResponseEntity<CalendarResponse> calendar(@RequestParam  (required = false) String year) {return ResponseEntity.ok(generalService.getCalendar(year));
+    public ResponseEntity<CalendarResponse> calendar(@RequestParam(required = false) String year) {
+        return ResponseEntity.ok(generalService.getCalendar(year));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
@@ -60,19 +63,19 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/api/comment")
     public ResponseEntity<?> setComment(@RequestBody SetCommentRequest setCommentRequest,
-                                                 Principal principal) {
+                                        Principal principal) {
         if (!generalService.checkComment(setCommentRequest).isResult()) {
             return ResponseEntity.badRequest()
                     .body(generalService.getErrorResponse(setCommentRequest));
         }
-        return ResponseEntity.ok(generalService.comment(setCommentRequest,principal));
+        return ResponseEntity.ok(generalService.comment(setCommentRequest, principal));
     }
 
     @PreAuthorize("hasAuthority('user:moderate')")
     @PostMapping("/api/moderation")
     public ResponseEntity<ResultResponse> moderation(@RequestBody ModerationRequest moderationRequest,
                                                      Principal principal) {
-        return ResponseEntity.ok(generalService.moderation(moderationRequest,principal));
+        return ResponseEntity.ok(generalService.moderation(moderationRequest, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
@@ -92,7 +95,7 @@ public class ApiGeneralController {
     @PostMapping("/profile/my")
     public ResponseEntity<RegResponse> editProfile(@RequestBody ProfileRequest profileRequest,
                                                    Principal principal) {
-        return ResponseEntity.ok(generalService.profile( profileRequest,principal));
+        return ResponseEntity.ok(generalService.profile(profileRequest, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
@@ -103,7 +106,7 @@ public class ApiGeneralController {
 
     @GetMapping("/api/statistics/all")
     public ResponseEntity<StatisticsResponse> statAll(Principal principal) {
-        if (!generalService.ststisticIsPublic()&&(userRepository.findIfModerator(principal.getName())!=1)) {
+        if (!generalService.statisticIsPublic() && (!generalService.checkIfModerator(principal))) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         return ResponseEntity.ok(generalService.statisticsAll());

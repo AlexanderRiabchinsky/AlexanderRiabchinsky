@@ -104,34 +104,14 @@ public class ApiPostController {
     @PostMapping("/post/like")
     public ResponseEntity<ResultResponse> like(@RequestBody LikeDislikeRequest request,
                                                Principal principal) {
-        Optional<PostVotes> like = postVotesRepository.checkVote(request.getPostId(),
-                userRepository.findByEmail(principal.getName()).get().getId());
-        if (like.isPresent()) {
-            if (like.get().getValue() == 1) {
-                return ResponseEntity.ok(postService.getFalse());
-            } else if (like.get().getValue() == -1) {
-                return ResponseEntity.ok(postService.getChangeTolike(like.get()));
-            }
-        }
-        return ResponseEntity.ok(postService.getLike(userRepository.findByEmail(principal.getName()).get().getId(),
-                request.getPostId()));
+        return ResponseEntity.ok(postService.getLike(request, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post/dislike")
     public ResponseEntity<ResultResponse> dislike(@RequestBody LikeDislikeRequest request,
                                                   Principal principal) {
-        Optional<PostVotes> disLike = postVotesRepository.checkVote(request.getPostId(),
-                userRepository.findByEmail(principal.getName()).get().getId());
-        if (disLike.isPresent()) {
-            if (disLike.get().getValue() == -1) {
-                return ResponseEntity.ok(postService.getFalse());
-            } else if (disLike.get().getValue() == 1) {
-                return ResponseEntity.ok(postService.getChangeToDislike(disLike.get()));
-            }
-        }
-        return ResponseEntity.ok(postService.getDislike(userRepository.findByEmail(principal.getName()).get().getId(),
-                request.getPostId()));
+        return ResponseEntity.ok(postService.getDislike(request, principal));
     }
 
 }

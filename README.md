@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @AlexanderRiabchinsky
-- 👀 I’m interested in studuing Java
+- 👀 I’m interested in studying Java
 - 🌱 I’m currently learning Spring
 - 💞️ I’m looking to collaborate on developing
 - 📫 How to reach me rialex@rambler.ru
