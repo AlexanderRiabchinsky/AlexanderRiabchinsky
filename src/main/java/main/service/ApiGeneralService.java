@@ -10,14 +10,17 @@ import main.repositories.*;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Math.*;
 import static org.flywaydb.core.internal.util.StringUtils.leftPad;
@@ -106,9 +109,7 @@ public class ApiGeneralService {
     public boolean checkImage(MultipartFile image) {
         String extension = FilenameUtils.getExtension(image.getOriginalFilename());
         long fileLenth = image.getSize();
-        if ((extension.equals("jpg") || extension.equals("png")) && fileLenth < MAX_IMAGE_LENTH) {
-            return true;
-        } else return false;
+        return (extension.equals("jpg") || extension.equals("png")) && fileLenth < MAX_IMAGE_LENTH;
     }
 
     public RegResponse getImageError(MultipartFile photo) {
@@ -127,7 +128,7 @@ public class ApiGeneralService {
         return response;
     }
 
-    public String saveImage(MultipartFile photo) throws IOException {
+    public String saveImageFromMultiPart(MultipartFile photo) throws IOException {
         RegResponse response = new RegResponse();
         String dir1 = gen(2);
         String dir2 = gen(2);
@@ -148,14 +149,33 @@ public class ApiGeneralService {
 
         return "/" + newFileName;
     }
+//    public String saveImageFromImage(Image photo) throws IOException {
+//        RegResponse response = new RegResponse();
+//        String dir1 = gen(2);
+//        String dir2 = gen(2);
+//        String dir3 = gen(2);
+//        String newFileName = gen(5);
+//        String extension = FilenameUtils.getExtension(photo.g);
+//
+//        String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
+//        newFileName = dirName + "/" + newFileName + "." + extension;
+//        File dir = new File(dirName);
+//        if (!dir.exists()) {
+//            dir.mkdirs();
+//        }
+//        BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
+//        File outputfile = new File(newFileName);
+//        ImageIO.write(photo, extension, outputfile);
+//        response.setString(newFileName);
+
+//        return "/" + newFileName;
+ //   }
 
     public RegResponse comment(SetCommentRequest request,
                                Principal principal) {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         Optional<Posts> postOpt = postsRepository.findById(request.getPostId());
-     //   Optional<PostComments> postCommOpt = postCommentsRepository.findById(request.getParentId());
-
         String text = request.getText();
         if (text.length() < MIN_COMMENT_LENTH) {
             errors.put("text", "Текст комментария отсутствует или менее " + MIN_COMMENT_LENTH + " символов");
@@ -230,7 +250,15 @@ public class ApiGeneralService {
         return response;
     }
 
-    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password) {
+    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password,int removePhoto) throws IOException {
+        User user = userRepository.findByEmail(email).get();
+        String existsPath = user.getPhoto();
+        String path = "";
+        if(!photo.isEmpty()){
+            BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
+            Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING);
+   //         path = saveImageFromMultiPart(image);
+            }
         RegResponse response = new RegResponse();
 
         return response;

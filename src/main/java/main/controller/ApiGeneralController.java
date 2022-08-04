@@ -57,7 +57,7 @@ public class ApiGeneralController {
         if (!generalService.checkImage(image)) {
             return ResponseEntity.badRequest().body(generalService.getImageError(image));
         }
-        return ResponseEntity.ok(generalService.saveImage(image));
+        return ResponseEntity.ok(generalService.saveImageFromMultiPart(image));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
@@ -88,7 +88,7 @@ public class ApiGeneralController {
             @RequestParam(value = "removePhoto") int removePhoto,
             Principal principal) throws IOException {
         return ResponseEntity
-                .ok(generalService.editImage(principal, photo, name, email, password));
+                .ok(generalService.editImage(principal, photo, name, email, password,removePhoto));
     }
 
     @PreAuthorize("hasAuthority('user:write')")

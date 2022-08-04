@@ -1,9 +1,9 @@
 package main.service;
 
 import lombok.AllArgsConstructor;
-import main.api.request.LoginRequest;
 import main.api.request.PasswordRequest;
 import main.api.request.RegRequest;
+import main.api.request.RestoreRequest;
 import main.api.response.*;
 import main.model.CaptchaCodes;
 import main.model.User;
@@ -20,7 +20,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.security.Principal;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -101,7 +100,7 @@ public class ApiAuthService {
         return regResponse;
     }
 
-    public ResultResponse getRestoreResponse(LoginRequest request) {
+    public ResultResponse getRestoreResponse(RestoreRequest request) {
         ResultResponse response = new ResultResponse();
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if (!user.isPresent()) {response.setResult(false);
