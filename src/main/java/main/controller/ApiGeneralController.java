@@ -79,7 +79,7 @@ public class ApiGeneralController {
     }
 
     @PreAuthorize("hasAuthority('user:write')")
-    @PostMapping(value = "/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/api/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<RegResponse> editProfile(
             @RequestParam(value = "photo") MultipartFile photo,
             @RequestParam(value = "name") String name,
@@ -92,7 +92,7 @@ public class ApiGeneralController {
     }
 
     @PreAuthorize("hasAuthority('user:write')")
-    @PostMapping("/profile/my")
+    @PostMapping("/api/profile/my")
     public ResponseEntity<RegResponse> editProfile(@RequestBody ProfileRequest profileRequest,
                                                    Principal principal) {
         return ResponseEntity.ok(generalService.profile(profileRequest, principal));
