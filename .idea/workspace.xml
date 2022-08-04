@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 03.08.22  current status">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RestoreRequest.java" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 04.08.22  current status">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1_5__create schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1_5__create schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,13 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00024" summary="version as of 08.06.22">
-      <created>1654659853483</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1654659853483</updated>
     </task>
     <task id="LOCAL-00025" summary="version as of 09.06.22">
       <created>1654808477957</created>
@@ -478,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659505899506</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="version as of 04.08.22  current status">
+      <created>1659606255076</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1659606255076</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,7 +490,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 15.07.22 corrected" />
     <MESSAGE value="version as of 16.07.22 corrected" />
     <MESSAGE value="version as of 18.07.22 corrected" />
     <MESSAGE value="version as of 18.07.22 (2) corrected" />
@@ -520,6 +514,7 @@
     <MESSAGE value="version as of 01.08.22  globalSettings trial" />
     <MESSAGE value="version as of 01.08.22  like &amp; dislike" />
     <MESSAGE value="version as of 03.08.22  current status" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 03.08.22  current status" />
+    <MESSAGE value="version as of 04.08.22  current status" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 04.08.22  current status" />
   </component>
 </project>

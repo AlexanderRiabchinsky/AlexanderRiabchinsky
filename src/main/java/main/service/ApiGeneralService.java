@@ -8,6 +8,8 @@ import main.api.response.*;
 import main.model.*;
 import main.repositories.*;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -19,8 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.*;
 import static org.flywaydb.core.internal.util.StringUtils.leftPad;
@@ -39,6 +43,9 @@ public class ApiGeneralService {
 
     private final static int MAX_IMAGE_LENTH = 30720;
     private final static int MIN_COMMENT_LENTH = 5;
+    public static final int MAX_LENGTH = 255;
+    public static final int PASSWORD_LENGTH = 6;
+    public static final PasswordEncoder BCRYPT = new BCryptPasswordEncoder(12);
 
     public SettingsResponse getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
@@ -169,7 +176,7 @@ public class ApiGeneralService {
 //        response.setString(newFileName);
 
 //        return "/" + newFileName;
- //   }
+    //   }
 
     public RegResponse comment(SetCommentRequest request,
                                Principal principal) {
@@ -250,23 +257,66 @@ public class ApiGeneralService {
         return response;
     }
 
-    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password,int removePhoto) throws IOException {
+    public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password, int removePhoto) throws IOException {
         User user = userRepository.findByEmail(email).get();
         String existsPath = user.getPhoto();
         String path = "";
-        if(!photo.isEmpty()){
+        if (!photo.isEmpty()) {
             BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
             Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING);
-   //         path = saveImageFromMultiPart(image);
-            }
+            //         path = saveImageFromMultiPart(image);
+        }
         RegResponse response = new RegResponse();
 
         return response;
     }
 
     public RegResponse profile(ProfileRequest request, Principal principal) {
+        Optional<User> userOpt = userRepository.findByEmail(principal.getName());
         RegResponse response = new RegResponse();
+        if (userOpt.isPresent()) {
+            Map<String, String> errors = new HashMap<>();
+            List<String> emails = userRepository.findAll().stream()
+                    .map(User::getEmail).collect(Collectors.toList());
+            String email = request.getEmail();
+            if (emails.contains(email)) {
+                errors.put("email", "Этот e-mail уже зарегистрирован");
+            }
+            String name = request.getName();
+            if (name.length() > MAX_LENGTH || !name.matches("[А-Яа-яA-Za-z]+([А-Яа-яA-Za-z\\s]+)?")) {
+                errors.put("name", "Имя указано неверно");
+            }
+            List<String> names = userRepository.findAll().stream()
+                    .map(User::getName).collect(Collectors.toList());
+            String newName = request.getName();
+            if (names.contains(newName)) {
+                errors.put("name", "Такое имя уже зарегистрировано");
+            }
+            String password = request.getPassword();
+            if (password.length() < PASSWORD_LENGTH) {
+                errors.put("password", "Пароль короче 6-ти символов");
+            }
 
+            if (errors.isEmpty()) {
+                response.setResult(true);
+                User user = userOpt.get();
+                if (!request.getName().isBlank()) {
+                    user.setName(name);
+                }
+                if (!request.getEmail().isBlank()) {
+                    user.setEmail(email);
+                }
+                if (!request.getPassword().isBlank()) {
+                    user.setPassword(BCRYPT.encode(password));
+                }
+                userRepository.save(user);
+            } else {
+                response.setResult(false);
+                response.setErrors(errors);
+            }
+        } else {
+            response.setResult(false);
+        }
         return response;
     }
 
