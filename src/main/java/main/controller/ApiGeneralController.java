@@ -57,7 +57,7 @@ public class ApiGeneralController {
         if (!generalService.checkImage(image)) {
             return ResponseEntity.badRequest().body(generalService.getImageError(image));
         }
-        return ResponseEntity.ok(generalService.saveImageFromMultiPart(image));
+        return ResponseEntity.ok(generalService.saveImage(image));
     }
 
     @PreAuthorize("hasAuthority('user:write')")

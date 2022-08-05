@@ -9,6 +9,7 @@ import main.model.CaptchaCodes;
 import main.model.User;
 import main.repositories.CaptchaCodesRepository;
 import main.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,8 @@ public class ApiAuthService {
     public MapperService mapperService;
 
     private final UserRepository userRepository;
-    private CaptchaCodesRepository captchaCodesRepository;
+    private final CaptchaCodesRepository captchaCodesRepository;
+    private final EmailService emailService;
     public static final PasswordEncoder BCRYPT = new BCryptPasswordEncoder(12);
 
     public AuthCheckResponse getLoginResponse(String email) {
@@ -106,37 +108,11 @@ public class ApiAuthService {
         if (!user.isPresent()) {response.setResult(false);
         return response;}
         String to = request.getEmail();
-        String from = "web@gmail.com";
-        String host = "localhost";
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", host);
-
-        Session session = Session.getDefaultInstance(properties);
-
-        try {
-            MimeMessage message = new MimeMessage(session);
-
-            // Установить От: поле заголовка
-            message.setFrom(new InternetAddress(from));
-
-            // Установить Кому: поле заголовка
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Установить тему: поле заголовка
-            message.setSubject("Восстановление пароля");
-
-            // Теперь установите фактическое сообщение
-            message.setText("Это актуальное сообщение");
-
-            // Отправить сообщение
-            Transport.send(message);
-            System.out.println("Сообщение успешно отправлено....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
+        String subject = "Восстановление пароля";
+        String text = "Это актуальное сообщение";
+        emailService.sendSimpleMessage(to,subject,text);
 
         response.setResult(true);
-
         return response;
     }
 

@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 public class ProfileRequest {
     private String name;
-    @JsonProperty("e_mail")
     private String email;
     private String password;
     private int removePhoto;

@@ -8,6 +8,7 @@ import main.api.response.*;
 import main.model.*;
 import main.repositories.*;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -45,6 +49,7 @@ public class ApiGeneralService {
     private final static int MIN_COMMENT_LENTH = 5;
     public static final int MAX_LENGTH = 255;
     public static final int PASSWORD_LENGTH = 6;
+    public static final int PROFILE_IMG_SIZE = 36;
     public static final PasswordEncoder BCRYPT = new BCryptPasswordEncoder(12);
 
     public SettingsResponse getGlobalSettings() {
@@ -135,7 +140,7 @@ public class ApiGeneralService {
         return response;
     }
 
-    public String saveImageFromMultiPart(MultipartFile photo) throws IOException {
+    public String saveImage(MultipartFile photo) throws IOException {
         RegResponse response = new RegResponse();
         String dir1 = gen(2);
         String dir2 = gen(2);
@@ -156,27 +161,6 @@ public class ApiGeneralService {
 
         return "/" + newFileName;
     }
-//    public String saveImageFromImage(Image photo) throws IOException {
-//        RegResponse response = new RegResponse();
-//        String dir1 = gen(2);
-//        String dir2 = gen(2);
-//        String dir3 = gen(2);
-//        String newFileName = gen(5);
-//        String extension = FilenameUtils.getExtension(photo.g);
-//
-//        String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
-//        newFileName = dirName + "/" + newFileName + "." + extension;
-//        File dir = new File(dirName);
-//        if (!dir.exists()) {
-//            dir.mkdirs();
-//        }
-//        BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
-//        File outputfile = new File(newFileName);
-//        ImageIO.write(photo, extension, outputfile);
-//        response.setString(newFileName);
-
-//        return "/" + newFileName;
-    //   }
 
     public RegResponse comment(SetCommentRequest request,
                                Principal principal) {
@@ -259,14 +243,64 @@ public class ApiGeneralService {
 
     public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password, int removePhoto) throws IOException {
         User user = userRepository.findByEmail(email).get();
-        String existsPath = user.getPhoto();
-        String path = "";
-        if (!photo.isEmpty()) {
-            BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
-            Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING);
+        RegResponse response = new RegResponse();
+        //       String existsPath = user.getPhoto();
+        //       String path = "";
+        String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
+        long fileLenth = photo.getSize();
+        if (photo.isEmpty()) {
+            Map<String, String> errors = new HashMap<>();
+            List<String> emails = userRepository.findAll().stream()
+                    .map(User::getEmail).collect(Collectors.toList());
+            //          String email = request.getEmail();
+            if (emails.contains(email)) {
+                errors.put("email", "Этот e-mail уже зарегистрирован");
+            }
+            //          String name = request.getName();
+            if (name.length() > MAX_LENGTH || !name.matches("[А-Яа-яA-Za-z]+([А-Яа-яA-Za-z\\s]+)?")) {
+                errors.put("name", "Имя указано неверно");
+            }
+            if (!extension.equals("jpg") && !extension.equals("png")) {
+                errors.put("type", "Отправлен файл не формата изображение jpg, png");
+            }
+            if (fileLenth > MAX_IMAGE_LENTH) {
+                errors.put("size", "Размер файла превышает допустимый размер");
+            }
+            if (errors.isEmpty()) {
+                response.setResult(true);
+                BufferedImage bufferedImage = ImageIO.read(photo.getInputStream());
+                BufferedImage resultImage = Scalr.resize(bufferedImage,
+                        Scalr.Method.QUALITY,
+                        PROFILE_IMG_SIZE,
+                        PROFILE_IMG_SIZE);
+                String toFile = "upload/" + user.getId() + "/" + photo.getOriginalFilename();
+
+                Path path = Paths.get(toFile);
+                if (removePhoto == 0) {
+                    if (!path.toFile().exists()) {
+
+                        Files.createDirectories(path.getParent());
+                        Files.createFile(path);
+
+                        //                   String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
+                        ImageIO.write(resultImage, extension, path.toFile());
+                        File outputfile = new File(toFile);
+                        ImageIO.write(bufferedImage, extension, outputfile);
+                    }
+                    user.setPhoto("/" + toFile.substring(toFile.lastIndexOf("upload")));
+                } else if (removePhoto == 1) {
+                    user.setPhoto(null);
+                }
+                userRepository.save(user);
+
+            } else {
+                response.setResult(false);
+                response.setErrors(errors);
+            }
+
+            //           Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING);
             //         path = saveImageFromMultiPart(image);
         }
-        RegResponse response = new RegResponse();
 
         return response;
     }
@@ -286,28 +320,22 @@ public class ApiGeneralService {
             if (name.length() > MAX_LENGTH || !name.matches("[А-Яа-яA-Za-z]+([А-Яа-яA-Za-z\\s]+)?")) {
                 errors.put("name", "Имя указано неверно");
             }
-            List<String> names = userRepository.findAll().stream()
-                    .map(User::getName).collect(Collectors.toList());
-            String newName = request.getName();
-            if (names.contains(newName)) {
-                errors.put("name", "Такое имя уже зарегистрировано");
-            }
-            String password = request.getPassword();
-            if (password.length() < PASSWORD_LENGTH) {
+            String password = (request.getPassword() == null) ? "" : request.getPassword();
+            if (password.length() < PASSWORD_LENGTH && password.length() != 0) {
                 errors.put("password", "Пароль короче 6-ти символов");
             }
 
             if (errors.isEmpty()) {
                 response.setResult(true);
                 User user = userOpt.get();
-                if (!request.getName().isBlank()) {
+                if (request.getName() != null) {
                     user.setName(name);
                 }
-                if (!request.getEmail().isBlank()) {
+                if (request.getEmail() != null) {
                     user.setEmail(email);
                 }
-                if (!request.getPassword().isBlank()) {
-                    user.setPassword(BCRYPT.encode(password));
+                if (request.getPassword() != null) {
+                    user.setPassword(BCRYPT.encode(request.getPassword()));
                 }
                 userRepository.save(user);
             } else {
