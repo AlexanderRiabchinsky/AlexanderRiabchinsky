@@ -242,13 +242,13 @@ public class ApiGeneralService {
     }
 
     public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password, int removePhoto) throws IOException {
-        User user = userRepository.findByEmail(email).get();
+        User user = userRepository.findByEmail(principal.getName()).get();
         RegResponse response = new RegResponse();
         //       String existsPath = user.getPhoto();
         //       String path = "";
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
         long fileLenth = photo.getSize();
-        if (photo.isEmpty()) {
+        if (!photo.isEmpty()) {
             Map<String, String> errors = new HashMap<>();
             List<String> emails = userRepository.findAll().stream()
                     .map(User::getEmail).collect(Collectors.toList());

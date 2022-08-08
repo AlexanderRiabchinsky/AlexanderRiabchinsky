@@ -81,11 +81,11 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/api/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<RegResponse> editProfile(
-            @RequestParam(value = "photo") MultipartFile photo,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "email") String email,
+            @RequestParam(value = "photo",required = false) MultipartFile photo,
+            @RequestParam(value = "name",required = false) String name,
+            @RequestParam(value = "email",required = false) String email,
             @RequestParam(value = "password", required = false) String password,
-            @RequestParam(value = "removePhoto") int removePhoto,
+            @RequestParam(value = "removePhoto",required = false) int removePhoto,
             Principal principal) throws IOException {
         return ResponseEntity
                 .ok(generalService.editImage(principal, photo, name, email, password,removePhoto));
