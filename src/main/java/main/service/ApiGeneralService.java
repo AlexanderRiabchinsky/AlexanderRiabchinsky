@@ -7,6 +7,7 @@ import main.api.request.SetCommentRequest;
 import main.api.response.*;
 import main.model.*;
 import main.repositories.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -244,11 +245,9 @@ public class ApiGeneralService {
     public RegResponse editImage(Principal principal, MultipartFile photo, String name, String email, String password, int removePhoto) throws IOException {
         User user = userRepository.findByEmail(principal.getName()).get();
         RegResponse response = new RegResponse();
-        //       String existsPath = user.getPhoto();
-        //       String path = "";
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
         long fileLenth = photo.getSize();
-        if (!photo.isEmpty()) {
+        if (photo != null) {
             Map<String, String> errors = new HashMap<>();
             List<String> emails = userRepository.findAll().stream()
                     .map(User::getEmail).collect(Collectors.toList());
@@ -276,36 +275,27 @@ public class ApiGeneralService {
                 String toFile = "upload/" + user.getId() + "/" + photo.getOriginalFilename();
 
                 Path path = Paths.get(toFile);
-                if (removePhoto == 0) {
-                    if (!path.toFile().exists()) {
+                if (!path.toFile().exists()) {
 
-                        Files.createDirectories(path.getParent());
-                        Files.createFile(path);
+                    Files.createDirectories(path.getParent());
+                    Files.createFile(path);
 
-                        //                   String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
-                        ImageIO.write(resultImage, extension, path.toFile());
-                        File outputfile = new File(toFile);
-                        ImageIO.write(bufferedImage, extension, outputfile);
-                    }
-                    user.setPhoto("/" + toFile.substring(toFile.lastIndexOf("upload")));
-                } else if (removePhoto == 1) {
-                    user.setPhoto(null);
+                    ImageIO.write(resultImage, extension, path.toFile());
+                    File outputfile = new File(toFile);
+                    ImageIO.write(bufferedImage, extension, outputfile);
                 }
+                user.setPhoto("/" + toFile.substring(toFile.lastIndexOf("upload")));
                 userRepository.save(user);
 
             } else {
                 response.setResult(false);
                 response.setErrors(errors);
             }
-
-            //           Image image = bufferedImage.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING);
-            //         path = saveImageFromMultiPart(image);
         }
-
         return response;
     }
 
-    public RegResponse profile(ProfileRequest request, Principal principal) {
+    public RegResponse profile(ProfileRequest request, Principal principal) throws IOException {
         Optional<User> userOpt = userRepository.findByEmail(principal.getName());
         RegResponse response = new RegResponse();
         if (userOpt.isPresent()) {
@@ -336,6 +326,12 @@ public class ApiGeneralService {
                 }
                 if (request.getPassword() != null) {
                     user.setPassword(BCRYPT.encode(request.getPassword()));
+                }
+                if(request.getRemovePhoto()==1){
+                   user.setPhoto(null);
+                   String toDelete = "upload/" + user.getId()+ "/";
+            //        File errase = new File(toDelete);
+                    FileUtils.deleteDirectory(new File(toDelete));
                 }
                 userRepository.save(user);
             } else {

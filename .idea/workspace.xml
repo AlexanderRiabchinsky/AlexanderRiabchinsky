@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 05.08.22  corrected">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="version as of 08.08.22  corrected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/config/MyConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/EmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,13 +135,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00028" summary="version as of 10.06.22 corrected">
-      <created>1654852909462</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1654852909462</updated>
     </task>
     <task id="LOCAL-00029" summary="version as of 12.06.22 corrected">
       <created>1655061623137</created>
@@ -477,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659699720935</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="version as of 08.08.22  corrected">
+      <created>1659984221976</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1659984221976</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -494,7 +496,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 19.07.22 corrected" />
     <MESSAGE value="version as of 20.07.22  3rd Stage Completed" />
     <MESSAGE value="version as of 21.07.22  start 4 stage" />
     <MESSAGE value="version as of 22.07.22  corrected db.migration" />
@@ -519,6 +520,7 @@
     <MESSAGE value="version as of 04.08.22  profile method" />
     <MESSAGE value="version as of 04.08.22  profile method corrected" />
     <MESSAGE value="version as of 05.08.22  corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="version as of 05.08.22  corrected" />
+    <MESSAGE value="version as of 08.08.22  corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="version as of 08.08.22  corrected" />
   </component>
 </project>

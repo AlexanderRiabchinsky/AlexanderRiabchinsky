@@ -44,6 +44,7 @@ public class ApiAuthService {
         UserExternal userResponse = new UserExternal();
         userResponse.setEmail(currentUser.getEmail());
         userResponse.setName(currentUser.getName());
+        userResponse.setPhoto(currentUser.getPhoto());
         userResponse.setModeration(currentUser.getIsModerator() == 1);
         userResponse.setId(currentUser.getId());
 

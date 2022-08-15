@@ -86,7 +86,7 @@ public class ApiGeneralController {
             @RequestParam(value = "email",required = false) String email,
             @RequestParam(value = "password", required = false) String password,
             @RequestParam(value = "removePhoto",required = false) int removePhoto,
-            Principal principal) throws IOException {
+            Principal principal) throws IOException {System.out.println(removePhoto);
         return ResponseEntity
                 .ok(generalService.editImage(principal, photo, name, email, password,removePhoto));
     }
@@ -94,7 +94,7 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/api/profile/my")
     public ResponseEntity<RegResponse> editProfile(@RequestBody ProfileRequest profileRequest,
-                                                   Principal principal) {
+                                                   Principal principal) throws IOException {
         return ResponseEntity.ok(generalService.profile(profileRequest, principal));
     }
 

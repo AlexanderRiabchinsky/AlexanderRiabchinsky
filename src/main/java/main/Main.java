@@ -9,7 +9,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 
 
 @SpringBootApplication
-public class Main implements CommandLineRunner {
+public class Main implements CommandLineRunner{
     private static final Logger log = getLogger(Main.class);
 
     public static void main(String[] args) {

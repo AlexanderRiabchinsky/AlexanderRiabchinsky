@@ -85,7 +85,7 @@ public class ApiAuthController {
     }
 
     @PostMapping("/password")
-    public ResponseEntity<RegResponse> restore(@RequestBody PasswordRequest request) {
+    public ResponseEntity<RegResponse> password(@RequestBody PasswordRequest request) {
         return ResponseEntity.ok(apiAuthService.getPasswordResponse(request));
     }
 
