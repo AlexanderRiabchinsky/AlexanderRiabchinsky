@@ -24,5 +24,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query("select isModerator from User  where email =:email")
     int findIfModerator(@Param("email") String email);
+
+    @Query("SELECT id FROM User where code=:code")
+    Optional<Integer> findByCode(@Param("code") String code);
 }
 

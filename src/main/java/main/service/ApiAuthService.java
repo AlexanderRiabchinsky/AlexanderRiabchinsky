@@ -9,18 +9,11 @@ import main.model.CaptchaCodes;
 import main.model.User;
 import main.repositories.CaptchaCodesRepository;
 import main.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -108,9 +101,14 @@ public class ApiAuthService {
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if (!user.isPresent()) {response.setResult(false);
         return response;}
+        String secret = UUID.randomUUID().toString().replaceAll("-","");
+        User userToRestore = user.get();
+        userToRestore.setCode(secret);
+        userRepository.save(userToRestore);
+
         String to = request.getEmail();
         String subject = "Восстановление пароля";
-        String text = "Это актуальное сообщение";
+        String text = "/login/change-password/"+secret;//System.out.println(text);
         emailService.sendSimpleMessage(to,subject,text);
 
         response.setResult(true);
@@ -119,6 +117,36 @@ public class ApiAuthService {
 
     public RegResponse getPasswordResponse(PasswordRequest request) {
         RegResponse response = new RegResponse();
+        Optional<Integer> trialUser = userRepository.findByCode(request.getCode());
+        Map<String, String> errors = new HashMap<>();
+
+        if (!trialUser.isPresent()) {
+            errors.put("code", "Ссылка для восстановления пароля устарела.\n" +
+                    " <a href= \"/auth/restore\">Запросить ссылку снова</a>");
+        }
+        String password = request.getPassword();
+        if (password.length() < PASSWORD_LENGTH) {
+            errors.put("password", "Пароль короче 6-ти символов");
+        }
+        String captcha = request.getCaptcha();
+        String secret = request.getCaptchaSecret();
+        Optional<CaptchaCodes> optionalCaptcha = captchaCodesRepository.findCaptchaBySecretCode(secret);
+        if (optionalCaptcha.isPresent()) {
+            if (!optionalCaptcha.get().getCode().equals(captcha)) {
+                errors.put("captcha", "Код с картинки введён неверно");
+            }
+        } else {
+            errors.put("captcha", "код устарел");
+        }
+        if (errors.isEmpty()) {
+            response.setResult(true);
+            User user = userRepository.getOne(trialUser.get());
+            user.setPassword(BCRYPT.encode(request.getPassword()));
+            userRepository.save(user);
+        } else {
+            response.setResult(false);
+            response.setErrors(errors);
+        }
 
         return response;
     }

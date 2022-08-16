@@ -7,6 +7,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RestoreRequest {
-//    @JsonProperty("e_mail")
     private String email;
 }
