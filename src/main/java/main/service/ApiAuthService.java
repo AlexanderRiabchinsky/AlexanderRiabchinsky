@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.ZoneId;
 import java.util.*;
@@ -102,13 +103,14 @@ public class ApiAuthService {
         if (!user.isPresent()) {response.setResult(false);
         return response;}
         String secret = UUID.randomUUID().toString().replaceAll("-","");
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         User userToRestore = user.get();
         userToRestore.setCode(secret);
         userRepository.save(userToRestore);
 
         String to = request.getEmail();
         String subject = "Восстановление пароля";
-        String text = "/login/change-password/"+secret;//System.out.println(text);
+        String text = baseUrl+"/login/change-password/"+secret;//System.out.println(text);
         emailService.sendSimpleMessage(to,subject,text);
 
         response.setResult(true);
