@@ -31,7 +31,7 @@ public class Posts{
     @Column(name = "moderator_id")
     private Integer moderatorId;
 
-    @ManyToOne(fetch = FetchType.LAZY)//optional = false,cascade = CascadeType.ALL
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -47,11 +47,9 @@ public class Posts{
 
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-    //@JoinColumn(name = "post_id")
     private List<PostComments> postComments;
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-    //@JoinColumn(name = "post_id")
     private List<PostVotes> postVotes;
 
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
