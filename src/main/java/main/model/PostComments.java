@@ -15,21 +15,16 @@ public class PostComments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
-
     @Column(name = "parent_id")
     private Integer parentId;
 
-
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = false)
     private Posts post;
 
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-
     private LocalDateTime time;
-
     private String text;
 }

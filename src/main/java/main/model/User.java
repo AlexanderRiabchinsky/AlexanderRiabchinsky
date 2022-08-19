@@ -1,13 +1,10 @@
 package main.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,18 +22,12 @@ public class User {
 
     @Column(name = "reg_time")
     private LocalDateTime regTime;
-
     private String name;
-
     private String email;
-
     private String password;
-
     private String code;
-
     private String photo;
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Posts> posts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -45,7 +36,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostComments> postComments;
 
-    public Role getRole(){
-        return isModerator==1 ? Role.MODERATOR : Role.USER;
+    public Role getRole() {
+        return isModerator == 1 ? Role.MODERATOR : Role.USER;
     }
 }

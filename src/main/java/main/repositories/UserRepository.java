@@ -9,15 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
 
     @Query("select u.name from User u where u.id =:id")
     String findNameById(@Param("id") int id);
-
-    @Query("select u.photo from User u where u.id =:id")
-    String findPhotoById(@Param("id") int id);
 
     @Query("select u.email from User u where u.id =:id")
     String findEmailById(@Param("id") int id);

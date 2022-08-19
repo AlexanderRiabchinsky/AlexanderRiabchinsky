@@ -4,7 +4,6 @@ import main.api.request.ModerationRequest;
 import main.api.request.ProfileRequest;
 import main.api.request.SetCommentRequest;
 import main.api.response.*;
-import main.repositories.UserRepository;
 import main.service.ApiGeneralService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,13 +20,10 @@ public class ApiGeneralController {
 
     private final ApiGeneralService generalService;
     private final InitResponse initResponse;
-    private final UserRepository userRepository;
 
-    public ApiGeneralController(ApiGeneralService generalService, InitResponse initResponse, UserRepository userRepository) {
-
+    public ApiGeneralController(ApiGeneralService generalService, InitResponse initResponse) {
         this.generalService = generalService;
         this.initResponse = initResponse;
-        this.userRepository = userRepository;
     }
 
 
@@ -81,14 +77,15 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/api/profile/my", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<RegResponse> editProfile(
-            @RequestParam(value = "photo",required = false) MultipartFile photo,
-            @RequestParam(value = "name",required = false) String name,
-            @RequestParam(value = "email",required = false) String email,
+            @RequestParam(value = "photo", required = false) MultipartFile photo,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "password", required = false) String password,
-            @RequestParam(value = "removePhoto",required = false) int removePhoto,
-            Principal principal) throws IOException {System.out.println(removePhoto);
+            @RequestParam(value = "removePhoto", required = false) int removePhoto,
+            Principal principal) throws IOException {
+        System.out.println(removePhoto);
         return ResponseEntity
-                .ok(generalService.editImage(principal, photo, name, email, password,removePhoto));
+                .ok(generalService.editImage(principal, photo, name, email, password, removePhoto));
     }
 
     @PreAuthorize("hasAuthority('user:write')")

@@ -5,7 +5,6 @@ import main.api.request.PasswordRequest;
 import main.api.request.RegRequest;
 import main.api.request.RestoreRequest;
 import main.api.response.*;
-import main.repositories.UserRepository;
 import main.service.ApiAuthService;
 import main.service.ApiGeneralService;
 import main.service.CaptchaService;
@@ -25,32 +24,29 @@ import java.security.Principal;
 @RequestMapping("/api/auth")
 public class ApiAuthController {
     private final ApiAuthService apiAuthService;
-    private final SettingsResponse settingsResponse;
     private final CaptchaService captchaService;
     private final ApiGeneralService apiGeneralService;
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
 
     @Autowired
-    public ApiAuthController(ApiAuthService apiAuthService, SettingsResponse settingsResponse, CaptchaService captchaService, ApiGeneralService apiGeneralService, AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public ApiAuthController(ApiAuthService apiAuthService, CaptchaService captchaService, ApiGeneralService apiGeneralService, AuthenticationManager authenticationManager) {
         this.apiAuthService = apiAuthService;
-        this.settingsResponse = settingsResponse;
         this.captchaService = captchaService;
         this.apiGeneralService = apiGeneralService;
         this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthCheckResponse>login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<AuthCheckResponse> login(@RequestBody LoginRequest loginRequest) {
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(auth);
         User user = (User) auth.getPrincipal();
 
         return ResponseEntity.ok(apiAuthService.getLoginResponse(user.getUsername()));
 
     }
+
     @GetMapping("/logout")
     public ResponseEntity<ResultResponse> logout(Principal principal) {
         SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
@@ -59,8 +55,8 @@ public class ApiAuthController {
 
 
     @GetMapping("/check")
-    public ResponseEntity<AuthCheckResponse> check(Principal principal){
-        if (principal== null){
+    public ResponseEntity<AuthCheckResponse> check(Principal principal) {
+        if (principal == null) {
             return ResponseEntity.ok(new AuthCheckResponse());
         }
         return ResponseEntity.ok(apiAuthService.getLoginResponse(principal.getName()));
@@ -68,7 +64,8 @@ public class ApiAuthController {
 
 
     @GetMapping("/captcha")
-    public ResponseEntity<CaptchaResponse> captchaCheck() {return ResponseEntity.ok(captchaService.getCaptchaCode());
+    public ResponseEntity<CaptchaResponse> captchaCheck() {
+        return ResponseEntity.ok(captchaService.getCaptchaCode());
     }
 
     @PostMapping("/register")
@@ -88,5 +85,4 @@ public class ApiAuthController {
     public ResponseEntity<RegResponse> password(@RequestBody PasswordRequest request) {
         return ResponseEntity.ok(apiAuthService.getPasswordResponse(request));
     }
-
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "posts")
-public class Posts{
+public class Posts {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,6 @@ public class Posts{
             nullable = false)
     private ModerationStatus status;
 
-
     @Column(name = "moderator_id")
     private Integer moderatorId;
 
@@ -37,22 +36,19 @@ public class Posts{
 
     @Column(name = "time")
     private LocalDateTime timestamp;
-
     private String title;
-
     private String text;
 
     @Column(name = "view_count")
     private int viewCount;
 
-
-    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<PostComments> postComments;
 
-    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<PostVotes> postVotes;
 
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL},fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "tag2post", joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tags> tags;

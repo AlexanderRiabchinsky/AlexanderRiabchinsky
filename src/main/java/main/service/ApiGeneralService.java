@@ -14,10 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -327,10 +324,10 @@ public class ApiGeneralService {
                 if (request.getPassword() != null) {
                     user.setPassword(BCRYPT.encode(request.getPassword()));
                 }
-                if(request.getRemovePhoto()==1){
-                   user.setPhoto(null);
-                   String toDelete = "upload/" + user.getId()+ "/";
-            //        File errase = new File(toDelete);
+                if (request.getRemovePhoto() == 1) {
+                    user.setPhoto(null);
+                    String toDelete = "upload/" + user.getId() + "/";
+                    //        File errase = new File(toDelete);
                     FileUtils.deleteDirectory(new File(toDelete));
                 }
                 userRepository.save(user);

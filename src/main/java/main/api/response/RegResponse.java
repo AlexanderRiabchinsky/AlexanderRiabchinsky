@@ -1,6 +1,5 @@
 package main.api.response;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +10,6 @@ import java.util.Map;
 public class RegResponse {
     private boolean result;
     int id;
-    private Map<String,String>errors;
+    private Map<String, String> errors;
     String string;
 }

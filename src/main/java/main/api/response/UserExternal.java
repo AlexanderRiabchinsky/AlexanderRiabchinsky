@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-@Getter @Setter
+@Getter
+@Setter
 public class UserExternal {
     @Id
     private int id;

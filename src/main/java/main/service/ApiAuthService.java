@@ -100,9 +100,11 @@ public class ApiAuthService {
     public ResultResponse getRestoreResponse(RestoreRequest request) {
         ResultResponse response = new ResultResponse();
         Optional<User> user = userRepository.findByEmail(request.getEmail());
-        if (!user.isPresent()) {response.setResult(false);
-        return response;}
-        String secret = UUID.randomUUID().toString().replaceAll("-","");
+        if (!user.isPresent()) {
+            response.setResult(false);
+            return response;
+        }
+        String secret = UUID.randomUUID().toString().replaceAll("-", "");
         String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         User userToRestore = user.get();
         userToRestore.setCode(secret);
@@ -110,8 +112,8 @@ public class ApiAuthService {
 
         String to = request.getEmail();
         String subject = "Восстановление пароля";
-        String text = baseUrl+"/login/change-password/"+secret;//System.out.println(text);
-        emailService.sendSimpleMessage(to,subject,text);
+        String text = baseUrl + "/login/change-password/" + secret;//System.out.println(text);
+        emailService.sendSimpleMessage(to, subject, text);
 
         response.setResult(true);
         return response;

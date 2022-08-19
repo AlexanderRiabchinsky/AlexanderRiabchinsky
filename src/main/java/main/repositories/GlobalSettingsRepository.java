@@ -8,10 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GlobalSettingsRepository extends JpaRepository<GlobalSettings,Integer> {
+public interface GlobalSettingsRepository extends JpaRepository<GlobalSettings, Integer> {
     @Query(value = "SELECT value FROM global_settings WHERE code =:code",
             nativeQuery = true)
     String findSettingValue(@Param("code") String code);
+
     @Modifying
     @Query(value = "UPDATE global_settings SET value=:value WHERE code =:code",
             nativeQuery = true)

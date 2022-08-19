@@ -9,7 +9,6 @@ import main.repositories.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +22,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ApiPostService {
     private final MapperService mapperService;
-    private final ApiAuthService apiAuthService;
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
-    private final PostCommentsRepository postCommentsRepository;
     private final PostVotesRepository postVotesRepository;
     private final TagsRepository tagsRepository;
     private final ApiGeneralService apiGeneralService;
@@ -395,9 +392,7 @@ public class ApiPostService {
         return response;
     }
 
-
     public Posts getOptionalPostById(int id, Principal principal) {
         return postsRepository.getOptionalPostById(id);
     }
-
 }

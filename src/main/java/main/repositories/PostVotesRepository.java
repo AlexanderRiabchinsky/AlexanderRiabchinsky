@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PostVotesRepository extends JpaRepository<PostVotes,Integer> {
+public interface PostVotesRepository extends JpaRepository<PostVotes, Integer> {
 
-    @Query(value ="SELECT * FROM post_votes WHERE post_id =:postId and user_id=:userId",
+    @Query(value = "SELECT * FROM post_votes WHERE post_id =:postId and user_id=:userId",
             nativeQuery = true)
-    Optional<PostVotes>checkVote(@Param("postId") int PostId,@Param("userId") int userId);
+    Optional<PostVotes> checkVote(@Param("postId") int PostId, @Param("userId") int userId);
 }

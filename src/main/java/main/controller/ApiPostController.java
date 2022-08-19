@@ -3,10 +3,7 @@ package main.controller;
 import main.api.request.LikeDislikeRequest;
 import main.api.request.RegPostRequest;
 import main.api.response.*;
-import main.model.PostVotes;
 import main.model.Posts;
-import main.repositories.PostVotesRepository;
-import main.repositories.UserRepository;
 import main.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +18,9 @@ import java.util.Optional;
 public class ApiPostController {
 
     private final ApiPostService postService;
-    private final PostVotesRepository postVotesRepository;
-    private final UserRepository userRepository;
 
-    public ApiPostController(ApiPostService postService, PostVotesRepository postVotesRepository, UserRepository userRepository) {
+    public ApiPostController(ApiPostService postService) {
         this.postService = postService;
-        this.postVotesRepository = postVotesRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/post")
