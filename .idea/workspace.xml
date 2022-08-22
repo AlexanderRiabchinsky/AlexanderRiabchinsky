@@ -4,53 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="Stage 5 completed">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="ReadMe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/ProfileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/ProfileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/RegPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RegPostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/RegRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RegRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/request/RestoreRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/request/RestoreRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/AuthCheckResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CalendarResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/CaptchaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/CaptchaResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/InitResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/InitResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostIDResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostModeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostModeration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/RegResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/ResultResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/ResultResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/SettingsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/SettingsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/StatisticsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/StatisticsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/TagResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/api/response/UserExternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiAuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiGeneralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/ApiPostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controller/DefaultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controller/DefaultController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/CaptchaCodes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/GlobalSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostComments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/PostVotes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/Tags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/CaptchaCodesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/CaptchaCodesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/GlobalSettingsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/GlobalSettingsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostCommentsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/PostVotesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/TagsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/TagsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/security/SecurityUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/security/SecurityUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/security/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/security/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiGeneralService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/ApiPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/service/CaptchaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/service/CaptchaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,13 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00033" summary="version as of 03.07.22 (2) corrected">
-      <created>1656876310202</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1656876310202</updated>
     </task>
     <task id="LOCAL-00034" summary="version as of 04.07.22 corrected">
       <created>1656919294418</created>
@@ -517,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660804164708</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="ReadMe">
+      <created>1660903545900</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1660903545900</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -534,7 +490,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 23.07.22  corrected" />
     <MESSAGE value="version as of 25.07.22  corrected" />
     <MESSAGE value="version as of 26.07.22  corrected" />
     <MESSAGE value="version as of 26.07.22  corrected /post/{id}" />
@@ -559,6 +514,7 @@
     <MESSAGE value="version as of 16.08.22  corrected" />
     <MESSAGE value="version as of 17.08.22  corrected" />
     <MESSAGE value="Stage 5 completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stage 5 completed" />
+    <MESSAGE value="ReadMe" />
+    <option name="LAST_COMMIT_MESSAGE" value="ReadMe" />
   </component>
 </project>
