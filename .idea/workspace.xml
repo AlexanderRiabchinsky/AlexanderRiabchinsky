@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (plugin)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (port)">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +131,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00040" summary="version as of 09.07.22 corrected">
-      <created>1657387361657</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1657387361657</updated>
     </task>
     <task id="LOCAL-00041" summary="version as of 11.07.22 corrected">
       <created>1657542507539</created>
@@ -475,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661335213430</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="DB connected (port)">
+      <created>1661337621739</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1661337621740</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +492,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 27.07.22  corrected moderation" />
     <MESSAGE value="version as of 28.07.22  corrected post registration&amp; correction" />
     <MESSAGE value="version as of 28.07.22  corrected comment" />
     <MESSAGE value="version as of 29.07.22  corrected" />
@@ -517,6 +516,7 @@
     <MESSAGE value="DB connected" />
     <MESSAGE value="DB connected (name)" />
     <MESSAGE value="DB connected (plugin)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DB connected (plugin)" />
+    <MESSAGE value="DB connected (port)" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB connected (port)" />
   </component>
 </project>
