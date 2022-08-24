@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="new root files">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
@@ -132,13 +132,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00036" summary="version as of 06.07.22 corrected">
-      <created>1657107073666</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1657107073666</updated>
     </task>
     <task id="LOCAL-00037" summary="version as of 07.07.22 corrected">
       <created>1657189790442</created>
@@ -476,7 +469,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661252463517</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="DB connected">
+      <created>1661330006224</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1661330006225</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +493,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 26.07.22  corrected /post/{id}" />
     <MESSAGE value="version as of 27.07.22  corrected" />
     <MESSAGE value="version as of 27.07.22  corrected photo" />
     <MESSAGE value="version as of 27.07.22  corrected moderation" />
@@ -518,6 +517,7 @@
     <MESSAGE value="ReadMe" />
     <MESSAGE value="ReadMe corrected" />
     <MESSAGE value="new root files" />
-    <option name="LAST_COMMIT_MESSAGE" value="new root files" />
+    <MESSAGE value="DB connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB connected" />
   </component>
 </project>
