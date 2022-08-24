@@ -1,8 +1,9 @@
-spring.datasource.url: jdbc:mysql://localhost:3306/blogDriver?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
-spring.datasource.username: root
-spring.datasource.password: testtest
+spring.datasource.url: jdbc:mysql://rialexlx.beget.tech/rialexlx_blog?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+spring.datasource.username: rialexlx_blog
+spring.datasource.password: Test01
 spring:flyway:locations=classpath:db-migration:
 spring.jpa.hibernate.ddl-auto: none
+server:port: 3606
 someParameter: 4337
 
 blog.title: DevPub
