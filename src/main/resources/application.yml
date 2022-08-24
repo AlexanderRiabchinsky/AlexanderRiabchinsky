@@ -1,9 +1,9 @@
-spring.datasource.url: jdbc:mysql://rialexlx.beget.tech/rialexlx_blog?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+spring.datasource.url: jdbc:mysql://rialexlx.beget.tech:3306/rialexlx_blog?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
 spring.datasource.username: rialexlx_blog
 spring.datasource.password: Test01
 spring:flyway:locations=classpath:db-migration:
 spring.jpa.hibernate.ddl-auto: none
-server.port=PORT:8080:
+server:port: 8080
 someParameter: 4337
 
 blog.title: DevPub
