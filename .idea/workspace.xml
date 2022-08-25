@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (application)">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (port)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,13 +131,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00046" summary="version as of 15.07.22 corrected">
-      <created>1657869301634</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1657869301634</updated>
     </task>
     <task id="LOCAL-00047" summary="version as of 16.07.22 corrected">
       <created>1657995699560</created>
@@ -475,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661343375124</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="DB connected (port)">
+      <created>1661343932316</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1661343932316</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,8 +515,8 @@
     <MESSAGE value="DB connected" />
     <MESSAGE value="DB connected (name)" />
     <MESSAGE value="DB connected (plugin)" />
-    <MESSAGE value="DB connected (port)" />
     <MESSAGE value="DB connected (application)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DB connected (application)" />
+    <MESSAGE value="DB connected (port)" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB connected (port)" />
   </component>
 </project>
