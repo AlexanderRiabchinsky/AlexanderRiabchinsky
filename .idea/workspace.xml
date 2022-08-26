@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (port)">
+    <list default="true" id="fa14f698-028d-4cec-b110-ee79bf28a237" name="Changes" comment="DB connected (port 8080)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,13 +131,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642924494352</updated>
-    </task>
-    <task id="LOCAL-00047" summary="version as of 16.07.22 corrected">
-      <created>1657995699560</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1657995699560</updated>
     </task>
     <task id="LOCAL-00048" summary="version as of 18.07.22 corrected">
       <created>1658137341361</created>
@@ -475,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661343932316</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="DB connected (port 8080)">
+      <created>1661410648666</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1661410648667</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +492,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="version as of 28.07.22  corrected comment" />
     <MESSAGE value="version as of 29.07.22  corrected" />
     <MESSAGE value="version as of 30.07.22  all controllers" />
     <MESSAGE value="version as of 31.07.22  statistics" />
@@ -517,6 +516,7 @@
     <MESSAGE value="DB connected (plugin)" />
     <MESSAGE value="DB connected (application)" />
     <MESSAGE value="DB connected (port)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DB connected (port)" />
+    <MESSAGE value="DB connected (port 8080)" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB connected (port 8080)" />
   </component>
 </project>
