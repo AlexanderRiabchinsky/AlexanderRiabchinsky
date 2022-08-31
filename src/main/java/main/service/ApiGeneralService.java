@@ -43,7 +43,7 @@ public class ApiGeneralService {
     private final PostVotesRepository postVotesRepository;
     private final MapperService mapperService;
 
-    private final static int MAX_IMAGE_LENTH = 30720;
+    private final static int MAX_IMAGE_LENTH = 51200;
     private final static int MIN_COMMENT_LENTH = 5;
     public static final int MAX_LENGTH = 255;
     public static final int PASSWORD_LENGTH = 6;

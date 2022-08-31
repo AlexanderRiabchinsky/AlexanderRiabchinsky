@@ -112,7 +112,7 @@ public class ApiAuthService {
 
         String to = request.getEmail();
         String subject = "Восстановление пароля";
-        String text = baseUrl + "/login/change-password/" + secret;//System.out.println(text);
+        String text = baseUrl + "/login/change-password/" + secret;
         emailService.sendSimpleMessage(to, subject, text);
 
         response.setResult(true);
