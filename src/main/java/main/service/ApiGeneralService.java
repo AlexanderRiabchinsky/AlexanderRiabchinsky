@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,7 +26,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static java.lang.Math.*;
 import static org.flywaydb.core.internal.util.StringUtils.leftPad;
 
@@ -145,7 +143,6 @@ public class ApiGeneralService {
         String dir3 = gen(2);
         String newFileName = gen(5);
         String extension = FilenameUtils.getExtension(photo.getOriginalFilename());
-
         String dirName = "upload/" + dir1 + "/" + dir2 + "/" + dir3;
         newFileName = dirName + "/" + newFileName + "." + extension;
         File dir = new File(dirName);
@@ -180,7 +177,6 @@ public class ApiGeneralService {
             pc.setTime(LocalDateTime.now());
             pc.setText(request.getText());
             postCommentsRepository.save(pc);
-
             regResponse.setId(postCommentsRepository.findRecentId());
         } else {
             regResponse.setResult(false);
@@ -235,7 +231,6 @@ public class ApiGeneralService {
             postsRepository.save(post);
             response.setResult(true);
         }
-
         return response;
     }
 
@@ -248,11 +243,9 @@ public class ApiGeneralService {
             Map<String, String> errors = new HashMap<>();
             List<String> emails = userRepository.findAll().stream()
                     .map(User::getEmail).collect(Collectors.toList());
-            //          String email = request.getEmail();
             if (emails.contains(email)) {
                 errors.put("email", "Этот e-mail уже зарегистрирован");
             }
-            //          String name = request.getName();
             if (name.length() > MAX_LENGTH || !name.matches("[А-Яа-яA-Za-z]+([А-Яа-яA-Za-z\\s]+)?")) {
                 errors.put("name", "Имя указано неверно");
             }
@@ -273,17 +266,14 @@ public class ApiGeneralService {
 
                 Path path = Paths.get(toFile);
                 if (!path.toFile().exists()) {
-
                     Files.createDirectories(path.getParent());
                     Files.createFile(path);
-
                     ImageIO.write(resultImage, extension, path.toFile());
                     File outputfile = new File(toFile);
                     ImageIO.write(bufferedImage, extension, outputfile);
                 }
                 user.setPhoto("/" + toFile.substring(toFile.lastIndexOf("upload")));
                 userRepository.save(user);
-
             } else {
                 response.setResult(false);
                 response.setErrors(errors);
@@ -311,7 +301,6 @@ public class ApiGeneralService {
             if (password.length() < PASSWORD_LENGTH && password.length() != 0) {
                 errors.put("password", "Пароль короче 6-ти символов");
             }
-
             if (errors.isEmpty()) {
                 response.setResult(true);
                 User user = userOpt.get();
@@ -327,7 +316,6 @@ public class ApiGeneralService {
                 if (request.getRemovePhoto() == 1) {
                     user.setPhoto(null);
                     String toDelete = "upload/" + user.getId() + "/";
-                    //        File errase = new File(toDelete);
                     FileUtils.deleteDirectory(new File(toDelete));
                 }
                 userRepository.save(user);
@@ -396,7 +384,6 @@ public class ApiGeneralService {
         response.setDislikesCount(dislikes);
         response.setViewsCount(views);
         response.setFirstPublication(response.getPostsCount() == 0 ? 0 : first);
-
         return response;
     }
 
@@ -425,12 +412,10 @@ public class ApiGeneralService {
         response.setDislikesCount(dislikes);
         response.setViewsCount(views);
         response.setFirstPublication(first);
-
         return response;
     }
 
     public void settings(SettingsResponse request) {
-
         List<GlobalSettings> settings = globalSettingsRepository.findAll();
         for (GlobalSettings setting : settings) {
             switch (setting.getCode()) {

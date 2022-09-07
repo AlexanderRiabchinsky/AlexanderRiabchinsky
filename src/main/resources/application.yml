@@ -1,9 +1,8 @@
-spring.datasource.url: jdbc:mysql://rialexlx.beget.tech:3306/rialexlx_blog?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
-spring.datasource.username: rialexlx_blog
-spring.datasource.password: Test01
+spring.datasource.url: jdbc:mysql://localhost:3306/blogDriver?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+spring.datasource.username: root
+spring.datasource.password: testtest
 spring:flyway:locations=classpath:db-migration:
 spring.jpa.hibernate.ddl-auto: none
-server.port: ${PORT:8080}
 someParameter: 4337
 
 blog.title: DevPub
@@ -13,12 +12,6 @@ blog.email: rialex@rambler.ru
 blog.copyright: Alexander Riabchinsky
 blog.copyrightFrom: 2022
 
-#spring.mail.host: smtp.gmail.com
-#spring.mail.port: 587
-#spring.mail.username: testdbbox@gmail.com
-#spring.mail.password: parolesimple
-#spring.mail.properties.mail.smtp.auth: true
-#spring.mail.properties.mail.smtp.starttls.enable: true
 
 spring.mail.protocol: smtps
 spring.mail.host: smtp.mail.ru

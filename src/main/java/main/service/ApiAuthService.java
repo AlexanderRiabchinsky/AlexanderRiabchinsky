@@ -151,8 +151,6 @@ public class ApiAuthService {
             response.setResult(false);
             response.setErrors(errors);
         }
-
         return response;
     }
-
 }
