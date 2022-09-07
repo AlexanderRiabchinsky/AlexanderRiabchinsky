@@ -75,7 +75,6 @@ public class ApiPostService {
         postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
         postByDateResponse.setCount(page.getTotalElements());
-
         return postByDateResponse;
     }
 
@@ -91,7 +90,6 @@ public class ApiPostService {
 
     public PostIDResponse getPostById(int id, Principal principal) {
         Posts post = postsRepository.findById(id).get();
-
         AuthCheckResponse authCheckResponse = getAuthCheck(principal);
         int view;
         if (authCheckResponse.isResult()) {
@@ -147,7 +145,6 @@ public class ApiPostService {
 
         postModeration.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
-
         postModeration.setPosts(moderatorPosts);
 
         return postModeration;
@@ -181,7 +178,6 @@ public class ApiPostService {
 
         myPosts.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
-
         myPosts.setPosts(moderatorPosts);
 
         return myPosts;
@@ -294,7 +290,6 @@ public class ApiPostService {
             int result = localDateTime.compareTo(LocalDateTime.now());
             LocalDateTime time = (result < 0) ? LocalDateTime.now() : localDateTime;
             post.setTimestamp(time);
-
             post.setTitle(title);
             post.setText(text);
             post.setViewCount(0);
