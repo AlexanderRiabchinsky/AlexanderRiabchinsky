@@ -358,13 +358,17 @@ public class ApiGeneralService {
         response.setErrors(errors);
         return response;
     }
-
-    public StatisticsResponse statisticsMy(Principal principal) {
+    public StatisticsResponse statistics(Principal principal) {
         int likes = 0;
         int dislikes = 0;
         int views = 0;
         long first = mapperService.getTimestampFromLocalDateTime(LocalDateTime.now());
-        List<Posts> posts = postsRepository.findMyActivePosts(userRepository.findByEmail(principal.getName()).get().getId());
+        List<Posts> posts;
+        if(principal==null){
+            posts = postsRepository.findAll();
+        }else{
+            posts = postsRepository.findMyActivePosts(userRepository.findByEmail(principal.getName()).get().getId());
+        }
         List<PostVotes> postVotes = postVotesRepository.findAll();
         for (Posts post : posts) {
             for (PostVotes pv : postVotes) {
@@ -384,34 +388,6 @@ public class ApiGeneralService {
         response.setDislikesCount(dislikes);
         response.setViewsCount(views);
         response.setFirstPublication(response.getPostsCount() == 0 ? 0 : first);
-        return response;
-    }
-
-    public StatisticsResponse statisticsAll() {
-        int likes = 0;
-        int dislikes = 0;
-        int views = 0;
-        long first = mapperService.getTimestampFromLocalDateTime(LocalDateTime.now());
-        List<Posts> posts = postsRepository.findAll();
-        List<PostVotes> postVotes = postVotesRepository.findAll();
-        for (Posts post : posts) {
-            for (PostVotes pv : postVotes) {
-                if (post.getId() == pv.getPost().getId() && pv.getValue() == 1) {
-                    likes++;
-                }
-                if (post.getId() == pv.getPost().getId() && pv.getValue() == -1) {
-                    dislikes++;
-                }
-            }
-            views += post.getViewCount();
-            first = Math.min(first, mapperService.getTimestampFromLocalDateTime(post.getTimestamp()));
-        }
-        StatisticsResponse response = new StatisticsResponse();
-        response.setPostsCount(posts.stream().count());
-        response.setLikesCount(likes);
-        response.setDislikesCount(dislikes);
-        response.setViewsCount(views);
-        response.setFirstPublication(first);
         return response;
     }
 

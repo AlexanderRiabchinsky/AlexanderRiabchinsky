@@ -68,24 +68,19 @@ public class ApiPostService {
         return postByMode;
     }
 
-    public PostResponse getPostByDate(int offset, int limit, String date) {
-        PostResponse postByDateResponse = new PostResponse();
+    public PostResponse getPostByElement(int offset, int limit, String data, int element) {
+        PostResponse postByElement = new PostResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
-        Page<Posts> page = postsRepository.findPostsByDate(pageable, date);
-        postByDateResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
+        Page<Posts> page;
+        if (element==0) {
+            page = postsRepository.findPostsByDate(pageable, data);
+        } else {
+            page = postsRepository.findPostsByTag(pageable, data);
+        }
+        postByElement.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
                 .collect(Collectors.toList()));
-        postByDateResponse.setCount(page.getTotalElements());
-        return postByDateResponse;
-    }
-
-    public PostResponse getPostByTag(int offset, int limit, String tag) {
-        PostResponse postByTagResponse = new PostResponse();
-        Pageable pageable = PageRequest.of(offset / limit, limit);
-        Page<Posts> page = postsRepository.findPostsByTag(pageable, tag);
-        postByTagResponse.setPosts(page.getContent().stream().map(mapperService::convertPostToDto)
-                .collect(Collectors.toList()));
-        postByTagResponse.setCount(page.getTotalElements());
-        return postByTagResponse;
+        postByElement.setCount(page.getTotalElements());
+        return postByElement;
     }
 
     public PostIDResponse getPostById(int id, Principal principal) {
@@ -210,7 +205,7 @@ public class ApiPostService {
         return authCheck;
     }
 
-    public RegResponse getRegPostResponse(RegPostRequest regRequest, Principal principal) {
+    public RegResponse getPostResponse(int id, RegPostRequest regRequest, Principal principal) {
         RegResponse regResponse = new RegResponse();
         Map<String, String> errors = new HashMap<>();
         String title = regRequest.getTitle();
@@ -224,59 +219,7 @@ public class ApiPostService {
         if (errors.isEmpty()) {
             regResponse.setResult(true);
             Posts post = new Posts();
-            post.setIsActive(regRequest.getActive());
-            ModerationStatus status =
-                    ((!apiGeneralService.isPostPremoderated() || getAuthorizedUser(principal)
-                            .getIsModerator() == 1) && regRequest.getActive() == 1) ?
-                            ModerationStatus.ACCEPTED : ModerationStatus.NEW;
-            post.setStatus(status);
-            post.setModeratorId((getAuthorizedUser(principal).
-                    getIsModerator() == 1) ? getAuthorizedUser(principal).getId() : null);
-            post.setUser(getAuthorizedUser(principal));
-
-            LocalDateTime localDateTime = LocalDateTime.
-                    ofEpochSecond(regRequest.getTimestamp(), 0, ZoneOffset.UTC);
-            int result = localDateTime.compareTo(LocalDateTime.now());
-            LocalDateTime time = (result < 0) ? LocalDateTime.now() : localDateTime;
-            post.setTimestamp(time);
-
-            post.setTitle(title);
-            post.setText(text);
-            post.setViewCount(0);
-
-            List<Tags> tags = new ArrayList<>();
-            for (String t : regRequest.getTags()) {
-                if (tagsRepository.findTagByName(t) == null) {
-                    Tags newTag = new Tags();
-                    newTag.setName(t);
-                    tagsRepository.save(newTag);
-                }
-                tags.add(tagsRepository.findTagByName(t));
-            }
-            post.setTags(tags);
-            postsRepository.save(post);
-        } else {
-            regResponse.setResult(false);
-            regResponse.setErrors(errors);
-        }
-        return regResponse;
-    }
-
-    public RegResponse getUpdatePostResponse(int id, RegPostRequest regRequest, Principal principal) {
-        RegResponse regResponse = new RegResponse();
-        Map<String, String> errors = new HashMap<>();
-        String title = regRequest.getTitle();
-        if (title.length() < TITLE_LENGTH) {
-            errors.put("title", "Название поста короче 3 символов");
-        }
-        String text = regRequest.getText();
-        if (text.length() < TEXT_LENGTH) {
-            errors.put("text", "Текст поста короче 50 символов");
-        }
-        if (errors.isEmpty()) {
-            regResponse.setResult(true);
-            Posts post = new Posts();
-            post.setId(id);
+            if(id!=0){post.setId(id);}
             post.setIsActive(regRequest.getActive());
             ModerationStatus status =
                     ((!apiGeneralService.isPostPremoderated() || getAuthorizedUser(principal)
@@ -313,42 +256,21 @@ public class ApiPostService {
         return regResponse;
     }
 
-    public ResultResponse getLike(LikeDislikeRequest request, Principal principal) {
+    public ResultResponse getLikeDislike(LikeDislikeRequest request, Principal principal,int parametr) {
         Optional<PostVotes> like = postVotesRepository.checkVote(request.getPostId(),
                 userRepository.findByEmail(principal.getName()).get().getId());
         if (like.isPresent()) {
-            if (like.get().getValue() == 1) {
+            if (like.get().getValue() == parametr) {
                 return getFalse();
-            } else if (like.get().getValue() == -1) {
-                return getChangeTolike(like.get());
+            } else if (like.get().getValue() == -parametr) {
+                return getChange(like.get(),parametr);
             }
         }
         PostVotes newPV = new PostVotes();
         newPV.setPost(postsRepository.getOne(request.getPostId()));
         newPV.setUser(userRepository.findByEmail(principal.getName()).get());
         newPV.setTime(LocalDateTime.now());
-        newPV.setValue(1);
-        postVotesRepository.save(newPV);
-        ResultResponse response = new ResultResponse();
-        response.setResult(true);
-        return response;
-    }
-
-    public ResultResponse getDislike(LikeDislikeRequest request, Principal principal) {
-        Optional<PostVotes> disLike = postVotesRepository.checkVote(request.getPostId(),
-                userRepository.findByEmail(principal.getName()).get().getId());
-        if (disLike.isPresent()) {
-            if (disLike.get().getValue() == -1) {
-                return getFalse();
-            } else if (disLike.get().getValue() == 1) {
-                return getChangeToDislike(disLike.get());
-            }
-        }
-        PostVotes newPV = new PostVotes();
-        newPV.setPost(postsRepository.getOne(request.getPostId()));
-        newPV.setUser(userRepository.findByEmail(principal.getName()).get());
-        newPV.setTime(LocalDateTime.now());
-        newPV.setValue(-1);
+        newPV.setValue(parametr);
         postVotesRepository.save(newPV);
         ResultResponse response = new ResultResponse();
         response.setResult(true);
@@ -361,26 +283,13 @@ public class ApiPostService {
         return response;
     }
 
-    public ResultResponse getChangeTolike(PostVotes like) {
+    public ResultResponse getChange(PostVotes like,int parametr) {
         PostVotes newPV = new PostVotes();
         newPV.setId(like.getId());
         newPV.setPost(like.getPost());
         newPV.setUser(like.getUser());
         newPV.setTime(LocalDateTime.now());
-        newPV.setValue(1);
-        postVotesRepository.save(newPV);
-        ResultResponse response = new ResultResponse();
-        response.setResult(true);
-        return response;
-    }
-
-    public ResultResponse getChangeToDislike(PostVotes disLike) {
-        PostVotes newPV = new PostVotes();
-        newPV.setId(disLike.getId());
-        newPV.setPost(disLike.getPost());
-        newPV.setUser(disLike.getUser());
-        newPV.setTime(LocalDateTime.now());
-        newPV.setValue(-1);
+        newPV.setValue(parametr);
         postVotesRepository.save(newPV);
         ResultResponse response = new ResultResponse();
         response.setResult(true);

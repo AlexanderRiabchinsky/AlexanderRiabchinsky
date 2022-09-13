@@ -98,7 +98,7 @@ public class ApiGeneralController {
     @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/api/statistics/my")
     public ResponseEntity<StatisticsResponse> statMy(Principal principal) {
-        return ResponseEntity.ok(generalService.statisticsMy(principal));
+        return ResponseEntity.ok(generalService.statistics(principal));
     }
 
     @GetMapping("/api/statistics/all")
@@ -106,7 +106,7 @@ public class ApiGeneralController {
         if (!generalService.statisticIsPublic() && (!generalService.checkIfModerator(principal))) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-        return ResponseEntity.ok(generalService.statisticsAll());
+        return ResponseEntity.ok(generalService.statistics(null));
     }
 
     @PreAuthorize("hasAuthority('user:moderate')")

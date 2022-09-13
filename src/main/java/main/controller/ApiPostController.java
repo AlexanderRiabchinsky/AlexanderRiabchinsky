@@ -41,14 +41,14 @@ public class ApiPostController {
     public ResponseEntity<PostResponse> byDate(@RequestParam(defaultValue = "0") int offset,
                                                @RequestParam(defaultValue = "10") int limit,
                                                @RequestParam(required = false) String date) {
-        return ResponseEntity.ok(postService.getPostByDate(offset, limit, date));
+        return ResponseEntity.ok(postService.getPostByElement(offset, limit, date,0));
     }
 
     @GetMapping("/post/byTag")
     public ResponseEntity<PostResponse> byTag(@RequestParam(defaultValue = "0") int offset,
                                               @RequestParam(defaultValue = "10") int limit,
                                               @RequestParam(required = false) String tag) {
-        return ResponseEntity.ok(postService.getPostByTag(offset, limit, tag));
+        return ResponseEntity.ok(postService.getPostByElement(offset, limit, tag,1));
     }
 
     @GetMapping("/post/{id}")
@@ -78,7 +78,7 @@ public class ApiPostController {
     @PostMapping("/post")
     public ResponseEntity<RegResponse> newPost(@RequestBody RegPostRequest regPostRequest,
                                                Principal principal) {
-        return ResponseEntity.ok(postService.getRegPostResponse(regPostRequest, principal));
+        return ResponseEntity.ok(postService.getPostResponse(0,regPostRequest, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
@@ -90,21 +90,21 @@ public class ApiPostController {
         if (optionalPost.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.ok(postService.getUpdatePostResponse(optionalPost.get().getId(), regPostRequest, principal));
+        return ResponseEntity.ok(postService.getPostResponse(optionalPost.get().getId(), regPostRequest, principal));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post/like")
     public ResponseEntity<ResultResponse> like(@RequestBody LikeDislikeRequest request,
                                                Principal principal) {
-        return ResponseEntity.ok(postService.getLike(request, principal));
+        return ResponseEntity.ok(postService.getLikeDislike(request, principal,1));
     }
 
     @PreAuthorize("hasAuthority('user:write')")
     @PostMapping("/post/dislike")
     public ResponseEntity<ResultResponse> dislike(@RequestBody LikeDislikeRequest request,
                                                   Principal principal) {
-        return ResponseEntity.ok(postService.getDislike(request, principal));
+        return ResponseEntity.ok(postService.getLikeDislike(request, principal,-1));
     }
 
 }
